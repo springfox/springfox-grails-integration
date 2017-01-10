@@ -27,10 +27,6 @@
       "description": "Genre Controller"
     },
     {
-      "name": "application",
-      "description": "Application Controller"
-    },
-    {
       "name": "artist",
       "description": "Artist Controller"
     },
@@ -683,45 +679,6 @@
         }
       }
     },
-    "/application/index": {
-      "get": {
-        "tags": [
-          "application"
-        ],
-        "summary": "index",
-        "operationId": "indexUsingGET_1",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "max",
-            "in": "query",
-            "description": "max",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
-    },
     "/artist/create": {
       "post": {
         "tags": [
@@ -969,7 +926,7 @@
           "artist"
         ],
         "summary": "index",
-        "operationId": "indexUsingGET_2",
+        "operationId": "indexUsingGET_1",
         "consumes": [
           "application/json"
         ],
@@ -1612,7 +1569,7 @@
           "genre"
         ],
         "summary": "index",
-        "operationId": "indexUsingGET_3",
+        "operationId": "indexUsingGET_2",
         "consumes": [
           "application/json"
         ],
@@ -2255,7 +2212,7 @@
           "label"
         ],
         "summary": "index",
-        "operationId": "indexUsingGET_4",
+        "operationId": "indexUsingGET_3",
         "consumes": [
           "application/json"
         ],
@@ -2898,7 +2855,7 @@
           "song"
         ],
         "summary": "index",
-        "operationId": "indexUsingGET_5",
+        "operationId": "indexUsingGET_4",
         "consumes": [
           "application/json"
         ],

@@ -32,11 +32,10 @@ public class GrailsRequestHandlerProvider implements RequestHandlerProvider {
   @Override
   public List<RequestHandler> requestHandlers() {
     final List<RequestHandler> requestHandlers = new ArrayList<RequestHandler>();
-    Arrays.stream(grailsApplication.getArtefacts("Controller")).forEach(it -> {
+    Arrays.stream(grailsApplication.getArtefacts("Controller"))
+        .filter(it -> isRestfulController(it))
+        .forEach(it -> {
       GrailsControllerClass controller = (GrailsControllerClass) it;
-//                List<UrlMapping> mappingsForController = Arrays.stream(grailsUrlMappings.getUrlMappings())
-//                        .filter(m -> m.getControllerName() == controller.getName())
-//                        .collect(Collectors.toList());
 
       GrailsClass inferredDomain = Arrays.stream(grailsApplication.getArtefacts("Domain"))
           .filter(d -> Objects.equals(d.getLogicalPropertyName(), controller.getLogicalPropertyName()))
@@ -47,6 +46,16 @@ public class GrailsRequestHandlerProvider implements RequestHandlerProvider {
           (GrailsDomainClass) inferredDomain).handlers());
     });
     return requestHandlers;
+  }
+
+  @SuppressWarnings("unchecked")
+  private boolean isRestfulController(GrailsClass controllerClazz) {
+    try {
+      Class<?> restfulController = Class.forName("grails.rest.RestfulController");
+      return restfulController.isAssignableFrom(controllerClazz.getClazz());
+    } catch (ClassNotFoundException e) {
+      return false;
+    }
   }
 
   public GrailsApplication getGrailsApplication() {
