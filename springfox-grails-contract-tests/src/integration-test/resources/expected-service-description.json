@@ -40,7 +40,7 @@
     }
   ],
   "paths": {
-    "/Album/create": {
+    "/album/create": {
       "post": {
         "tags": [
           "album"
@@ -130,7 +130,7 @@
         }
       }
     },
-    "/Album/delete/{id}": {
+    "/album/delete/{id}": {
       "post": {
         "tags": [
           "album"
@@ -175,7 +175,7 @@
         }
       }
     },
-    "/Album/edit/{id}": {
+    "/album/edit/{id}": {
       "post": {
         "tags": [
           "album"
@@ -281,7 +281,7 @@
         }
       }
     },
-    "/Album/index/{id}": {
+    "/album/index": {
       "get": {
         "tags": [
           "album"
@@ -296,12 +296,12 @@
         ],
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
+            "name": "max",
+            "in": "query",
+            "description": "max",
+            "required": false,
             "type": "integer",
-            "format": "int64"
+            "format": "int32"
           }
         ],
         "responses": {
@@ -323,7 +323,7 @@
         }
       }
     },
-    "/Album/patch/{id}": {
+    "/album/patch/{id}": {
       "post": {
         "tags": [
           "album"
@@ -429,7 +429,7 @@
         }
       }
     },
-    "/Album/save/{id}": {
+    "/album/save/{id}": {
       "post": {
         "tags": [
           "album"
@@ -535,7 +535,7 @@
         }
       }
     },
-    "/Album/show/{id}": {
+    "/album/show/{id}": {
       "get": {
         "tags": [
           "album"
@@ -577,7 +577,7 @@
         }
       }
     },
-    "/Album/update/{id}": {
+    "/album/update/{id}": {
       "post": {
         "tags": [
           "album"
@@ -683,7 +683,7 @@
         }
       }
     },
-    "/Application/index/{id}": {
+    "/application/index": {
       "get": {
         "tags": [
           "application"
@@ -695,6 +695,16 @@
         ],
         "produces": [
           "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "max",
+            "in": "query",
+            "description": "max",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
         ],
         "responses": {
           "200": {
@@ -712,7 +722,7 @@
         }
       }
     },
-    "/Artist/create": {
+    "/artist/create": {
       "post": {
         "tags": [
           "artist"
@@ -802,7 +812,7 @@
         }
       }
     },
-    "/Artist/delete/{id}": {
+    "/artist/delete/{id}": {
       "post": {
         "tags": [
           "artist"
@@ -847,7 +857,7 @@
         }
       }
     },
-    "/Artist/edit/{id}": {
+    "/artist/edit/{id}": {
       "post": {
         "tags": [
           "artist"
@@ -953,7 +963,7 @@
         }
       }
     },
-    "/Artist/index/{id}": {
+    "/artist/index": {
       "get": {
         "tags": [
           "artist"
@@ -968,12 +978,12 @@
         ],
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
+            "name": "max",
+            "in": "query",
+            "description": "max",
+            "required": false,
             "type": "integer",
-            "format": "int64"
+            "format": "int32"
           }
         ],
         "responses": {
@@ -995,7 +1005,7 @@
         }
       }
     },
-    "/Artist/patch/{id}": {
+    "/artist/patch/{id}": {
       "post": {
         "tags": [
           "artist"
@@ -1101,7 +1111,7 @@
         }
       }
     },
-    "/Artist/save/{id}": {
+    "/artist/save/{id}": {
       "post": {
         "tags": [
           "artist"
@@ -1207,7 +1217,7 @@
         }
       }
     },
-    "/Artist/show/{id}": {
+    "/artist/show/{id}": {
       "get": {
         "tags": [
           "artist"
@@ -1249,7 +1259,7 @@
         }
       }
     },
-    "/Artist/update/{id}": {
+    "/artist/update/{id}": {
       "post": {
         "tags": [
           "artist"
@@ -1355,7 +1365,7 @@
         }
       }
     },
-    "/Genre/create": {
+    "/genre/create": {
       "post": {
         "tags": [
           "genre"
@@ -1445,7 +1455,7 @@
         }
       }
     },
-    "/Genre/delete/{id}": {
+    "/genre/delete/{id}": {
       "post": {
         "tags": [
           "genre"
@@ -1490,7 +1500,7 @@
         }
       }
     },
-    "/Genre/edit/{id}": {
+    "/genre/edit/{id}": {
       "post": {
         "tags": [
           "genre"
@@ -1596,7 +1606,7 @@
         }
       }
     },
-    "/Genre/index/{id}": {
+    "/genre/index": {
       "get": {
         "tags": [
           "genre"
@@ -1611,12 +1621,12 @@
         ],
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
+            "name": "max",
+            "in": "query",
+            "description": "max",
+            "required": false,
             "type": "integer",
-            "format": "int64"
+            "format": "int32"
           }
         ],
         "responses": {
@@ -1638,7 +1648,7 @@
         }
       }
     },
-    "/Genre/patch/{id}": {
+    "/genre/patch/{id}": {
       "post": {
         "tags": [
           "genre"
@@ -1744,7 +1754,7 @@
         }
       }
     },
-    "/Genre/save/{id}": {
+    "/genre/save/{id}": {
       "post": {
         "tags": [
           "genre"
@@ -1850,7 +1860,7 @@
         }
       }
     },
-    "/Genre/show/{id}": {
+    "/genre/show/{id}": {
       "get": {
         "tags": [
           "genre"
@@ -1892,7 +1902,7 @@
         }
       }
     },
-    "/Genre/update/{id}": {
+    "/genre/update/{id}": {
       "post": {
         "tags": [
           "genre"
@@ -1998,7 +2008,7 @@
         }
       }
     },
-    "/Label/create": {
+    "/label/create": {
       "post": {
         "tags": [
           "label"
@@ -2088,7 +2098,7 @@
         }
       }
     },
-    "/Label/delete/{id}": {
+    "/label/delete/{id}": {
       "post": {
         "tags": [
           "label"
@@ -2133,7 +2143,7 @@
         }
       }
     },
-    "/Label/edit/{id}": {
+    "/label/edit/{id}": {
       "post": {
         "tags": [
           "label"
@@ -2239,7 +2249,7 @@
         }
       }
     },
-    "/Label/index/{id}": {
+    "/label/index": {
       "get": {
         "tags": [
           "label"
@@ -2254,12 +2264,12 @@
         ],
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
+            "name": "max",
+            "in": "query",
+            "description": "max",
+            "required": false,
             "type": "integer",
-            "format": "int64"
+            "format": "int32"
           }
         ],
         "responses": {
@@ -2281,7 +2291,7 @@
         }
       }
     },
-    "/Label/patch/{id}": {
+    "/label/patch/{id}": {
       "post": {
         "tags": [
           "label"
@@ -2387,7 +2397,7 @@
         }
       }
     },
-    "/Label/save/{id}": {
+    "/label/save/{id}": {
       "post": {
         "tags": [
           "label"
@@ -2493,7 +2503,7 @@
         }
       }
     },
-    "/Label/show/{id}": {
+    "/label/show/{id}": {
       "get": {
         "tags": [
           "label"
@@ -2535,7 +2545,7 @@
         }
       }
     },
-    "/Label/update/{id}": {
+    "/label/update/{id}": {
       "post": {
         "tags": [
           "label"
@@ -2641,7 +2651,7 @@
         }
       }
     },
-    "/Song/create": {
+    "/song/create": {
       "post": {
         "tags": [
           "song"
@@ -2731,7 +2741,7 @@
         }
       }
     },
-    "/Song/delete/{id}": {
+    "/song/delete/{id}": {
       "post": {
         "tags": [
           "song"
@@ -2776,7 +2786,7 @@
         }
       }
     },
-    "/Song/edit/{id}": {
+    "/song/edit/{id}": {
       "post": {
         "tags": [
           "song"
@@ -2882,7 +2892,7 @@
         }
       }
     },
-    "/Song/index/{id}": {
+    "/song/index": {
       "get": {
         "tags": [
           "song"
@@ -2897,12 +2907,12 @@
         ],
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
+            "name": "max",
+            "in": "query",
+            "description": "max",
+            "required": false,
             "type": "integer",
-            "format": "int64"
+            "format": "int32"
           }
         ],
         "responses": {
@@ -2924,7 +2934,7 @@
         }
       }
     },
-    "/Song/patch/{id}": {
+    "/song/patch/{id}": {
       "post": {
         "tags": [
           "song"
@@ -3030,7 +3040,7 @@
         }
       }
     },
-    "/Song/save/{id}": {
+    "/song/save/{id}": {
       "post": {
         "tags": [
           "song"
@@ -3136,7 +3146,7 @@
         }
       }
     },
-    "/Song/show/{id}": {
+    "/song/show/{id}": {
       "get": {
         "tags": [
           "song"
@@ -3178,7 +3188,7 @@
         }
       }
     },
-    "/Song/update/{id}": {
+    "/song/update/{id}": {
       "post": {
         "tags": [
           "song"

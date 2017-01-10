@@ -16,58 +16,60 @@ import java.util.List;
 import java.util.Objects;
 
 public class GrailsRequestHandlerProvider implements RequestHandlerProvider {
-    private final TypeResolver resolver;
-    private GrailsApplication grailsApplication;
-    private LinkGenerator grailsLinkGenerator;
-    private UrlMappings grailsUrlMappings;
+  private final TypeResolver resolver;
+  private GrailsApplication grailsApplication;
+  private LinkGenerator grailsLinkGenerator;
+  private UrlMappings grailsUrlMappings;
 
-    public GrailsRequestHandlerProvider(GrailsApplication grailsApplication, TypeResolver resolver, LinkGenerator grailsLinkGenerator, UrlMappings grailsUrlMappings) {
-        this.resolver = resolver;
-        this.grailsUrlMappings = grailsUrlMappings;
-        this.grailsLinkGenerator = grailsLinkGenerator;
-        this.grailsApplication = grailsApplication;
-    }
+  public GrailsRequestHandlerProvider(GrailsApplication grailsApplication, TypeResolver resolver, LinkGenerator
+      grailsLinkGenerator, UrlMappings grailsUrlMappings) {
+    this.resolver = resolver;
+    this.grailsUrlMappings = grailsUrlMappings;
+    this.grailsLinkGenerator = grailsLinkGenerator;
+    this.grailsApplication = grailsApplication;
+  }
 
-    @Override
-    public List<RequestHandler> requestHandlers() {
-        final List<RequestHandler> requestHandlers = new ArrayList<RequestHandler>();
-        Arrays.stream(grailsApplication.getArtefacts("Controller")).forEach(it -> {
-            GrailsControllerClass controller = (GrailsControllerClass) it;
+  @Override
+  public List<RequestHandler> requestHandlers() {
+    final List<RequestHandler> requestHandlers = new ArrayList<RequestHandler>();
+    Arrays.stream(grailsApplication.getArtefacts("Controller")).forEach(it -> {
+      GrailsControllerClass controller = (GrailsControllerClass) it;
 //                List<UrlMapping> mappingsForController = Arrays.stream(grailsUrlMappings.getUrlMappings())
 //                        .filter(m -> m.getControllerName() == controller.getName())
 //                        .collect(Collectors.toList());
 
-            GrailsClass inferredDomain = Arrays.stream(grailsApplication.getArtefacts("Domain"))
-                    .filter(d -> Objects.equals(d.getLogicalPropertyName(), controller.getLogicalPropertyName()))
-                    .findFirst()
-                    .orElse(null);
+      GrailsClass inferredDomain = Arrays.stream(grailsApplication.getArtefacts("Domain"))
+          .filter(d -> Objects.equals(d.getLogicalPropertyName(), controller.getLogicalPropertyName()))
+          .findFirst()
+          .orElse(null);
 
-            requestHandlers.addAll(new DefaultRequestHandlersProvider(resolver, grailsLinkGenerator, controller, (GrailsDomainClass) inferredDomain).handlers());
-        });
-        return requestHandlers;
-    }
+      requestHandlers.addAll(new DefaultRequestHandlersProvider(resolver, grailsLinkGenerator, controller,
+          (GrailsDomainClass) inferredDomain).handlers());
+    });
+    return requestHandlers;
+  }
 
-    public GrailsApplication getGrailsApplication() {
-        return grailsApplication;
-    }
+  public GrailsApplication getGrailsApplication() {
+    return grailsApplication;
+  }
 
-    public void setGrailsApplication(GrailsApplication grailsApplication) {
-        this.grailsApplication = grailsApplication;
-    }
+  public void setGrailsApplication(GrailsApplication grailsApplication) {
+    this.grailsApplication = grailsApplication;
+  }
 
-    public LinkGenerator getGrailsLinkGenerator() {
-        return grailsLinkGenerator;
-    }
+  public LinkGenerator getGrailsLinkGenerator() {
+    return grailsLinkGenerator;
+  }
 
-    public void setGrailsLinkGenerator(LinkGenerator grailsLinkGenerator) {
-        this.grailsLinkGenerator = grailsLinkGenerator;
-    }
+  public void setGrailsLinkGenerator(LinkGenerator grailsLinkGenerator) {
+    this.grailsLinkGenerator = grailsLinkGenerator;
+  }
 
-    public Object getGrailsUrlMappings() {
-        return grailsUrlMappings;
-    }
+  public Object getGrailsUrlMappings() {
+    return grailsUrlMappings;
+  }
 
-    public void setGrailsUrlMappings(UrlMappings grailsUrlMappings) {
-        this.grailsUrlMappings = grailsUrlMappings;
-    }
+  public void setGrailsUrlMappings(UrlMappings grailsUrlMappings) {
+    this.grailsUrlMappings = grailsUrlMappings;
+  }
 }
