@@ -10,13 +10,13 @@ import springfox.documentation.RequestHandler;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class DefaultRequestHandlersProvider {
+public class RestfulRequestHandlersProvider {
   private GrailsDomainClass domain;
   private GrailsControllerClass controller;
   private LinkGenerator linkGenerator;
   private TypeResolver resolver;
 
-  public DefaultRequestHandlersProvider(TypeResolver resolver, LinkGenerator linkGenerator, GrailsControllerClass
+  public RestfulRequestHandlersProvider(TypeResolver resolver, LinkGenerator linkGenerator, GrailsControllerClass
       controller, GrailsDomainClass domain) {
     this.resolver = resolver;
     this.domain = domain;

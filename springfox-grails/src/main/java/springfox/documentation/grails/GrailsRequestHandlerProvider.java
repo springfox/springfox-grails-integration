@@ -43,7 +43,7 @@ public class GrailsRequestHandlerProvider implements RequestHandlerProvider {
           .findFirst()
           .orElse(null);
 
-      requestHandlers.addAll(new DefaultRequestHandlersProvider(resolver, grailsLinkGenerator, controller,
+      requestHandlers.addAll(new RestfulRequestHandlersProvider(resolver, grailsLinkGenerator, controller,
           (GrailsDomainClass) inferredDomain).handlers());
     });
     return requestHandlers;
