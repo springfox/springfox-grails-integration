@@ -1,9 +1,7 @@
 package springfox.documentation.grails;
 
 import com.fasterxml.classmate.TypeResolver;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.method.HandlerMethod;
 
@@ -15,12 +13,10 @@ import java.util.Map;
 
 import static springfox.documentation.grails.Actions.*;
 
-@Component
-public class IndexActionSpecificationFactory implements ActionSpecificationFactory {
+class IndexActionSpecificationFactory implements ActionSpecificationFactory {
   private final TypeResolver resolver;
 
-  @Autowired
-  public IndexActionSpecificationFactory(TypeResolver resolver) {
+  IndexActionSpecificationFactory(TypeResolver resolver) {
     this.resolver = resolver;
   }
 
