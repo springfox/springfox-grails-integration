@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ActionSpecificationResolver {
+class ActionSpecificationResolver {
   private final RestfulActionSpecificationFactory restfulActions;
   private final MethodBackedActionSpecificationFactory methodBackedActions;
 

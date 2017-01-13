@@ -22,7 +22,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class GrailsRequestHandler implements RequestHandler {
+class GrailsRequestHandler implements RequestHandler {
   private final GrailsActionContext actionContext;
   private final GrailsActionAttributes urlProvider;
   private final ActionSpecification actionSpecification;

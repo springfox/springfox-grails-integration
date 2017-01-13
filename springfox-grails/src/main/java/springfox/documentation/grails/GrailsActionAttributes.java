@@ -14,7 +14,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 @Component
-public class GrailsActionAttributes {
+class GrailsActionAttributes {
   private final LinkGenerator linkGenerator;
   private final UrlMappings urlMappings;
 

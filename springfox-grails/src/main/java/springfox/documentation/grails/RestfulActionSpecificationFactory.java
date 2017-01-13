@@ -8,7 +8,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Component
-public class RestfulActionSpecificationFactory implements ActionSpecificationFactory {
+class RestfulActionSpecificationFactory implements ActionSpecificationFactory {
   private final Map<String, ActionSpecificationFactory> factoryLookup;
 
   @Autowired

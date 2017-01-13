@@ -12,7 +12,7 @@ import java.util.Map;
 import static springfox.documentation.grails.Actions.*;
 
 @Component
-public class MethodBackedActionSpecificationFactory implements ActionSpecificationFactory {
+class MethodBackedActionSpecificationFactory implements ActionSpecificationFactory {
 
   private final GrailsActionAttributes urlProvider;
   private final HandlerMethodResolver handlerMethodResolver;

@@ -16,7 +16,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Component
-public class GrailsRequestHandlerProvider implements RequestHandlerProvider {
+class GrailsRequestHandlerProvider implements RequestHandlerProvider {
   private final GrailsActionAttributes urlProvider;
   private final GrailsApplication grailsApplication;
   private final ActionSpecificationResolver actionResolver;
