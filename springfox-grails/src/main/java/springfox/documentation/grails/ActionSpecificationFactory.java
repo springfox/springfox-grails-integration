@@ -41,5 +41,13 @@ public interface ActionSpecificationFactory {
         singletonList(SynthesizedAnnotations.REQUEST_BODY_ANNOTATION), resolvedType);
   }
 
-  ActionSpecification create(GrailsDomainClass domain);
+
+  default Class domainClass(GrailsDomainClass domain) {
+    if (domain != null) {
+      return domain.getClazz();
+    }
+    return Void.TYPE;
+  }
+
+  ActionSpecification create(GrailsActionContext actionContext);
 }
