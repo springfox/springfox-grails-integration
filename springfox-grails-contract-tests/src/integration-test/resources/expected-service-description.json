@@ -27,6 +27,10 @@
       "description": "Genre Controller"
     },
     {
+      "name": "application",
+      "description": "Application Controller"
+    },
+    {
       "name": "artist",
       "description": "Artist Controller"
     },
@@ -304,7 +308,10 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Album"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Album"
+              }
             }
           },
           "401": {
@@ -679,6 +686,224 @@
         }
       }
     },
+    "/application/index": {
+      "get": {
+        "tags": [
+          "application"
+        ],
+        "summary": "index",
+        "operationId": "indexUsingGET_1",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "head": {
+        "tags": [
+          "application"
+        ],
+        "summary": "index",
+        "operationId": "indexUsingHEAD",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "application"
+        ],
+        "summary": "index",
+        "operationId": "indexUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "application"
+        ],
+        "summary": "index",
+        "operationId": "indexUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "application"
+        ],
+        "summary": "index",
+        "operationId": "indexUsingDELETE",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      },
+      "options": {
+        "tags": [
+          "application"
+        ],
+        "summary": "index",
+        "operationId": "indexUsingOPTIONS",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "application"
+        ],
+        "summary": "index",
+        "operationId": "indexUsingPATCH",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "*/*"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
     "/artist/create": {
       "post": {
         "tags": [
@@ -926,7 +1151,7 @@
           "artist"
         ],
         "summary": "index",
-        "operationId": "indexUsingGET_1",
+        "operationId": "indexUsingGET_2",
         "consumes": [
           "application/json"
         ],
@@ -947,7 +1172,10 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Artist"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Artist"
+              }
             }
           },
           "401": {
@@ -1569,7 +1797,7 @@
           "genre"
         ],
         "summary": "index",
-        "operationId": "indexUsingGET_2",
+        "operationId": "indexUsingGET_3",
         "consumes": [
           "application/json"
         ],
@@ -1590,7 +1818,10 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Genre"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Genre"
+              }
             }
           },
           "401": {
@@ -2212,7 +2443,7 @@
           "label"
         ],
         "summary": "index",
-        "operationId": "indexUsingGET_3",
+        "operationId": "indexUsingGET_4",
         "consumes": [
           "application/json"
         ],
@@ -2233,7 +2464,10 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Label"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Label"
+              }
             }
           },
           "401": {
@@ -2855,7 +3089,7 @@
           "song"
         ],
         "summary": "index",
-        "operationId": "indexUsingGET_4",
+        "operationId": "indexUsingGET_5",
         "consumes": [
           "application/json"
         ],
@@ -2876,7 +3110,10 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Song"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Song"
+              }
             }
           },
           "401": {
