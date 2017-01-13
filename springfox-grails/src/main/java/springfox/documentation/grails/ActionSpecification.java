@@ -9,10 +9,10 @@ import springfox.documentation.service.ResolvedMethodParameter;
 import java.util.List;
 import java.util.Set;
 
-public class ActionSpecification {
+class ActionSpecification {
   private final Set<RequestMethod> supportedMethods;
-  private final Set<? extends MediaType> produces;
-  private final Set<? extends MediaType> consumes;
+  private final Set<MediaType> produces;
+  private final Set<MediaType> consumes;
   private final List<ResolvedMethodParameter> parameters;
   private final ResolvedType returnType;
 
@@ -20,8 +20,8 @@ public class ActionSpecification {
 
   public ActionSpecification(
       Set<RequestMethod> supportedMethods,
-      Set<? extends MediaType> produces,
-      Set<? extends MediaType> consumes,
+      Set<MediaType> produces,
+      Set<MediaType> consumes,
       HandlerMethod handlerMethod,
       List<ResolvedMethodParameter> parameters,
       ResolvedType returnType) {
@@ -33,27 +33,27 @@ public class ActionSpecification {
     this.handlerMethod = handlerMethod;
   }
 
-  public Set<RequestMethod> getSupportedMethods() {
+  Set<RequestMethod> getSupportedMethods() {
     return supportedMethods;
   }
 
-  public Set<? extends MediaType> getProduces() {
+  Set<MediaType> getProduces() {
     return produces;
   }
 
-  public Set<? extends MediaType> getConsumes() {
+  Set<MediaType> getConsumes() {
     return consumes;
   }
 
-  public List<ResolvedMethodParameter> getParameters() {
+  List<ResolvedMethodParameter> getParameters() {
     return parameters;
   }
 
-  public ResolvedType getReturnType() {
+  ResolvedType getReturnType() {
     return returnType;
   }
 
-  public HandlerMethod getHandlerMethod() {
+  HandlerMethod getHandlerMethod() {
     return handlerMethod;
   }
 }

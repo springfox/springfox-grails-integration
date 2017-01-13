@@ -1,6 +1,5 @@
 package springfox.documentation.grails;
 
-import grails.core.GrailsControllerClass;
 import grails.web.mapping.LinkGenerator;
 import grails.web.mapping.UrlMappings;
 import org.springframework.beans.factory.annotation.Autowired;

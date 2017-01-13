@@ -41,7 +41,7 @@ public class ActionSpecificationResolver {
     );
   }
 
-  @SuppressWarnings("unchecked")
+  @SuppressWarnings({"unchecked", "squid:S1166"})
   private boolean isRestfulController(GrailsClass controllerClazz) {
     try {
       Class<?> restfulController = Class.forName("grails.rest.RestfulController");

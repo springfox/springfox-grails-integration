@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 import springfox.documentation.RequestHandler;
 import springfox.documentation.spi.service.RequestHandlerProvider;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -34,11 +33,9 @@ public class GrailsRequestHandlerProvider implements RequestHandlerProvider {
 
   @Override
   public List<RequestHandler> requestHandlers() {
-    List<RequestHandler> requestHandlers = new ArrayList<RequestHandler>();
-    requestHandlers.addAll(Arrays.stream(grailsApplication.getArtefacts("Controller"))
+    return Arrays.stream(grailsApplication.getArtefacts("Controller"))
         .flatMap(this::fromGrailsAction)
-        .collect(Collectors.toList()));
-    return requestHandlers;
+        .collect(Collectors.toList());
   }
 
   private Stream<? extends RequestHandler> fromGrailsAction(GrailsClass grailsClass) {
@@ -55,8 +52,7 @@ public class GrailsRequestHandlerProvider implements RequestHandlerProvider {
           return new GrailsRequestHandler(
               actionContext,
               urlProvider,
-              actionResolver.resolve(actionContext)
-          );
+              actionResolver.resolve(actionContext));
         });
   }
 

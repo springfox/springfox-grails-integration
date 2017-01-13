@@ -8,6 +8,7 @@ import static java.util.Collections.*;
 import static springfox.documentation.grails.SynthesizedAnnotations.*;
 
 
+@FunctionalInterface
 public interface ActionSpecificationFactory {
   default Class<?> idType(GrailsDomainClass domain) {
     return domain != null ? domain.getIdentifier().getType() : Void.TYPE;
@@ -17,7 +18,7 @@ public interface ActionSpecificationFactory {
     return new ResolvedMethodParameter(
         index,
         name,
-        singletonList(pathVariable(name, name, true)),
+        singletonList(pathVariable(name, name)),
         resolvedType);
   }
 
