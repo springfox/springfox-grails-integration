@@ -3,10 +3,10 @@ package springfox.documentation.grails;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
-import springfox.documentation.annotations.ApiIgnore;
 
 import java.lang.annotation.Annotation;
 
+@SuppressWarnings({"squid:S1188"})
 class SynthesizedAnnotations {
   static final RequestBody REQUEST_BODY_ANNOTATION = new RequestBody() {
     @Override
@@ -19,23 +19,12 @@ class SynthesizedAnnotations {
       return true;
     }
   };
-  static final ApiIgnore API_IGNORE_ANNOTATION = new ApiIgnore() {
-    @Override
-    public String value() {
-      return "Parameter is ignored";
-    }
-
-    @Override
-    public Class<? extends Annotation> annotationType() {
-      return ApiIgnore.class;
-    }
-  };
 
   private SynthesizedAnnotations() {
     throw new UnsupportedOperationException();
   }
 
-  public static PathVariable pathVariable(final String name, final String value, final boolean required) {
+  static PathVariable pathVariable(final String name, final String value) {
     return new PathVariable() {
       @Override
       public Class<? extends Annotation> annotationType() {
@@ -53,13 +42,13 @@ class SynthesizedAnnotations {
       }
 
       @Override
-      public boolean required() {
-        return required;
+      public boolean required(){
+        return true;
       }
     };
   }
 
-  public static RequestParam requestParam(final String name, final String value, final boolean required, final String
+  static RequestParam requestParam(final String name, final String value, final boolean required, final String
       defaultValue) {
     return new RequestParam() {
 
