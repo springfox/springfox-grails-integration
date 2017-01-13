@@ -3,6 +3,7 @@ package springfox.documentation.grails;
 import com.fasterxml.classmate.ResolvedType;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.method.HandlerMethod;
 import springfox.documentation.service.ResolvedMethodParameter;
 
 import java.util.List;
@@ -13,19 +14,23 @@ public class ActionSpecification {
   private final Set<? extends MediaType> produces;
   private final Set<? extends MediaType> consumes;
   private final List<ResolvedMethodParameter> parameters;
-  private final ResolvedType resolvedType;
+  private final ResolvedType returnType;
+
+  private final HandlerMethod handlerMethod;
 
   public ActionSpecification(
       Set<RequestMethod> supportedMethods,
       Set<? extends MediaType> produces,
       Set<? extends MediaType> consumes,
+      HandlerMethod handlerMethod,
       List<ResolvedMethodParameter> parameters,
-      ResolvedType resolvedType) {
+      ResolvedType returnType) {
     this.supportedMethods = supportedMethods;
     this.produces = produces;
     this.consumes = consumes;
     this.parameters = parameters;
-    this.resolvedType = resolvedType;
+    this.returnType = returnType;
+    this.handlerMethod = handlerMethod;
   }
 
   public Set<RequestMethod> getSupportedMethods() {
@@ -44,7 +49,11 @@ public class ActionSpecification {
     return parameters;
   }
 
-  public ResolvedType getResolvedType() {
-    return resolvedType;
+  public ResolvedType getReturnType() {
+    return returnType;
+  }
+
+  public HandlerMethod getHandlerMethod() {
+    return handlerMethod;
   }
 }

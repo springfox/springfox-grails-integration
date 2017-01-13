@@ -1,16 +1,21 @@
 package springfox.documentation.grails;
 
 import com.fasterxml.classmate.TypeResolver;
-import grails.core.GrailsDomainClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.method.HandlerMethod;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
+import static springfox.documentation.grails.Actions.*;
+
+@Component
 public class IndexActionSpecificationFactory implements ActionSpecificationFactory {
   private final TypeResolver resolver;
 
@@ -20,11 +25,14 @@ public class IndexActionSpecificationFactory implements ActionSpecificationFacto
   }
 
   @Override
-  public ActionSpecification create(GrailsDomainClass domain) {
+  public ActionSpecification create(GrailsActionContext context) {
+    Map<String, HandlerMethod> actions = actionsToHandler(context.getController().getClazz());
+    HandlerMethod handlerMethod = actions.get(context.getAction());
     return new ActionSpecification(
         new HashSet<>(Collections.singletonList(RequestMethod.GET)),
         new HashSet<>(Collections.singletonList(MediaType.APPLICATION_JSON)),
         new HashSet<>(Collections.singletonList(MediaType.APPLICATION_JSON)),
+        handlerMethod,
         new ArrayList<>(Collections.singletonList(
             queryParameter(
                 1,
@@ -32,14 +40,7 @@ public class IndexActionSpecificationFactory implements ActionSpecificationFacto
                 resolver.resolve(Integer.class),
                 false,
                 ""))),
-        resolver.resolve(List.class, domainClass(domain)));
+        resolver.resolve(List.class, domainClass(context.getDomainClass())));
 
-  }
-
-  private Class domainClass(GrailsDomainClass domain) {
-    if (domain != null) {
-      return domain.getClazz();
-    }
-    return Void.TYPE;
   }
 }
