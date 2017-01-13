@@ -1,12 +1,11 @@
 package springfox.documentation.grails;
 
-import com.fasterxml.classmate.TypeResolver;
 import grails.core.GrailsApplication;
 import grails.core.GrailsClass;
 import grails.core.GrailsControllerClass;
 import grails.core.GrailsDomainClass;
-import grails.web.mapping.LinkGenerator;
-import grails.web.mapping.UrlMappings;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import springfox.documentation.RequestHandler;
 import springfox.documentation.spi.service.RequestHandlerProvider;
 
@@ -14,71 +13,51 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
+@Component
 public class GrailsRequestHandlerProvider implements RequestHandlerProvider {
-  private final TypeResolver resolver;
-  private GrailsApplication grailsApplication;
-  private LinkGenerator grailsLinkGenerator;
-  private UrlMappings grailsUrlMappings;
+  private final GrailsActionAttributes urlProvider;
+  private final GrailsApplication grailsApplication;
+  private final ActionSpecificationResolver actionResolver;
 
-  public GrailsRequestHandlerProvider(GrailsApplication grailsApplication, TypeResolver resolver, LinkGenerator
-      grailsLinkGenerator, UrlMappings grailsUrlMappings) {
-    this.resolver = resolver;
-    this.grailsUrlMappings = grailsUrlMappings;
-    this.grailsLinkGenerator = grailsLinkGenerator;
+  @Autowired
+  public GrailsRequestHandlerProvider(
+      GrailsApplication grailsApplication,
+      GrailsActionAttributes urlProvider,
+      ActionSpecificationResolver actionResolver) {
+    this.urlProvider = urlProvider;
     this.grailsApplication = grailsApplication;
+    this.actionResolver = actionResolver;
   }
 
   @Override
   public List<RequestHandler> requestHandlers() {
-    final List<RequestHandler> requestHandlers = new ArrayList<RequestHandler>();
-    Arrays.stream(grailsApplication.getArtefacts("Controller"))
-        .filter(it -> isRestfulController(it))
-        .forEach(it -> {
-      GrailsControllerClass controller = (GrailsControllerClass) it;
-
-      GrailsClass inferredDomain = Arrays.stream(grailsApplication.getArtefacts("Domain"))
-          .filter(d -> Objects.equals(d.getLogicalPropertyName(), controller.getLogicalPropertyName()))
-          .findFirst()
-          .orElse(null);
-
-      requestHandlers.addAll(new RestfulRequestHandlersProvider(resolver, grailsLinkGenerator, controller,
-          (GrailsDomainClass) inferredDomain).handlers());
-    });
+    List<RequestHandler> requestHandlers = new ArrayList<RequestHandler>();
+    requestHandlers.addAll(Arrays.stream(grailsApplication.getArtefacts("Controller"))
+        .flatMap(this::fromGrailsAction)
+        .collect(Collectors.toList()));
     return requestHandlers;
   }
 
-  @SuppressWarnings("unchecked")
-  private boolean isRestfulController(GrailsClass controllerClazz) {
-    try {
-      Class<?> restfulController = Class.forName("grails.rest.RestfulController");
-      return restfulController.isAssignableFrom(controllerClazz.getClazz());
-    } catch (ClassNotFoundException e) {
-      return false;
-    }
+  private Stream<? extends RequestHandler> fromGrailsAction(GrailsClass grailsClass) {
+    GrailsDomainClass inferredDomain = (GrailsDomainClass) Arrays.stream(grailsApplication.getArtefacts("Domain"))
+        .filter(d -> Objects.equals(d.getLogicalPropertyName(), grailsClass.getLogicalPropertyName()))
+        .findFirst()
+        .orElse(null);
+
+    GrailsControllerClass controller = (GrailsControllerClass) grailsClass;
+    return controller.getActions()
+        .stream()
+        .map(action -> {
+          GrailsActionContext actionContext = new GrailsActionContext(controller, inferredDomain, action);
+          return new GrailsRequestHandler(
+              actionContext,
+              urlProvider,
+              actionResolver.resolve(actionContext)
+          );
+        });
   }
 
-  public GrailsApplication getGrailsApplication() {
-    return grailsApplication;
-  }
-
-  public void setGrailsApplication(GrailsApplication grailsApplication) {
-    this.grailsApplication = grailsApplication;
-  }
-
-  public LinkGenerator getGrailsLinkGenerator() {
-    return grailsLinkGenerator;
-  }
-
-  public void setGrailsLinkGenerator(LinkGenerator grailsLinkGenerator) {
-    this.grailsLinkGenerator = grailsLinkGenerator;
-  }
-
-  public Object getGrailsUrlMappings() {
-    return grailsUrlMappings;
-  }
-
-  public void setGrailsUrlMappings(UrlMappings grailsUrlMappings) {
-    this.grailsUrlMappings = grailsUrlMappings;
-  }
 }
