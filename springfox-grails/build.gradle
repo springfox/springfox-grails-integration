@@ -22,12 +22,6 @@ buildscript {
   dependencies {
     classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
   }
-
-}
-
-plugins {
-    id "net.ltgt.apt" version "0.9"
-    id 'com.github.ben-manes.versions' version '0.13.0'
 }
 
 apply plugin: 'groovy'
@@ -37,38 +31,6 @@ apply plugin: 'com.jfrog.bintray'
 apply from: 'gradle/publishing.gradle'
 
 description = 'Springfox Grails module that produces grails specific documentation'
-group = 'io.springfox'
-version = '1.0.0-SNAPSHOT'
-
-ext {
-    cglib = "3.2.4"
-    classmate = "1.3.1"
-    groovy = "2.4.7"
-    guava = "18.0"
-    grails = "3.2.2"
-    jackson = '2.7.7'
-    joda = "2.9.4"
-    jsonPath = "2.2.0"
-    jsonAssert = "1.3.0"
-    mockito = "1.10.19"
-    objenesis = "2.4"
-    servlet = "3.1.0"
-    slf4j = "1.7.21"
-    snakeyaml = '1.17'
-    spock = "1.1-groovy-2.4-rc-3"
-    spring = "4.2.8.RELEASE"
-    springHateoas = "0.21.0.RELEASE"
-    springPluginVersion = "1.2.0.RELEASE"
-    swagger2Core = "1.5.10"
-    springBoot = "1.3.6.RELEASE"
-    springfox = "2.6.1"
-}
-
-repositories {
-    jcenter()
-    mavenLocal()
-    mavenCentral()
-}
 
 configurations {
     provided
@@ -77,9 +39,6 @@ configurations {
 
 dependencies {
     testCompile "org.springframework:spring-test:${spring}"
-    //testCompile "cglib:cglib-nodep:$cglib"
-    //testCompile "org.objenesis:objenesis:$objenesis"
-    //testCompile "org.mockito:mockito-all:${mockito}"
     testCompile "com.jayway.jsonpath:json-path:${jsonPath}"
     testCompile "org.slf4j:slf4j-simple:${slf4j}"
     testCompile "org.yaml:snakeyaml:${snakeyaml}"

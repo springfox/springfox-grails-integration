@@ -18,3 +18,4 @@ include 'services:webservice'
 rootProject.name = 'springfox-grails-integration'
 include 'springfox-grails'
 include 'springfox-grails-contract-tests'
+
