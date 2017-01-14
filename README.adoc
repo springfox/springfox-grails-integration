@@ -55,6 +55,9 @@ Below outlines how to include the springfox-swagger2 module which produces Swagg
 
 TIP: Refer the main documentation on how to http://springfox.github.io/springfox/docs/current/#swagger-ui[include springfox bundled swagger-ui] dependencies
 
+NOTE: Please refer the main documentation on  to http://springfox.github.io/springfox/docs/current/#dependencies[including the springfox-swagger2 dependencies]
+which are required for this integration library to work.
+
 ==== Gradle
 ===== Release
 [source,groovy]
