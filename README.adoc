@@ -1,2 +1,175 @@
-# springfox-grails
-Springfox Grails module that produces grails specific documentation
+# SpringFox Grails Integration
+
+SpringFox Grails integration library that produces grails specific documentation.
+
+=== Development Environment
+
+To build from source
+
+- File >> open >> build.gradle
+- Make sure to check the 'use the default gradle wrapper' option.
+- First time build
+
+```bash
+./gradlew cleanIdea idea
+
+```
+
+- To get more output from any gradle commands/tasks append a `-i` (info) or `-d` (debug) e.g.
+```bash
+./gradlew build -i
+
+```
+- To publish to local maven repository
+```bash
+./gradlew clean build publishToMavenLocal -i
+
+```
+
+== Getting Started
+
+:releaseVersion: {springfox-released-version}
+:snapshotVersion: {springfox-current-version}
+:springfoxRfc6570Version: {springfox-swagger-ui-rfc6570-version}
+
+The SpringFox Grails integration library depends on http://springfox.github.io/springfox/docs/current/[Springfox]
+[[img-download]]
+image:::https://api.bintray.com/packages/springfox/maven-repo/springfox/images/download.svg[alt="Download", link="https://bintray.com/springfox/maven-repo/springfox/_latestVersion"]
+
+
+=== Dependencies
+NOTE: The snapshots haven't been published yet to jcenter as of (01/15/2017)
+
+The Springfox libraries are hosted on https://bintray.com/springfox/maven-repo/springfox/view[bintray] and jcenter.
+The artifacts can be viewed accessed at the following locations:
+
+* Release:
+   ** https://jcenter.bintray.com/io/springfox/
+   ** http://jcenter.bintray.com/io/springfox/
+* Snapshot
+ ** http://oss.jfrog.org/simple/oss-snapshot-local/io/springfox/
+ ** http://oss.jfrog.org/oss-snapshot-local/io/springfox/
+
+SpringFox has multiple modules and the dependencies will vary depending on the desired API specification standard.
+Below outlines how to include the springfox-swagger2 module which produces Swagger 2.0 API documentation.
+
+TIP: Refer the main documentation on how to http://springfox.github.io/springfox/docs/current/#swagger-ui[include springfox bundled swagger-ui] dependencies
+
+==== Gradle
+===== Release
+[source,groovy]
+[subs="verbatim,attributes"]
+----
+repositories {
+  jcenter()
+}
+
+dependencies {
+    compile "io.springfox:springfox-grails:{releaseVersion}"
+}
+----
+
+===== Snapshot
+
+[source,groovy]
+[subs="verbatim,attributes"]
+----
+repositories {
+   maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }
+}
+
+dependencies {
+    compile "io.springfox:springfox-grails:{snapshotVersion}"
+}
+----
+
+
+==== Maven
+===== Release
+
+[source,xml]
+[subs="verbatim,attributes"]
+----
+<repositories>
+    <repository>
+      <id>jcenter-snapshots</id>
+      <name>jcenter</name>
+      <url>https://jcenter.bintray.com/</url>
+    </repository>
+</repositories>
+
+<dependency>
+    <groupId>io.springfox</groupId>
+    <artifactId>springfox-grails</artifactId>
+    <version>{releaseVersion}</version>
+</dependency>
+----
+
+===== Snapshot
+
+[source,xml]
+[subs="verbatim,attributes"]
+----
+<repositories>
+    <repository>
+      <id>jcenter-snapshots</id>
+      <name>jcenter</name>
+      <url>http://oss.jfrog.org/artifactory/oss-snapshot-local/</url>
+    </repository>
+</repositories>
+
+<dependency>
+    <groupId>io.springfox</groupId>
+    <artifactId>springfox-grails</artifactId>
+    <version>{snapshotVersion}</version>
+</dependency>
+----
+
+===== Configure the springfox grails integration
+
+In your Application (GrailsAutoConfiguration) startup entry-point follow the steps below
+
+[source,groovy]
+[subs="verbatim,attributes"]
+----
+
+// 1. Enable SpringFox on your project
+@EnableSwagger2
+// 2. Import the springfox grails integration configuration
+@Import([springfox.documentation.grails.SpringfoxGrailsIntegrationConfiguration])
+class Application extends GrailsAutoConfiguration {
+    static void main(String[] args) {
+        GrailsApp.run(Application, args)
+    }
+
+
+    // 3. **Optionally** define a custom docket or omit this step to use the default
+    @Bean
+    Docket api() {
+        new Docket(DocumentationType.SWAGGER_2)
+                .ignoredParameterTypes(MetaClass)
+    }
+
+    // 4. **Optionally** configure the swagger-ui webjar to serve the scaffolded swagger UI
+    @Bean
+    static WebMvcConfigurerAdapter webConfigurer() {
+        new WebMvcConfigurerAdapter() {
+            @Override
+            void addResourceHandlers(ResourceHandlerRegistry registry) {
+                if (!registry.hasMappingForPattern("/webjars/**")) {
+                    registry
+                        .addResourceHandler("/webjars/**")
+                        .addResourceLocations("classpath:/META-INF/resources/webjars/")
+                }
+                if (!registry.hasMappingForPattern("/swagger-ui.html")) {
+                    registry
+                        .addResourceHandler("/swagger-ui.html")
+                        .addResourceLocations("classpath:/META-INF/resources/swagger-ui.html")
+                }
+            }
+        }
+    }
+}
+
+----
+
