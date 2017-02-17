@@ -1,16 +1,10 @@
 package springfox.documentation.grails
 
-import grails.web.Action
+import grails.rest.RestfulController
 
-
-class AController {
-
-  @Action
-  def index() {
-  }
-
-  @Action
-  def show() {
+class AController extends RestfulController<ADomain> {
+  AController(Class<ADomain> resource) {
+    super(resource, false)
   }
 
   def nonAction() {

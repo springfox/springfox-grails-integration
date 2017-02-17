@@ -55,6 +55,8 @@ dependencies {
     provided "org.springframework:spring-context:$spring"
     provided "org.grails:grails-core:$grails"
     provided "org.grails:grails-web-url-mappings:$grails"
+    provided "org.grails:grails-web-url-mappings:$grails"
+    provided 'javax.servlet:javax.servlet-api:3.1.0'
 
     compile "com.google.guava:guava:${guava}"
     compile "com.fasterxml:classmate:${classmate}"

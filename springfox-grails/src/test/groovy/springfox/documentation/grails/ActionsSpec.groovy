@@ -17,11 +17,14 @@ class ActionsSpec extends Specification implements GrailsControllerSupport {
     when:
       def handlerMethods = Actions.actionsToHandler(controller)
     then:
-      handlerMethods.size() == 2
+      handlerMethods.size() == 8
       handlerMethods.containsKey("index")
       handlerMethods.containsKey("show")
-    and:
-      handlerMethods["index"].method.name == "index"
-      handlerMethods["show"].method.name == "show"
+      handlerMethods.containsKey("create")
+      handlerMethods.containsKey("update")
+      handlerMethods.containsKey("save")
+      handlerMethods.containsKey("edit")
+      handlerMethods.containsKey("patch")
+      handlerMethods.containsKey("delete")
   }
 }

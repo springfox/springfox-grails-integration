@@ -8,7 +8,7 @@ import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.RequestMethod
 import spock.lang.Specification
 
-class ShowActionSpecificationFactorySpec extends Specification {
+class CreateActionSpecificationFactorySpec extends Specification {
   def controller = Mock(GrailsControllerClass)
   def domain = Mock(GrailsDomainClass)
   def identifierProperty = Mock(GrailsDomainClassProperty)
@@ -20,29 +20,29 @@ class ShowActionSpecificationFactorySpec extends Specification {
     domain.identifier.type >> Integer
   }
 
-  def "Show action produces action specification" () {
+  def "Create action produces action specification" () {
     given:
       def resolver = new TypeResolver()
-      def sut = new ShowActionSpecificationFactory(resolver)
+      def sut = new CreateActionSpecificationFactory(resolver)
     when:
-      def spec = sut.create(new GrailsActionContext(controller, domain, "show"))
+      def spec = sut.create(new GrailsActionContext(controller, domain, "create"))
     then:
       spec.consumes == [MediaType.APPLICATION_JSON] as Set
       spec.produces == [MediaType.APPLICATION_JSON] as Set
-      spec.supportedMethods == [RequestMethod.GET] as Set
+      spec.supportedMethods == [RequestMethod.PUT, RequestMethod.POST] as Set
       spec.parameters.size() == 1
-      spec.parameters[0].parameterType == resolver.resolve(Integer)
+      spec.parameters[0].parameterType == resolver.resolve(ADomain)
       spec.parameters[0].parameterIndex == 1
       spec.parameters[0].defaultName().isPresent()
-      spec.parameters[0].defaultName().get() == "id"
+      spec.parameters[0].defaultName().get() == "body"
       spec.returnType == resolver.resolve(ADomain)
-      spec.handlerMethod.method == AController.methods.find {it.name == "show" }
+      spec.handlerMethod.method == AController.methods.find {it.name == "create" }
   }
 
   def "Index action throws exception when action is not found" () {
     given:
       def resolver = new TypeResolver()
-      def sut = new ShowActionSpecificationFactory(resolver)
+      def sut = new CreateActionSpecificationFactory(resolver)
     when:
       sut.create(new GrailsActionContext(controller, domain, "unknown"))
     then:
