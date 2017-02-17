@@ -31,7 +31,7 @@ class SaveActionSpecificationFactory implements ActionSpecificationFactory {
         handlerMethod,
         new ArrayList<>(Arrays.asList(
             pathParameter(1, "id", resolver.resolve(idType(context.getDomainClass()))),
-            bodyParameter(1, resolver.resolve(domainClass(context.getDomainClass()))))),
+            bodyParameter(2, resolver.resolve(domainClass(context.getDomainClass()))))),
         resolver.resolve(domainClass(context.getDomainClass())));
 
   }
