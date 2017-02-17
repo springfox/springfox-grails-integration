@@ -9,6 +9,10 @@ class AController {
   def index() {
   }
 
+  @Action
+  def show() {
+  }
+
   def nonAction() {
 
   }
