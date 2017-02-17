@@ -1,5 +1,8 @@
 # SpringFox Grails Integration
 
+image:https://circleci.com/gh/springfox/springfox-grails-integration.svg?style=svg["CircleCI", link="https://circleci.com/gh/springfox/springfox-grails-integration"]
+image:https://codecov.io/gh/springfox/springfox-grails-integration/branch/master/graph/badge.svg["codecov",link="https://codecov.io/gh/springfox/springfox-grails-integration"]
+
 SpringFox Grails integration library that produces grails specific documentation.
 
 === Development Environment
