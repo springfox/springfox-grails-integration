@@ -1,6 +1,5 @@
 package springfox.documentation.grails;
 
-import grails.core.GrailsClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,17 +17,18 @@ class ActionSpecificationResolver {
   }
 
   ActionSpecification resolve(GrailsActionContext context) {
-    if (isRestfulController(context.getController())) {
+    if (isRestfulController(context)) {
       return restfulActions.create(context);
     }
     return methodBackedActions.create(context);
   }
 
   @SuppressWarnings({"unchecked", "squid:S1166"})
-  private boolean isRestfulController(GrailsClass controllerClazz) {
+  private boolean isRestfulController(GrailsActionContext context) {
     try {
       Class<?> restfulController = Class.forName("grails.rest.RestfulController");
-      return restfulController.isAssignableFrom(controllerClazz.getClazz());
+      return restfulController.isAssignableFrom(context.getController().getClazz())
+          && restfulActions.canHandle(context.getAction());
     } catch (ClassNotFoundException e) {
       return false;
     }

@@ -8,6 +8,7 @@ import grails.web.mapping.LinkGenerator
 import grails.web.mapping.UrlMapping
 import grails.web.mapping.UrlMappings
 import spock.lang.Specification
+import spock.lang.Unroll
 
 class ActionSpecificationResolverSpec extends Specification {
   def resolver = new TypeResolver()
@@ -27,13 +28,16 @@ class ActionSpecificationResolverSpec extends Specification {
     actionAttributes = new GrailsActionAttributes(links, urlMappings)
   }
 
-  def "Resolves restful and method backed actions"() {
+  @Unroll
+  def "Resolves action #action"() {
     given:
-      def sut = new MethodBackedActionSpecificationFactory(resolver, actionAttributes)
+      def sut = new ActionSpecificationResolver(
+          new RestfulActionSpecificationFactory(resolver),
+          new MethodBackedActionSpecificationFactory(resolver, actionAttributes))
     and:
       urlMappings.urlMappings >> [otherMapping(Mock(UrlMapping))]
     when:
-      def spec = sut.create(new GrailsActionContext(controller, domain, action))
+      def spec = sut.resolve(new GrailsActionContext(controller, domain, action))
     then:
       spec != null
       spec.handlerMethod.method.name == action

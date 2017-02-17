@@ -20,10 +20,14 @@ class RestfulActionSpecificationFactory implements ActionSpecificationFactory {
   @Override
   public ActionSpecification create(GrailsActionContext context) {
     Preconditions.checkArgument(
-        factoryLookup.containsKey(context.getAction()),
+        canHandle(context.getAction()),
         String.format("Action %s is not a restful action", context.getAction()));
 
     return factoryLookup.get(context.getAction()).create(context);
+  }
+
+  public boolean canHandle(String action) {
+    return factoryLookup.containsKey(action);
   }
 
   private static Map<String, ActionSpecificationFactory> restfulActions(TypeResolver resolver) {
