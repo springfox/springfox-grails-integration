@@ -28,6 +28,7 @@ apply plugin: 'groovy'
 apply plugin: 'idea'
 apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
+apply plugin: 'jacoco'
 apply from: 'gradle/publishing.gradle'
 
 description = 'Springfox Grails module that produces grails specific documentation'
@@ -91,3 +92,12 @@ jar {
       )
     }
 }
+
+jacocoTestReport {
+  reports {
+    xml.enabled true
+    html.enabled false
+  }
+}
+
+

@@ -30,7 +30,7 @@ class CreateActionSpecificationFactory implements ActionSpecificationFactory {
         new HashSet<>(Collections.singletonList(MediaType.APPLICATION_JSON)),
         handlerMethod,
         new ArrayList<>(Collections.singletonList(
-            bodyParameter(resolver.resolve(domainClass(context.getDomainClass()))))),
+            bodyParameter(1, resolver.resolve(domainClass(context.getDomainClass()))))),
         resolver.resolve(domainClass(context.getDomainClass())));
   }
 }

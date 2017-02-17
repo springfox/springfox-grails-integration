@@ -35,9 +35,9 @@ public interface ActionSpecificationFactory {
         resolvedType);
   }
 
-  default ResolvedMethodParameter bodyParameter(ResolvedType resolvedType) {
+  default ResolvedMethodParameter bodyParameter(int parameterIndex, ResolvedType resolvedType) {
     return new ResolvedMethodParameter(
-        1,
+        parameterIndex,
         "body",
         singletonList(SynthesizedAnnotations.REQUEST_BODY_ANNOTATION), resolvedType);
   }
