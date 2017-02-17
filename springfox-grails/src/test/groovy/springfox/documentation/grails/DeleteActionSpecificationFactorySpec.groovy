@@ -29,7 +29,7 @@ class DeleteActionSpecificationFactorySpec extends Specification {
     then:
       spec.consumes == [MediaType.APPLICATION_JSON] as Set
       spec.produces == [MediaType.APPLICATION_JSON] as Set
-      spec.supportedMethods == [RequestMethod.GET] as Set
+      spec.supportedMethods == [RequestMethod.POST] as Set
       spec.parameters.size() == 1
       spec.parameters[0].parameterType == resolver.resolve(Integer)
       spec.parameters[0].parameterIndex == 1

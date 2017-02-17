@@ -1,6 +1,7 @@
 package springfox.documentation.grails;
 
 import com.fasterxml.classmate.TypeResolver;
+import com.google.common.base.Preconditions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,6 +19,10 @@ class RestfulActionSpecificationFactory implements ActionSpecificationFactory {
 
   @Override
   public ActionSpecification create(GrailsActionContext context) {
+    Preconditions.checkArgument(
+        factoryLookup.containsKey(context.getAction()),
+        String.format("Action %s is not a restful action", context.getAction()));
+
     return factoryLookup.get(context.getAction()).create(context);
   }
 
