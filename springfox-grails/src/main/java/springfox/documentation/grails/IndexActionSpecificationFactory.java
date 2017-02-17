@@ -37,6 +37,5 @@ class IndexActionSpecificationFactory implements ActionSpecificationFactory {
                 false,
                 ""))),
         resolver.resolve(List.class, domainClass(context.getDomainClass())));
-
   }
 }
