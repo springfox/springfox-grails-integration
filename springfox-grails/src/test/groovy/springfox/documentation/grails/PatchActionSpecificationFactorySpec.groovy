@@ -8,7 +8,7 @@ import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.RequestMethod
 import spock.lang.Specification
 
-class EditActionSpecificationFactorySpec extends Specification {
+class PatchActionSpecificationFactorySpec extends Specification {
   def controller = Mock(GrailsControllerClass)
   def domain = Mock(GrailsDomainClass)
   def identifierProperty = Mock(GrailsDomainClassProperty)
@@ -20,12 +20,12 @@ class EditActionSpecificationFactorySpec extends Specification {
     domain.identifier.type >> Integer
   }
 
-  def "Edit action produces action specification" () {
+  def "Patch action produces action specification" () {
     given:
       def resolver = new TypeResolver()
-      def sut = new EditActionSpecificationFactory(resolver)
+      def sut = new PatchActionSpecificationFactory(resolver)
     when:
-      def spec = sut.create(new GrailsActionContext(controller, domain, "edit"))
+      def spec = sut.create(new GrailsActionContext(controller, domain, "patch"))
     then:
       spec.consumes == [MediaType.APPLICATION_JSON] as Set
       spec.produces == [MediaType.APPLICATION_JSON] as Set
@@ -42,13 +42,13 @@ class EditActionSpecificationFactorySpec extends Specification {
       spec.parameters[1].defaultName().get() == "body"
 
       spec.returnType == resolver.resolve(ADomain)
-      spec.handlerMethod.method == AController.methods.find {it.name == "edit" }
+      spec.handlerMethod.method == AController.methods.find {it.name == "patch" }
   }
 
-  def "Edit action throws exception when action is not found" () {
+  def "Patch action throws exception when action is not found" () {
     given:
       def resolver = new TypeResolver()
-      def sut = new EditActionSpecificationFactory(resolver)
+      def sut = new PatchActionSpecificationFactory(resolver)
     when:
       sut.create(new GrailsActionContext(controller, domain, "unknown"))
     then:

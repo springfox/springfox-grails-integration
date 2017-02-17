@@ -39,7 +39,7 @@ class CreateActionSpecificationFactorySpec extends Specification {
       spec.handlerMethod.method == AController.methods.find {it.name == "create" }
   }
 
-  def "Index action throws exception when action is not found" () {
+  def "Create action throws exception when action is not found" () {
     given:
       def resolver = new TypeResolver()
       def sut = new CreateActionSpecificationFactory(resolver)

@@ -20,7 +20,7 @@ class SaveActionSpecificationFactorySpec extends Specification {
     domain.identifier.type >> Integer
   }
 
-  def "Create action produces action specification" () {
+  def "Save action produces action specification" () {
     given:
       def resolver = new TypeResolver()
       def sut = new SaveActionSpecificationFactory(resolver)
@@ -45,7 +45,7 @@ class SaveActionSpecificationFactorySpec extends Specification {
       spec.handlerMethod.method == AController.methods.find {it.name == "save" }
   }
 
-  def "Index action throws exception when action is not found" () {
+  def "Save action throws exception when action is not found" () {
     given:
       def resolver = new TypeResolver()
       def sut = new SaveActionSpecificationFactory(resolver)

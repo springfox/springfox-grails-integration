@@ -39,7 +39,7 @@ class ShowActionSpecificationFactorySpec extends Specification {
       spec.handlerMethod.method == AController.methods.find {it.name == "show" }
   }
 
-  def "Index action throws exception when action is not found" () {
+  def "Show action throws exception when action is not found" () {
     given:
       def resolver = new TypeResolver()
       def sut = new ShowActionSpecificationFactory(resolver)
