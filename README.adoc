@@ -179,3 +179,9 @@ class Application extends GrailsAutoConfiguration {
 
 ----
 
+If you get an exception when you try to run your app, this might be because of the chosen profile for your application. If you use the `rest-api` profile, everything should be fine, but if you've chosen the `web` profile, it is likely that you have to add something like
+
+    grails.serverURL: http://localhost:8080
+    
+to your `application.yml` for the plugin to render absolute links.
+
