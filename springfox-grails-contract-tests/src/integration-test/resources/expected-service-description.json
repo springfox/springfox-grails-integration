@@ -15,6 +15,10 @@
   "basePath": "/",
   "tags": [
     {
+      "name": "book",
+      "description": "Book Controller"
+    },
+    {
       "name": "song",
       "description": "Song Controller"
     },
@@ -51,6 +55,7 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -95,6 +100,7 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -141,6 +147,7 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -186,6 +193,7 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -238,6 +246,7 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -292,6 +301,7 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -337,6 +347,7 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -389,6 +400,7 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -443,9 +455,18 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
           {
             "in": "body",
             "name": "body",
@@ -454,14 +475,6 @@
             "schema": {
               "$ref": "#/definitions/Album"
             }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "responses": {
@@ -495,9 +508,18 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
           {
             "in": "body",
             "name": "body",
@@ -506,14 +528,6 @@
             "schema": {
               "$ref": "#/definitions/Album"
             }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "responses": {
@@ -549,6 +563,7 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -595,6 +610,14 @@
         ],
         "parameters": [
           {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
             "in": "body",
             "name": "body",
             "description": "body",
@@ -602,14 +625,6 @@
             "schema": {
               "$ref": "#/definitions/Album"
             }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "responses": {
@@ -697,7 +712,7 @@
           "application/json"
         ],
         "produces": [
-          "*/*"
+          "application/json"
         ],
         "responses": {
           "200": {
@@ -727,7 +742,7 @@
           "application/json"
         ],
         "produces": [
-          "*/*"
+          "application/json"
         ],
         "responses": {
           "200": {
@@ -757,7 +772,7 @@
           "application/json"
         ],
         "produces": [
-          "*/*"
+          "application/json"
         ],
         "responses": {
           "200": {
@@ -790,7 +805,7 @@
           "application/json"
         ],
         "produces": [
-          "*/*"
+          "application/json"
         ],
         "responses": {
           "200": {
@@ -823,7 +838,7 @@
           "application/json"
         ],
         "produces": [
-          "*/*"
+          "application/json"
         ],
         "responses": {
           "200": {
@@ -853,7 +868,7 @@
           "application/json"
         ],
         "produces": [
-          "*/*"
+          "application/json"
         ],
         "responses": {
           "200": {
@@ -883,7 +898,7 @@
           "application/json"
         ],
         "produces": [
-          "*/*"
+          "application/json"
         ],
         "responses": {
           "200": {
@@ -915,6 +930,7 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -959,6 +975,7 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -1005,6 +1022,7 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -1050,6 +1068,7 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -1102,9 +1121,18 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
           {
             "in": "body",
             "name": "body",
@@ -1113,14 +1141,6 @@
             "schema": {
               "$ref": "#/definitions/Artist"
             }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "responses": {
@@ -1156,6 +1176,7 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -1201,9 +1222,18 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
           {
             "in": "body",
             "name": "body",
@@ -1212,14 +1242,6 @@
             "schema": {
               "$ref": "#/definitions/Artist"
             }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "responses": {
@@ -1253,9 +1275,18 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
           {
             "in": "body",
             "name": "body",
@@ -1264,14 +1295,6 @@
             "schema": {
               "$ref": "#/definitions/Artist"
             }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "responses": {
@@ -1307,6 +1330,7 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -1359,6 +1383,7 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -1413,6 +1438,7 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -1459,6 +1485,14 @@
         ],
         "parameters": [
           {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
             "in": "body",
             "name": "body",
             "description": "body",
@@ -1466,14 +1500,6 @@
             "schema": {
               "$ref": "#/definitions/Artist"
             }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "responses": {
@@ -1511,6 +1537,14 @@
         ],
         "parameters": [
           {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
             "in": "body",
             "name": "body",
             "description": "body",
@@ -1518,14 +1552,6 @@
             "schema": {
               "$ref": "#/definitions/Artist"
             }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "responses": {
@@ -1550,17 +1576,208 @@
         }
       }
     },
+    "/book/create": {
+      "post": {
+        "tags": [
+          "book"
+        ],
+        "summary": "create",
+        "description": "Creates a book",
+        "operationId": "createUsingPOST_9",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "formData",
+            "description": "Name of the book",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/book/delete": {
+      "delete": {
+        "tags": [
+          "book"
+        ],
+        "summary": "delete",
+        "description": "Deletes a book",
+        "operationId": "deleteUsingDELETE",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "formData",
+            "description": "Id of the book",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/book/index": {
+      "get": {
+        "tags": [
+          "book"
+        ],
+        "summary": "index",
+        "description": "Creates a book",
+        "operationId": "indexUsingGET_10",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/book/save": {
+      "post": {
+        "tags": [
+          "book"
+        ],
+        "summary": "save",
+        "description": "Saves a book",
+        "operationId": "saveUsingPOST_2",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/book/update": {
+      "put": {
+        "tags": [
+          "book"
+        ],
+        "summary": "update",
+        "description": "Updates a book",
+        "operationId": "updateUsingPUT_2",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/genre/create": {
       "post": {
         "tags": [
           "genre"
         ],
         "summary": "create",
-        "operationId": "createUsingPOST_2",
+        "operationId": "createUsingPOST_10",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -1605,6 +1822,7 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -1651,6 +1869,7 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -1696,6 +1915,7 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -1748,9 +1968,18 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
           {
             "in": "body",
             "name": "body",
@@ -1759,14 +1988,6 @@
             "schema": {
               "$ref": "#/definitions/Genre"
             }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "responses": {
@@ -1797,11 +2018,12 @@
           "genre"
         ],
         "summary": "index",
-        "operationId": "indexUsingGET_3",
+        "operationId": "indexUsingGET_11",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -1847,6 +2069,7 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -1899,9 +2122,18 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
           {
             "in": "body",
             "name": "body",
@@ -1910,14 +2142,6 @@
             "schema": {
               "$ref": "#/definitions/Genre"
             }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "responses": {
@@ -1948,11 +2172,12 @@
           "genre"
         ],
         "summary": "save",
-        "operationId": "saveUsingPOST_2",
+        "operationId": "saveUsingPOST_3",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -2005,6 +2230,7 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -2059,6 +2285,7 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -2105,6 +2332,14 @@
         ],
         "parameters": [
           {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
             "in": "body",
             "name": "body",
             "description": "body",
@@ -2112,14 +2347,6 @@
             "schema": {
               "$ref": "#/definitions/Genre"
             }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "responses": {
@@ -2148,7 +2375,7 @@
           "genre"
         ],
         "summary": "update",
-        "operationId": "updateUsingPUT_2",
+        "operationId": "updateUsingPUT_3",
         "consumes": [
           "application/json"
         ],
@@ -2202,11 +2429,12 @@
           "label"
         ],
         "summary": "create",
-        "operationId": "createUsingPOST_3",
+        "operationId": "createUsingPOST_11",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -2251,6 +2479,7 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -2297,6 +2526,7 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -2342,9 +2572,18 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
           {
             "in": "body",
             "name": "body",
@@ -2353,14 +2592,6 @@
             "schema": {
               "$ref": "#/definitions/Label"
             }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "responses": {
@@ -2394,9 +2625,18 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
           {
             "in": "body",
             "name": "body",
@@ -2405,14 +2645,6 @@
             "schema": {
               "$ref": "#/definitions/Label"
             }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "responses": {
@@ -2443,11 +2675,12 @@
           "label"
         ],
         "summary": "index",
-        "operationId": "indexUsingGET_4",
+        "operationId": "indexUsingGET_12",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -2493,9 +2726,18 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
           {
             "in": "body",
             "name": "body",
@@ -2504,14 +2746,6 @@
             "schema": {
               "$ref": "#/definitions/Label"
             }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "responses": {
@@ -2545,9 +2779,18 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
           {
             "in": "body",
             "name": "body",
@@ -2556,14 +2799,6 @@
             "schema": {
               "$ref": "#/definitions/Label"
             }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "responses": {
@@ -2594,14 +2829,23 @@
           "label"
         ],
         "summary": "save",
-        "operationId": "saveUsingPOST_3",
+        "operationId": "saveUsingPOST_4",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
           {
             "in": "body",
             "name": "body",
@@ -2610,14 +2854,6 @@
             "schema": {
               "$ref": "#/definitions/Label"
             }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "responses": {
@@ -2651,6 +2887,7 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -2705,6 +2942,7 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -2751,6 +2989,14 @@
         ],
         "parameters": [
           {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
             "in": "body",
             "name": "body",
             "description": "body",
@@ -2758,14 +3004,6 @@
             "schema": {
               "$ref": "#/definitions/Label"
             }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "responses": {
@@ -2794,7 +3032,7 @@
           "label"
         ],
         "summary": "update",
-        "operationId": "updateUsingPUT_3",
+        "operationId": "updateUsingPUT_4",
         "consumes": [
           "application/json"
         ],
@@ -2848,11 +3086,12 @@
           "song"
         ],
         "summary": "create",
-        "operationId": "createUsingPOST_4",
+        "operationId": "createUsingPOST_12",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -2897,6 +3136,7 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -2943,6 +3183,7 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -2988,9 +3229,18 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
           {
             "in": "body",
             "name": "body",
@@ -2999,14 +3249,6 @@
             "schema": {
               "$ref": "#/definitions/Song"
             }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "responses": {
@@ -3040,9 +3282,18 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
           {
             "in": "body",
             "name": "body",
@@ -3051,14 +3302,6 @@
             "schema": {
               "$ref": "#/definitions/Song"
             }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "responses": {
@@ -3089,11 +3332,12 @@
           "song"
         ],
         "summary": "index",
-        "operationId": "indexUsingGET_5",
+        "operationId": "indexUsingGET_13",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -3139,6 +3383,7 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -3191,9 +3436,18 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
           {
             "in": "body",
             "name": "body",
@@ -3202,14 +3456,6 @@
             "schema": {
               "$ref": "#/definitions/Song"
             }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "responses": {
@@ -3240,11 +3486,12 @@
           "song"
         ],
         "summary": "save",
-        "operationId": "saveUsingPOST_4",
+        "operationId": "saveUsingPOST_5",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -3297,9 +3544,18 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
           {
             "in": "body",
             "name": "body",
@@ -3308,14 +3564,6 @@
             "schema": {
               "$ref": "#/definitions/Song"
             }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "responses": {
@@ -3351,6 +3599,7 @@
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -3397,6 +3646,14 @@
         ],
         "parameters": [
           {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
             "in": "body",
             "name": "body",
             "description": "body",
@@ -3404,14 +3661,6 @@
             "schema": {
               "$ref": "#/definitions/Song"
             }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "responses": {
@@ -3440,7 +3689,7 @@
           "song"
         ],
         "summary": "update",
-        "operationId": "updateUsingPUT_4",
+        "operationId": "updateUsingPUT_5",
         "consumes": [
           "application/json"
         ],
