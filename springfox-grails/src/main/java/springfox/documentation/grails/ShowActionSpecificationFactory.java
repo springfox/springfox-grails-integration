@@ -25,7 +25,7 @@ class ShowActionSpecificationFactory implements ActionSpecificationFactory {
     HandlerMethod handlerMethod = actions.get(context.getAction());
     return new ActionSpecification(
         new HashSet<>(Collections.singletonList(RequestMethod.GET)),
-        new HashSet<>(Collections.singletonList(MediaType.APPLICATION_JSON)),
+        new HashSet<>(producesOverrides(context)),
         new HashSet<>(Collections.singletonList(MediaType.APPLICATION_JSON)),
         handlerMethod,
         new ArrayList<>(Collections.singletonList(

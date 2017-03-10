@@ -29,7 +29,7 @@ class MethodBackedActionSpecificationFactory implements ActionSpecificationFacto
     HandlerMethod handlerMethod = actions.get(context.getAction());
     return new ActionSpecification(
         urlProvider.httpMethod(context),
-        new HashSet<>(),
+        producesOverrides(context),
         new HashSet<>(),
         handlerMethod,
         handlerMethodResolver.methodParameters(handlerMethod),

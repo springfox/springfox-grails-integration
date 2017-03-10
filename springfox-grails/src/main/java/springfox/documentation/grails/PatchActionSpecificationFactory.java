@@ -26,7 +26,7 @@ class PatchActionSpecificationFactory implements ActionSpecificationFactory {
     HandlerMethod handlerMethod = actions.get(context.getAction());
     return new ActionSpecification(
         new HashSet<>(Arrays.asList(RequestMethod.POST, RequestMethod.PUT)),
-        new HashSet<>(Collections.singletonList(MediaType.APPLICATION_JSON)),
+        new HashSet<>(producesOverrides(context)),
         new HashSet<>(Collections.singletonList(MediaType.APPLICATION_JSON)),
         handlerMethod,
         new ArrayList<>(Arrays.asList(

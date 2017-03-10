@@ -7,6 +7,7 @@ import grails.core.GrailsDomainClassProperty
 import grails.web.mapping.LinkGenerator
 import grails.web.mapping.UrlMapping
 import grails.web.mapping.UrlMappings
+import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.RequestMethod
 import spock.lang.Specification
 
@@ -37,7 +38,7 @@ class MethodBackedActionSpecificationFactorySpec extends Specification {
       def spec = sut.create(new GrailsActionContext(controller, domain, "other"))
     then:
       spec.consumes == [] as Set
-      spec.produces == [] as Set
+      spec.produces == [MediaType.APPLICATION_JSON] as Set
       spec.supportedMethods == [RequestMethod.POST] as Set
       spec.parameters.size() == 2
       spec.parameters[0].parameterType == resolver.resolve(Integer)
