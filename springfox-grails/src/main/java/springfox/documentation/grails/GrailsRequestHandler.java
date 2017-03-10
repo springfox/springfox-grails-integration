@@ -43,7 +43,7 @@ class GrailsRequestHandler implements RequestHandler {
 
   @Override
   public boolean isAnnotatedWith(Class<? extends Annotation> annotation) {
-    return AnnotationUtils.findAnnotation(declaringClass(), annotation) != null;
+    return findAnnotation(annotation).isPresent();
   }
 
   @Override
