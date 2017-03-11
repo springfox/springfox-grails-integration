@@ -51,8 +51,8 @@
         "tags": [
           "album"
         ],
-        "summary": "create",
-        "operationId": "createUsingPOST",
+        "summary": "createAlbum",
+        "operationId": "createAlbumUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -96,8 +96,8 @@
         "tags": [
           "album"
         ],
-        "summary": "create",
-        "operationId": "createUsingPUT",
+        "summary": "createAlbum",
+        "operationId": "createAlbumUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -143,8 +143,8 @@
         "tags": [
           "album"
         ],
-        "summary": "delete",
-        "operationId": "deleteUsingDELETE",
+        "summary": "deleteAlbum",
+        "operationId": "deleteAlbumUsingDELETE",
         "consumes": [
           "application/json"
         ],
@@ -186,8 +186,8 @@
         "tags": [
           "album"
         ],
-        "summary": "edit",
-        "operationId": "editUsingPOST",
+        "summary": "editAlbum",
+        "operationId": "editAlbumUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -239,8 +239,8 @@
         "tags": [
           "album"
         ],
-        "summary": "edit",
-        "operationId": "editUsingPUT",
+        "summary": "editAlbum",
+        "operationId": "editAlbumUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -294,8 +294,8 @@
         "tags": [
           "album"
         ],
-        "summary": "index",
-        "operationId": "indexUsingGET",
+        "summary": "indexAlbum",
+        "operationId": "indexAlbumUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -340,8 +340,8 @@
         "tags": [
           "album"
         ],
-        "summary": "patch",
-        "operationId": "patchUsingPOST",
+        "summary": "patchAlbum",
+        "operationId": "patchAlbumUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -393,8 +393,8 @@
         "tags": [
           "album"
         ],
-        "summary": "patch",
-        "operationId": "patchUsingPUT",
+        "summary": "patchAlbum",
+        "operationId": "patchAlbumUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -448,8 +448,8 @@
         "tags": [
           "album"
         ],
-        "summary": "save",
-        "operationId": "saveUsingPOST",
+        "summary": "saveAlbum",
+        "operationId": "saveAlbumUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -503,8 +503,8 @@
         "tags": [
           "album"
         ],
-        "summary": "show",
-        "operationId": "showUsingGET",
+        "summary": "showAlbum",
+        "operationId": "showAlbumUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -546,8 +546,8 @@
         "tags": [
           "album"
         ],
-        "summary": "update",
-        "operationId": "updateUsingPUT",
+        "summary": "updateAlbum",
+        "operationId": "updateAlbumUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -601,7 +601,7 @@
           "application"
         ],
         "summary": "index",
-        "operationId": "indexUsingGET_1",
+        "operationId": "indexUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -818,8 +818,8 @@
         "tags": [
           "artist"
         ],
-        "summary": "create",
-        "operationId": "createUsingPOST_1",
+        "summary": "createArtist",
+        "operationId": "createArtistUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -863,8 +863,8 @@
         "tags": [
           "artist"
         ],
-        "summary": "create",
-        "operationId": "createUsingPUT_1",
+        "summary": "createArtist",
+        "operationId": "createArtistUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -910,8 +910,8 @@
         "tags": [
           "artist"
         ],
-        "summary": "delete",
-        "operationId": "deleteUsingPOST",
+        "summary": "deleteArtist",
+        "operationId": "deleteArtistUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -956,8 +956,8 @@
         "tags": [
           "artist"
         ],
-        "summary": "edit",
-        "operationId": "editUsingPOST_1",
+        "summary": "editArtist",
+        "operationId": "editArtistUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -1009,8 +1009,8 @@
         "tags": [
           "artist"
         ],
-        "summary": "edit",
-        "operationId": "editUsingPUT_1",
+        "summary": "editArtist",
+        "operationId": "editArtistUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -1064,8 +1064,8 @@
         "tags": [
           "artist"
         ],
-        "summary": "index",
-        "operationId": "indexUsingGET_2",
+        "summary": "indexArtist",
+        "operationId": "indexArtistUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -1110,8 +1110,8 @@
         "tags": [
           "artist"
         ],
-        "summary": "patch",
-        "operationId": "patchUsingPOST_1",
+        "summary": "patchArtist",
+        "operationId": "patchArtistUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -1163,8 +1163,8 @@
         "tags": [
           "artist"
         ],
-        "summary": "patch",
-        "operationId": "patchUsingPUT_1",
+        "summary": "patchArtist",
+        "operationId": "patchArtistUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -1218,8 +1218,8 @@
         "tags": [
           "artist"
         ],
-        "summary": "save",
-        "operationId": "saveUsingPOST_1",
+        "summary": "saveArtist",
+        "operationId": "saveArtistUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -1271,8 +1271,8 @@
         "tags": [
           "artist"
         ],
-        "summary": "save",
-        "operationId": "saveUsingPUT",
+        "summary": "saveArtist",
+        "operationId": "saveArtistUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -1326,8 +1326,8 @@
         "tags": [
           "artist"
         ],
-        "summary": "show",
-        "operationId": "showUsingGET_1",
+        "summary": "showArtist",
+        "operationId": "showArtistUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -1369,8 +1369,8 @@
         "tags": [
           "artist"
         ],
-        "summary": "update",
-        "operationId": "updateUsingPOST",
+        "summary": "updateArtist",
+        "operationId": "updateArtistUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -1421,8 +1421,8 @@
         "tags": [
           "artist"
         ],
-        "summary": "update",
-        "operationId": "updateUsingPUT_1",
+        "summary": "updateArtist",
+        "operationId": "updateArtistUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -1477,7 +1477,7 @@
         ],
         "summary": "create",
         "description": "Creates a book",
-        "operationId": "createUsingPOST_9",
+        "operationId": "createBookUsingPOST_7",
         "consumes": [
           "application/json"
         ],
@@ -1519,7 +1519,7 @@
         ],
         "summary": "delete",
         "description": "Deletes a book",
-        "operationId": "deleteUsingDELETE_1",
+        "operationId": "deleteBookUsingDELETE",
         "consumes": [
           "application/json"
         ],
@@ -1562,7 +1562,7 @@
         ],
         "summary": "index",
         "description": "Creates a book",
-        "operationId": "indexUsingGET_10",
+        "operationId": "indexBookUsingGET_7",
         "consumes": [
           "application/json"
         ],
@@ -1595,7 +1595,7 @@
         ],
         "summary": "save",
         "description": "Saves a book",
-        "operationId": "saveUsingPOST_2",
+        "operationId": "saveBookUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -1631,7 +1631,7 @@
         ],
         "summary": "update",
         "description": "Updates a book",
-        "operationId": "updateUsingPUT_2",
+        "operationId": "updateBookUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -1665,8 +1665,8 @@
         "tags": [
           "genre"
         ],
-        "summary": "create",
-        "operationId": "createUsingPOST_10",
+        "summary": "createGenre",
+        "operationId": "createGenreUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -1710,8 +1710,8 @@
         "tags": [
           "genre"
         ],
-        "summary": "create",
-        "operationId": "createUsingPUT_2",
+        "summary": "createGenre",
+        "operationId": "createGenreUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -1757,8 +1757,8 @@
         "tags": [
           "genre"
         ],
-        "summary": "delete",
-        "operationId": "deleteUsingPOST_1",
+        "summary": "deleteGenre",
+        "operationId": "deleteGenreUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -1803,8 +1803,8 @@
         "tags": [
           "genre"
         ],
-        "summary": "edit",
-        "operationId": "editUsingPOST_2",
+        "summary": "editGenre",
+        "operationId": "editGenreUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -1856,8 +1856,8 @@
         "tags": [
           "genre"
         ],
-        "summary": "edit",
-        "operationId": "editUsingPUT_2",
+        "summary": "editGenre",
+        "operationId": "editGenreUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -1911,8 +1911,8 @@
         "tags": [
           "genre"
         ],
-        "summary": "index",
-        "operationId": "indexUsingGET_11",
+        "summary": "indexGenre",
+        "operationId": "indexGenreUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -1957,8 +1957,8 @@
         "tags": [
           "genre"
         ],
-        "summary": "patch",
-        "operationId": "patchUsingPOST_2",
+        "summary": "patchGenre",
+        "operationId": "patchGenreUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -2010,8 +2010,8 @@
         "tags": [
           "genre"
         ],
-        "summary": "patch",
-        "operationId": "patchUsingPUT_2",
+        "summary": "patchGenre",
+        "operationId": "patchGenreUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -2065,8 +2065,8 @@
         "tags": [
           "genre"
         ],
-        "summary": "save",
-        "operationId": "saveUsingPOST_3",
+        "summary": "saveGenre",
+        "operationId": "saveGenreUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -2118,8 +2118,8 @@
         "tags": [
           "genre"
         ],
-        "summary": "save",
-        "operationId": "saveUsingPUT_1",
+        "summary": "saveGenre",
+        "operationId": "saveGenreUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -2173,8 +2173,8 @@
         "tags": [
           "genre"
         ],
-        "summary": "show",
-        "operationId": "showUsingGET_2",
+        "summary": "showGenre",
+        "operationId": "showGenreUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -2216,8 +2216,8 @@
         "tags": [
           "genre"
         ],
-        "summary": "update",
-        "operationId": "updateUsingPOST_1",
+        "summary": "updateGenre",
+        "operationId": "updateGenreUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -2268,8 +2268,8 @@
         "tags": [
           "genre"
         ],
-        "summary": "update",
-        "operationId": "updateUsingPUT_3",
+        "summary": "updateGenre",
+        "operationId": "updateGenreUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -2322,8 +2322,8 @@
         "tags": [
           "label"
         ],
-        "summary": "create",
-        "operationId": "createUsingPOST_11",
+        "summary": "createLabel",
+        "operationId": "createLabelUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -2367,8 +2367,8 @@
         "tags": [
           "label"
         ],
-        "summary": "create",
-        "operationId": "createUsingPUT_3",
+        "summary": "createLabel",
+        "operationId": "createLabelUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -2414,8 +2414,8 @@
         "tags": [
           "label"
         ],
-        "summary": "delete",
-        "operationId": "deleteUsingPOST_2",
+        "summary": "deleteLabel",
+        "operationId": "deleteLabelUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -2460,8 +2460,8 @@
         "tags": [
           "label"
         ],
-        "summary": "edit",
-        "operationId": "editUsingPOST_3",
+        "summary": "editLabel",
+        "operationId": "editLabelUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -2513,8 +2513,8 @@
         "tags": [
           "label"
         ],
-        "summary": "edit",
-        "operationId": "editUsingPUT_3",
+        "summary": "editLabel",
+        "operationId": "editLabelUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -2568,8 +2568,8 @@
         "tags": [
           "label"
         ],
-        "summary": "index",
-        "operationId": "indexUsingGET_12",
+        "summary": "indexLabel",
+        "operationId": "indexLabelUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -2614,8 +2614,8 @@
         "tags": [
           "label"
         ],
-        "summary": "patch",
-        "operationId": "patchUsingPOST_3",
+        "summary": "patchLabel",
+        "operationId": "patchLabelUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -2667,8 +2667,8 @@
         "tags": [
           "label"
         ],
-        "summary": "patch",
-        "operationId": "patchUsingPUT_3",
+        "summary": "patchLabel",
+        "operationId": "patchLabelUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -2722,8 +2722,8 @@
         "tags": [
           "label"
         ],
-        "summary": "save",
-        "operationId": "saveUsingPOST_4",
+        "summary": "saveLabel",
+        "operationId": "saveLabelUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -2775,8 +2775,8 @@
         "tags": [
           "label"
         ],
-        "summary": "save",
-        "operationId": "saveUsingPUT_2",
+        "summary": "saveLabel",
+        "operationId": "saveLabelUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -2830,8 +2830,8 @@
         "tags": [
           "label"
         ],
-        "summary": "show",
-        "operationId": "showUsingGET_3",
+        "summary": "showLabel",
+        "operationId": "showLabelUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -2873,8 +2873,8 @@
         "tags": [
           "label"
         ],
-        "summary": "update",
-        "operationId": "updateUsingPOST_2",
+        "summary": "updateLabel",
+        "operationId": "updateLabelUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -2925,8 +2925,8 @@
         "tags": [
           "label"
         ],
-        "summary": "update",
-        "operationId": "updateUsingPUT_4",
+        "summary": "updateLabel",
+        "operationId": "updateLabelUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -2979,8 +2979,8 @@
         "tags": [
           "song"
         ],
-        "summary": "create",
-        "operationId": "createUsingPOST_12",
+        "summary": "createSong",
+        "operationId": "createSongUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -3024,8 +3024,8 @@
         "tags": [
           "song"
         ],
-        "summary": "create",
-        "operationId": "createUsingPUT_4",
+        "summary": "createSong",
+        "operationId": "createSongUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -3071,8 +3071,8 @@
         "tags": [
           "song"
         ],
-        "summary": "delete",
-        "operationId": "deleteUsingPOST_3",
+        "summary": "deleteSong",
+        "operationId": "deleteSongUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -3117,8 +3117,8 @@
         "tags": [
           "song"
         ],
-        "summary": "edit",
-        "operationId": "editUsingPOST_4",
+        "summary": "editSong",
+        "operationId": "editSongUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -3170,8 +3170,8 @@
         "tags": [
           "song"
         ],
-        "summary": "edit",
-        "operationId": "editUsingPUT_4",
+        "summary": "editSong",
+        "operationId": "editSongUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -3225,8 +3225,8 @@
         "tags": [
           "song"
         ],
-        "summary": "index",
-        "operationId": "indexUsingGET_13",
+        "summary": "indexSong",
+        "operationId": "indexSongUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -3271,8 +3271,8 @@
         "tags": [
           "song"
         ],
-        "summary": "patch",
-        "operationId": "patchUsingPOST_4",
+        "summary": "patchSong",
+        "operationId": "patchSongUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -3324,8 +3324,8 @@
         "tags": [
           "song"
         ],
-        "summary": "patch",
-        "operationId": "patchUsingPUT_4",
+        "summary": "patchSong",
+        "operationId": "patchSongUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -3379,8 +3379,8 @@
         "tags": [
           "song"
         ],
-        "summary": "save",
-        "operationId": "saveUsingPOST_5",
+        "summary": "saveSong",
+        "operationId": "saveSongUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -3432,8 +3432,8 @@
         "tags": [
           "song"
         ],
-        "summary": "save",
-        "operationId": "saveUsingPUT_3",
+        "summary": "saveSong",
+        "operationId": "saveSongUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -3487,8 +3487,8 @@
         "tags": [
           "song"
         ],
-        "summary": "show",
-        "operationId": "showUsingGET_4",
+        "summary": "showSong",
+        "operationId": "showSongUsingGET",
         "consumes": [
           "application/json"
         ],
@@ -3530,8 +3530,8 @@
         "tags": [
           "song"
         ],
-        "summary": "update",
-        "operationId": "updateUsingPOST_3",
+        "summary": "updateSong",
+        "operationId": "updateSongUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -3582,8 +3582,8 @@
         "tags": [
           "song"
         ],
-        "summary": "update",
-        "operationId": "updateUsingPUT_5",
+        "summary": "updateSong",
+        "operationId": "updateSongUsingPUT",
         "consumes": [
           "application/json"
         ],
