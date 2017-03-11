@@ -9,8 +9,9 @@ allprojects {
   version = '1.0.0-SNAPSHOT'
 
   repositories {
-    jcenter()
     mavenLocal()
+    jcenter()
+    maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }
     mavenCentral()
   }
 
