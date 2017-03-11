@@ -1,0 +1,40 @@
+codecov:
+  notify:
+    require_ci_to_pass: yes
+
+coverage:
+  precision: 2
+  round: down
+  range: "70...95"
+
+  status:
+    project: yes
+    patch: yes
+    changes: no
+    
+  notify:
+    gitter:
+      default:
+        url: "https://webhooks.gitter.im/e/49ad46bbe08a7cda7e7f"
+        threshold: 1%
+        only_pulls: false
+        branches: null
+        flags: null
+        paths: null
+
+parsers:
+  gcov:
+    branch_detection:
+      conditional: yes
+      loop: yes
+      method: no
+      macro: no
+
+comment:
+  layout: "header, diff"
+  behavior: default
+  require_changes: no
+
+ignore:
+  - "/springfox-grails/src/main/java/springfox/documentation/grails/SynthesizedAnnotations.java"
+  - "/springfox-grails/src/main/java/springfox/documentation/grails/ActionSpecificationFactory.java"

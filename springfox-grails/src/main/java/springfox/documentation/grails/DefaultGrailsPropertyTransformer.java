@@ -4,16 +4,25 @@ import grails.core.GrailsDomainClassProperty;
 
 public class DefaultGrailsPropertyTransformer implements GrailsPropertyTransformer {
   @Override
-  public AlternateTypePropertyBuilder apply(GrailsDomainClassProperty each) {
-    Class type = each.getReferencedPropertyType();
-    if (!each.isPersistent() && each.getName().endsWith("Id")) {
-      GrailsDomainClassProperty property = each.getDomainClass().getPropertyByName(each.getName().replace("Id", ""));
-      type = property.getDomainClass().getIdentifier().getType();
+  public AlternateTypePropertyBuilder apply(GrailsDomainClassProperty property) {
+    Class type = property.getReferencedPropertyType();
+    if (!property.isPersistent() && property.getName().endsWith("Id")) {
+      type = relatedDomainIdentifierType(relatedDomainProperty(property));
     }
+
     return new AlternateTypePropertyBuilder()
-        .withName(each.getName())
+        .withName(property.getName())
         .withType(type)
         .withCanRead(true)
         .withCanWrite(true);
+  }
+
+  private Class relatedDomainIdentifierType(GrailsDomainClassProperty property) {
+    return property.getDomainClass().getIdentifier().getType();
+  }
+
+  private GrailsDomainClassProperty relatedDomainProperty(GrailsDomainClassProperty property) {
+    String entityPropertyName = property.getName().replace("Id", "");
+    return property.getDomainClass().getPropertyByName(entityPropertyName);
   }
 }
