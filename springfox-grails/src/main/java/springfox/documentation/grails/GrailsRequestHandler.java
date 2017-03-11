@@ -2,6 +2,7 @@ package springfox.documentation.grails;
 
 import com.fasterxml.classmate.ResolvedType;
 import com.google.common.base.Optional;
+import grails.core.GrailsDomainClass;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -43,7 +44,7 @@ class GrailsRequestHandler implements RequestHandler {
 
   @Override
   public boolean isAnnotatedWith(Class<? extends Annotation> annotation) {
-    return AnnotationUtils.findAnnotation(declaringClass(), annotation) != null;
+    return findAnnotation(annotation).isPresent();
   }
 
   @Override
@@ -69,6 +70,10 @@ class GrailsRequestHandler implements RequestHandler {
 
   @Override
   public String getName() {
+    GrailsDomainClass domainClass = actionContext.getDomainClass();
+    if (domainClass != null) {
+      return String.format("%s%s", actionContext.getAction(), domainClass.getName());
+    }
     return actionContext.getAction();
   }
 

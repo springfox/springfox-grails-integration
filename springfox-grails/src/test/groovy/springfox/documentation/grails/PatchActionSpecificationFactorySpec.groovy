@@ -4,6 +4,8 @@ import com.fasterxml.classmate.TypeResolver
 import grails.core.GrailsControllerClass
 import grails.core.GrailsDomainClass
 import grails.core.GrailsDomainClassProperty
+import grails.web.mapping.LinkGenerator
+import grails.web.mapping.UrlMappings
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.RequestMethod
 import spock.lang.Specification
@@ -12,6 +14,7 @@ class PatchActionSpecificationFactorySpec extends Specification {
   def controller = Mock(GrailsControllerClass)
   def domain = Mock(GrailsDomainClass)
   def identifierProperty = Mock(GrailsDomainClassProperty)
+  def actionAttributes = new GrailsActionAttributes(Mock(LinkGenerator), Mock(UrlMappings))
 
   def setup() {
     controller.clazz >> AController
@@ -25,7 +28,7 @@ class PatchActionSpecificationFactorySpec extends Specification {
       def resolver = new TypeResolver()
       def sut = new PatchActionSpecificationFactory(resolver)
     when:
-      def spec = sut.create(new GrailsActionContext(controller, domain, "patch"))
+      def spec = sut.create(new GrailsActionContext(controller, domain, actionAttributes, "patch"))
     then:
       spec.consumes == [MediaType.APPLICATION_JSON] as Set
       spec.produces == [MediaType.APPLICATION_JSON] as Set
@@ -50,7 +53,7 @@ class PatchActionSpecificationFactorySpec extends Specification {
       def resolver = new TypeResolver()
       def sut = new PatchActionSpecificationFactory(resolver)
     when:
-      sut.create(new GrailsActionContext(controller, domain, "unknown"))
+      sut.create(new GrailsActionContext(controller, domain, actionAttributes, "unknown"))
     then:
       def exception = thrown(NullPointerException)
       exception.message.contains("Handler method is null")

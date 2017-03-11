@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;
 
+import static com.google.common.collect.Sets.*;
 import static springfox.documentation.grails.Actions.*;
 
 class DeleteActionSpecificationFactory implements ActionSpecificationFactory {
@@ -24,8 +25,8 @@ class DeleteActionSpecificationFactory implements ActionSpecificationFactory {
     Map<String, HandlerMethod> actions = actionsToHandler(context.getController().getClazz());
     HandlerMethod handlerMethod = actions.get(context.getAction());
     return new ActionSpecification(
-        new HashSet<>(Collections.singletonList(RequestMethod.POST)),
-        new HashSet<>(Collections.singletonList(MediaType.APPLICATION_JSON)),
+        methodOverrides(context, newHashSet(RequestMethod.POST)),
+        new HashSet<>(producesOverrides(context)),
         new HashSet<>(Collections.singletonList(MediaType.APPLICATION_JSON)),
         handlerMethod,
         new ArrayList<>(Collections.singletonList(

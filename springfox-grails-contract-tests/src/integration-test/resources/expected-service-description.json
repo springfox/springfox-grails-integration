@@ -5,7 +5,9 @@
     "version": "1.0",
     "title": "Api Documentation",
     "termsOfService": "urn:tos",
-    "contact": {},
+    "contact": {
+
+    },
     "license": {
       "name": "Apache 2.0",
       "url": "http://www.apache.org/licenses/LICENSE-2.0"
@@ -14,6 +16,10 @@
   "host": "localhost:__PORT__",
   "basePath": "/",
   "tags": [
+    {
+      "name": "book",
+      "description": "Book Controller"
+    },
     {
       "name": "song",
       "description": "Song Controller"
@@ -45,12 +51,13 @@
         "tags": [
           "album"
         ],
-        "summary": "create",
-        "operationId": "createUsingPOST",
+        "summary": "createAlbum",
+        "operationId": "createAlbumUsingPOST",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -89,12 +96,13 @@
         "tags": [
           "album"
         ],
-        "summary": "create",
-        "operationId": "createUsingPUT",
+        "summary": "createAlbum",
+        "operationId": "createAlbumUsingPUT",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -131,16 +139,17 @@
       }
     },
     "/album/delete/{id}": {
-      "post": {
+      "delete": {
         "tags": [
           "album"
         ],
-        "summary": "delete",
-        "operationId": "deleteUsingPOST",
+        "summary": "deleteAlbum",
+        "operationId": "deleteAlbumUsingDELETE",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -160,17 +169,14 @@
               "$ref": "#/definitions/Album"
             }
           },
-          "201": {
-            "description": "Created"
-          },
           "401": {
             "description": "Unauthorized"
           },
+          "204": {
+            "description": "No Content"
+          },
           "403": {
             "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
           }
         }
       }
@@ -180,12 +186,13 @@
         "tags": [
           "album"
         ],
-        "summary": "edit",
-        "operationId": "editUsingPOST",
+        "summary": "editAlbum",
+        "operationId": "editAlbumUsingPOST",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -232,12 +239,13 @@
         "tags": [
           "album"
         ],
-        "summary": "edit",
-        "operationId": "editUsingPUT",
+        "summary": "editAlbum",
+        "operationId": "editAlbumUsingPUT",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -286,12 +294,13 @@
         "tags": [
           "album"
         ],
-        "summary": "index",
-        "operationId": "indexUsingGET",
+        "summary": "indexAlbum",
+        "operationId": "indexAlbumUsingGET",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -331,12 +340,13 @@
         "tags": [
           "album"
         ],
-        "summary": "patch",
-        "operationId": "patchUsingPOST",
+        "summary": "patchAlbum",
+        "operationId": "patchAlbumUsingPOST",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -383,12 +393,13 @@
         "tags": [
           "album"
         ],
-        "summary": "patch",
-        "operationId": "patchUsingPUT",
+        "summary": "patchAlbum",
+        "operationId": "patchAlbumUsingPUT",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -437,15 +448,24 @@
         "tags": [
           "album"
         ],
-        "summary": "save",
-        "operationId": "saveUsingPOST",
+        "summary": "saveAlbum",
+        "operationId": "saveAlbumUsingPOST",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
           {
             "in": "body",
             "name": "body",
@@ -454,66 +474,6 @@
             "schema": {
               "$ref": "#/definitions/Album"
             }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Album"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "album"
-        ],
-        "summary": "save",
-        "operationId": "saveUsingPUT",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Album"
-            }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "responses": {
@@ -543,12 +503,13 @@
         "tags": [
           "album"
         ],
-        "summary": "show",
-        "operationId": "showUsingGET",
+        "summary": "showAlbum",
+        "operationId": "showAlbumUsingGET",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -581,64 +542,12 @@
       }
     },
     "/album/update/{id}": {
-      "post": {
-        "tags": [
-          "album"
-        ],
-        "summary": "update",
-        "operationId": "updateUsingPOST",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "description": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Album"
-            }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Album"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      },
       "put": {
         "tags": [
           "album"
         ],
-        "summary": "update",
-        "operationId": "updateUsingPUT",
+        "summary": "updateAlbum",
+        "operationId": "updateAlbumUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -692,12 +601,12 @@
           "application"
         ],
         "summary": "index",
-        "operationId": "indexUsingGET_1",
+        "operationId": "indexUsingGET",
         "consumes": [
           "application/json"
         ],
         "produces": [
-          "*/*"
+          "application/json"
         ],
         "responses": {
           "200": {
@@ -727,7 +636,7 @@
           "application/json"
         ],
         "produces": [
-          "*/*"
+          "application/json"
         ],
         "responses": {
           "200": {
@@ -757,7 +666,7 @@
           "application/json"
         ],
         "produces": [
-          "*/*"
+          "application/json"
         ],
         "responses": {
           "200": {
@@ -790,7 +699,7 @@
           "application/json"
         ],
         "produces": [
-          "*/*"
+          "application/json"
         ],
         "responses": {
           "200": {
@@ -823,7 +732,7 @@
           "application/json"
         ],
         "produces": [
-          "*/*"
+          "application/json"
         ],
         "responses": {
           "200": {
@@ -853,7 +762,7 @@
           "application/json"
         ],
         "produces": [
-          "*/*"
+          "application/json"
         ],
         "responses": {
           "200": {
@@ -883,7 +792,7 @@
           "application/json"
         ],
         "produces": [
-          "*/*"
+          "application/json"
         ],
         "responses": {
           "200": {
@@ -909,12 +818,13 @@
         "tags": [
           "artist"
         ],
-        "summary": "create",
-        "operationId": "createUsingPOST_1",
+        "summary": "createArtist",
+        "operationId": "createArtistUsingPOST",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -953,12 +863,13 @@
         "tags": [
           "artist"
         ],
-        "summary": "create",
-        "operationId": "createUsingPUT_1",
+        "summary": "createArtist",
+        "operationId": "createArtistUsingPUT",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -999,12 +910,13 @@
         "tags": [
           "artist"
         ],
-        "summary": "delete",
-        "operationId": "deleteUsingPOST_1",
+        "summary": "deleteArtist",
+        "operationId": "deleteArtistUsingPOST",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -1044,12 +956,13 @@
         "tags": [
           "artist"
         ],
-        "summary": "edit",
-        "operationId": "editUsingPOST_1",
+        "summary": "editArtist",
+        "operationId": "editArtistUsingPOST",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -1096,15 +1009,24 @@
         "tags": [
           "artist"
         ],
-        "summary": "edit",
-        "operationId": "editUsingPUT_1",
+        "summary": "editArtist",
+        "operationId": "editArtistUsingPUT",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
           {
             "in": "body",
             "name": "body",
@@ -1113,14 +1035,6 @@
             "schema": {
               "$ref": "#/definitions/Artist"
             }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "responses": {
@@ -1150,12 +1064,13 @@
         "tags": [
           "artist"
         ],
-        "summary": "index",
-        "operationId": "indexUsingGET_2",
+        "summary": "indexArtist",
+        "operationId": "indexArtistUsingGET",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -1195,15 +1110,24 @@
         "tags": [
           "artist"
         ],
-        "summary": "patch",
-        "operationId": "patchUsingPOST_1",
+        "summary": "patchArtist",
+        "operationId": "patchArtistUsingPOST",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
           {
             "in": "body",
             "name": "body",
@@ -1212,14 +1136,6 @@
             "schema": {
               "$ref": "#/definitions/Artist"
             }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "responses": {
@@ -1247,15 +1163,24 @@
         "tags": [
           "artist"
         ],
-        "summary": "patch",
-        "operationId": "patchUsingPUT_1",
+        "summary": "patchArtist",
+        "operationId": "patchArtistUsingPUT",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
           {
             "in": "body",
             "name": "body",
@@ -1264,14 +1189,6 @@
             "schema": {
               "$ref": "#/definitions/Artist"
             }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "responses": {
@@ -1301,12 +1218,13 @@
         "tags": [
           "artist"
         ],
-        "summary": "save",
-        "operationId": "saveUsingPOST_1",
+        "summary": "saveArtist",
+        "operationId": "saveArtistUsingPOST",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -1353,12 +1271,13 @@
         "tags": [
           "artist"
         ],
-        "summary": "save",
-        "operationId": "saveUsingPUT_1",
+        "summary": "saveArtist",
+        "operationId": "saveArtistUsingPUT",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -1407,12 +1326,13 @@
         "tags": [
           "artist"
         ],
-        "summary": "show",
-        "operationId": "showUsingGET_1",
+        "summary": "showArtist",
+        "operationId": "showArtistUsingGET",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -1449,8 +1369,8 @@
         "tags": [
           "artist"
         ],
-        "summary": "update",
-        "operationId": "updateUsingPOST_1",
+        "summary": "updateArtist",
+        "operationId": "updateArtistUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -1459,6 +1379,14 @@
         ],
         "parameters": [
           {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
             "in": "body",
             "name": "body",
             "description": "body",
@@ -1466,14 +1394,6 @@
             "schema": {
               "$ref": "#/definitions/Artist"
             }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "responses": {
@@ -1501,8 +1421,8 @@
         "tags": [
           "artist"
         ],
-        "summary": "update",
-        "operationId": "updateUsingPUT_1",
+        "summary": "updateArtist",
+        "operationId": "updateArtistUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -1511,6 +1431,14 @@
         ],
         "parameters": [
           {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
             "in": "body",
             "name": "body",
             "description": "body",
@@ -1518,14 +1446,6 @@
             "schema": {
               "$ref": "#/definitions/Artist"
             }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "responses": {
@@ -1550,17 +1470,208 @@
         }
       }
     },
+    "/book/create": {
+      "post": {
+        "tags": [
+          "book"
+        ],
+        "summary": "create",
+        "description": "Creates a book",
+        "operationId": "createBookUsingPOST_7",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "formData",
+            "description": "Name of the book",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/book/delete": {
+      "delete": {
+        "tags": [
+          "book"
+        ],
+        "summary": "delete",
+        "description": "Deletes a book",
+        "operationId": "deleteBookUsingDELETE",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "formData",
+            "description": "Id of the book",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/book/index": {
+      "get": {
+        "tags": [
+          "book"
+        ],
+        "summary": "index",
+        "description": "Creates a book",
+        "operationId": "indexBookUsingGET_7",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/book/save": {
+      "post": {
+        "tags": [
+          "book"
+        ],
+        "summary": "save",
+        "description": "Saves a book",
+        "operationId": "saveBookUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
+    "/book/update": {
+      "put": {
+        "tags": [
+          "book"
+        ],
+        "summary": "update",
+        "description": "Updates a book",
+        "operationId": "updateBookUsingPUT",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      }
+    },
     "/genre/create": {
       "post": {
         "tags": [
           "genre"
         ],
-        "summary": "create",
-        "operationId": "createUsingPOST_2",
+        "summary": "createGenre",
+        "operationId": "createGenreUsingPOST",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -1599,12 +1710,13 @@
         "tags": [
           "genre"
         ],
-        "summary": "create",
-        "operationId": "createUsingPUT_2",
+        "summary": "createGenre",
+        "operationId": "createGenreUsingPUT",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -1645,12 +1757,13 @@
         "tags": [
           "genre"
         ],
-        "summary": "delete",
-        "operationId": "deleteUsingPOST_2",
+        "summary": "deleteGenre",
+        "operationId": "deleteGenreUsingPOST",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -1690,12 +1803,13 @@
         "tags": [
           "genre"
         ],
-        "summary": "edit",
-        "operationId": "editUsingPOST_2",
+        "summary": "editGenre",
+        "operationId": "editGenreUsingPOST",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -1742,15 +1856,24 @@
         "tags": [
           "genre"
         ],
-        "summary": "edit",
-        "operationId": "editUsingPUT_2",
+        "summary": "editGenre",
+        "operationId": "editGenreUsingPUT",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
           {
             "in": "body",
             "name": "body",
@@ -1759,14 +1882,6 @@
             "schema": {
               "$ref": "#/definitions/Genre"
             }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "responses": {
@@ -1796,12 +1911,13 @@
         "tags": [
           "genre"
         ],
-        "summary": "index",
-        "operationId": "indexUsingGET_3",
+        "summary": "indexGenre",
+        "operationId": "indexGenreUsingGET",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -1841,12 +1957,13 @@
         "tags": [
           "genre"
         ],
-        "summary": "patch",
-        "operationId": "patchUsingPOST_2",
+        "summary": "patchGenre",
+        "operationId": "patchGenreUsingPOST",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -1893,15 +2010,24 @@
         "tags": [
           "genre"
         ],
-        "summary": "patch",
-        "operationId": "patchUsingPUT_2",
+        "summary": "patchGenre",
+        "operationId": "patchGenreUsingPUT",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
           {
             "in": "body",
             "name": "body",
@@ -1910,14 +2036,6 @@
             "schema": {
               "$ref": "#/definitions/Genre"
             }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "responses": {
@@ -1947,12 +2065,13 @@
         "tags": [
           "genre"
         ],
-        "summary": "save",
-        "operationId": "saveUsingPOST_2",
+        "summary": "saveGenre",
+        "operationId": "saveGenreUsingPOST",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -1999,12 +2118,13 @@
         "tags": [
           "genre"
         ],
-        "summary": "save",
-        "operationId": "saveUsingPUT_2",
+        "summary": "saveGenre",
+        "operationId": "saveGenreUsingPUT",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -2053,12 +2173,13 @@
         "tags": [
           "genre"
         ],
-        "summary": "show",
-        "operationId": "showUsingGET_2",
+        "summary": "showGenre",
+        "operationId": "showGenreUsingGET",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -2095,8 +2216,8 @@
         "tags": [
           "genre"
         ],
-        "summary": "update",
-        "operationId": "updateUsingPOST_2",
+        "summary": "updateGenre",
+        "operationId": "updateGenreUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -2105,6 +2226,14 @@
         ],
         "parameters": [
           {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
             "in": "body",
             "name": "body",
             "description": "body",
@@ -2112,14 +2241,6 @@
             "schema": {
               "$ref": "#/definitions/Genre"
             }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "responses": {
@@ -2147,8 +2268,8 @@
         "tags": [
           "genre"
         ],
-        "summary": "update",
-        "operationId": "updateUsingPUT_2",
+        "summary": "updateGenre",
+        "operationId": "updateGenreUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -2201,12 +2322,13 @@
         "tags": [
           "label"
         ],
-        "summary": "create",
-        "operationId": "createUsingPOST_3",
+        "summary": "createLabel",
+        "operationId": "createLabelUsingPOST",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -2245,12 +2367,13 @@
         "tags": [
           "label"
         ],
-        "summary": "create",
-        "operationId": "createUsingPUT_3",
+        "summary": "createLabel",
+        "operationId": "createLabelUsingPUT",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -2291,12 +2414,13 @@
         "tags": [
           "label"
         ],
-        "summary": "delete",
-        "operationId": "deleteUsingPOST_3",
+        "summary": "deleteLabel",
+        "operationId": "deleteLabelUsingPOST",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -2336,15 +2460,24 @@
         "tags": [
           "label"
         ],
-        "summary": "edit",
-        "operationId": "editUsingPOST_3",
+        "summary": "editLabel",
+        "operationId": "editLabelUsingPOST",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
           {
             "in": "body",
             "name": "body",
@@ -2353,14 +2486,6 @@
             "schema": {
               "$ref": "#/definitions/Label"
             }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "responses": {
@@ -2388,15 +2513,24 @@
         "tags": [
           "label"
         ],
-        "summary": "edit",
-        "operationId": "editUsingPUT_3",
+        "summary": "editLabel",
+        "operationId": "editLabelUsingPUT",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
           {
             "in": "body",
             "name": "body",
@@ -2405,14 +2539,6 @@
             "schema": {
               "$ref": "#/definitions/Label"
             }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "responses": {
@@ -2442,12 +2568,13 @@
         "tags": [
           "label"
         ],
-        "summary": "index",
-        "operationId": "indexUsingGET_4",
+        "summary": "indexLabel",
+        "operationId": "indexLabelUsingGET",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -2487,15 +2614,24 @@
         "tags": [
           "label"
         ],
-        "summary": "patch",
-        "operationId": "patchUsingPOST_3",
+        "summary": "patchLabel",
+        "operationId": "patchLabelUsingPOST",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
           {
             "in": "body",
             "name": "body",
@@ -2504,14 +2640,6 @@
             "schema": {
               "$ref": "#/definitions/Label"
             }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "responses": {
@@ -2539,15 +2667,24 @@
         "tags": [
           "label"
         ],
-        "summary": "patch",
-        "operationId": "patchUsingPUT_3",
+        "summary": "patchLabel",
+        "operationId": "patchLabelUsingPUT",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
           {
             "in": "body",
             "name": "body",
@@ -2556,14 +2693,6 @@
             "schema": {
               "$ref": "#/definitions/Label"
             }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "responses": {
@@ -2593,15 +2722,24 @@
         "tags": [
           "label"
         ],
-        "summary": "save",
-        "operationId": "saveUsingPOST_3",
+        "summary": "saveLabel",
+        "operationId": "saveLabelUsingPOST",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
           {
             "in": "body",
             "name": "body",
@@ -2610,14 +2748,6 @@
             "schema": {
               "$ref": "#/definitions/Label"
             }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "responses": {
@@ -2645,12 +2775,13 @@
         "tags": [
           "label"
         ],
-        "summary": "save",
-        "operationId": "saveUsingPUT_3",
+        "summary": "saveLabel",
+        "operationId": "saveLabelUsingPUT",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -2699,12 +2830,13 @@
         "tags": [
           "label"
         ],
-        "summary": "show",
-        "operationId": "showUsingGET_3",
+        "summary": "showLabel",
+        "operationId": "showLabelUsingGET",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -2741,8 +2873,8 @@
         "tags": [
           "label"
         ],
-        "summary": "update",
-        "operationId": "updateUsingPOST_3",
+        "summary": "updateLabel",
+        "operationId": "updateLabelUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -2751,6 +2883,14 @@
         ],
         "parameters": [
           {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
             "in": "body",
             "name": "body",
             "description": "body",
@@ -2758,14 +2898,6 @@
             "schema": {
               "$ref": "#/definitions/Label"
             }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "responses": {
@@ -2793,8 +2925,8 @@
         "tags": [
           "label"
         ],
-        "summary": "update",
-        "operationId": "updateUsingPUT_3",
+        "summary": "updateLabel",
+        "operationId": "updateLabelUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -2847,12 +2979,13 @@
         "tags": [
           "song"
         ],
-        "summary": "create",
-        "operationId": "createUsingPOST_4",
+        "summary": "createSong",
+        "operationId": "createSongUsingPOST",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -2891,12 +3024,13 @@
         "tags": [
           "song"
         ],
-        "summary": "create",
-        "operationId": "createUsingPUT_4",
+        "summary": "createSong",
+        "operationId": "createSongUsingPUT",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -2937,12 +3071,13 @@
         "tags": [
           "song"
         ],
-        "summary": "delete",
-        "operationId": "deleteUsingPOST_4",
+        "summary": "deleteSong",
+        "operationId": "deleteSongUsingPOST",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -2982,15 +3117,24 @@
         "tags": [
           "song"
         ],
-        "summary": "edit",
-        "operationId": "editUsingPOST_4",
+        "summary": "editSong",
+        "operationId": "editSongUsingPOST",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
           {
             "in": "body",
             "name": "body",
@@ -2999,14 +3143,6 @@
             "schema": {
               "$ref": "#/definitions/Song"
             }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "responses": {
@@ -3034,15 +3170,24 @@
         "tags": [
           "song"
         ],
-        "summary": "edit",
-        "operationId": "editUsingPUT_4",
+        "summary": "editSong",
+        "operationId": "editSongUsingPUT",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
           {
             "in": "body",
             "name": "body",
@@ -3051,14 +3196,6 @@
             "schema": {
               "$ref": "#/definitions/Song"
             }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "responses": {
@@ -3088,12 +3225,13 @@
         "tags": [
           "song"
         ],
-        "summary": "index",
-        "operationId": "indexUsingGET_5",
+        "summary": "indexSong",
+        "operationId": "indexSongUsingGET",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -3133,12 +3271,13 @@
         "tags": [
           "song"
         ],
-        "summary": "patch",
-        "operationId": "patchUsingPOST_4",
+        "summary": "patchSong",
+        "operationId": "patchSongUsingPOST",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -3185,15 +3324,24 @@
         "tags": [
           "song"
         ],
-        "summary": "patch",
-        "operationId": "patchUsingPUT_4",
+        "summary": "patchSong",
+        "operationId": "patchSongUsingPUT",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
           {
             "in": "body",
             "name": "body",
@@ -3202,14 +3350,6 @@
             "schema": {
               "$ref": "#/definitions/Song"
             }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "responses": {
@@ -3239,12 +3379,13 @@
         "tags": [
           "song"
         ],
-        "summary": "save",
-        "operationId": "saveUsingPOST_4",
+        "summary": "saveSong",
+        "operationId": "saveSongUsingPOST",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -3291,15 +3432,24 @@
         "tags": [
           "song"
         ],
-        "summary": "save",
-        "operationId": "saveUsingPUT_4",
+        "summary": "saveSong",
+        "operationId": "saveSongUsingPUT",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
           {
             "in": "body",
             "name": "body",
@@ -3308,14 +3458,6 @@
             "schema": {
               "$ref": "#/definitions/Song"
             }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "responses": {
@@ -3345,12 +3487,13 @@
         "tags": [
           "song"
         ],
-        "summary": "show",
-        "operationId": "showUsingGET_4",
+        "summary": "showSong",
+        "operationId": "showSongUsingGET",
         "consumes": [
           "application/json"
         ],
         "produces": [
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -3387,8 +3530,8 @@
         "tags": [
           "song"
         ],
-        "summary": "update",
-        "operationId": "updateUsingPOST_4",
+        "summary": "updateSong",
+        "operationId": "updateSongUsingPOST",
         "consumes": [
           "application/json"
         ],
@@ -3397,6 +3540,14 @@
         ],
         "parameters": [
           {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
             "in": "body",
             "name": "body",
             "description": "body",
@@ -3404,14 +3555,6 @@
             "schema": {
               "$ref": "#/definitions/Song"
             }
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "description": "id",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
           }
         ],
         "responses": {
@@ -3439,8 +3582,8 @@
         "tags": [
           "song"
         ],
-        "summary": "update",
-        "operationId": "updateUsingPUT_4",
+        "summary": "updateSong",
+        "operationId": "updateSongUsingPUT",
         "consumes": [
           "application/json"
         ],
@@ -3493,27 +3636,6 @@
     "Artist": {
       "type": "object",
       "properties": {
-        "albums": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Album"
-          }
-        },
-        "attached": {
-          "type": "boolean"
-        },
-        "dirty": {
-          "type": "boolean"
-        },
-        "dirtyPropertyNames": {
-          "type": "array",
-          "items": {
-            "type": "object"
-          }
-        },
-        "errors": {
-          "$ref": "#/definitions/Errors"
-        },
         "id": {
           "type": "integer",
           "format": "int64"
@@ -3524,22 +3646,7 @@
         "name": {
           "type": "string"
         },
-        "properties": {
-          "type": "object"
-        },
-        "signedTo": {
-          "$ref": "#/definitions/Label"
-        },
         "signedToId": {
-          "type": "object"
-        },
-        "songs": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Song"
-          }
-        },
-        "version": {
           "type": "integer",
           "format": "int64"
         }
@@ -3595,52 +3702,24 @@
     "Song": {
       "type": "object",
       "properties": {
-        "album": {
-          "$ref": "#/definitions/Album"
-        },
         "albumId": {
-          "type": "object"
-        },
-        "artist": {
-          "$ref": "#/definitions/Artist"
+          "type": "integer",
+          "format": "int64"
         },
         "artistId": {
-          "type": "object"
-        },
-        "attached": {
-          "type": "boolean"
-        },
-        "dirty": {
-          "type": "boolean"
-        },
-        "dirtyPropertyNames": {
-          "type": "array",
-          "items": {
-            "type": "object"
-          }
-        },
-        "errors": {
-          "$ref": "#/definitions/Errors"
-        },
-        "genre": {
-          "$ref": "#/definitions/Genre"
+          "type": "integer",
+          "format": "int64"
         },
         "genreId": {
-          "type": "object"
+          "type": "integer",
+          "format": "int64"
         },
         "id": {
           "type": "integer",
           "format": "int64"
         },
-        "properties": {
-          "type": "object"
-        },
         "title": {
           "type": "string"
-        },
-        "version": {
-          "type": "integer",
-          "format": "int64"
         }
       }
     },
@@ -3676,94 +3755,36 @@
         "address": {
           "type": "string"
         },
-        "albums": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Album"
-          }
-        },
-        "artists": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Artist"
-          }
-        },
-        "attached": {
-          "type": "boolean"
-        },
-        "dirty": {
-          "type": "boolean"
-        },
-        "dirtyPropertyNames": {
-          "type": "array",
-          "items": {
-            "type": "object"
-          }
-        },
-        "errors": {
-          "$ref": "#/definitions/Errors"
-        },
         "id": {
           "type": "integer",
           "format": "int64"
         },
         "name": {
           "type": "string"
-        },
-        "properties": {
-          "type": "object"
-        },
-        "version": {
-          "type": "integer",
-          "format": "int64"
         }
       }
     },
     "Album": {
       "type": "object",
       "properties": {
-        "albumArtist": {
-          "$ref": "#/definitions/Artist"
-        },
         "albumArtistId": {
-          "type": "object"
-        },
-        "attached": {
-          "type": "boolean"
+          "type": "integer",
+          "format": "int64"
         },
         "coverImage": {
           "type": "string"
         },
-        "dirty": {
-          "type": "boolean"
-        },
-        "dirtyPropertyNames": {
-          "type": "array",
-          "items": {
-            "type": "object"
-          }
-        },
-        "errors": {
-          "$ref": "#/definitions/Errors"
-        },
-        "genre": {
-          "$ref": "#/definitions/Genre"
-        },
         "genreId": {
-          "type": "object"
+          "type": "integer",
+          "format": "int64"
         },
         "id": {
           "type": "integer",
           "format": "int64"
         },
-        "label": {
-          "$ref": "#/definitions/Label"
-        },
         "labelId": {
-          "type": "object"
-        },
-        "properties": {
-          "type": "object"
+          "type": "integer",
+          "format": "int64"
         },
         "rating": {
           "type": "string",
@@ -3779,21 +3800,11 @@
           "type": "string",
           "format": "date-time"
         },
-        "songs": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Song"
-          }
-        },
         "subtitle": {
           "type": "string"
         },
         "title": {
           "type": "string"
-        },
-        "version": {
-          "type": "integer",
-          "format": "int64"
         }
       }
     },
@@ -3835,40 +3846,12 @@
     "Genre": {
       "type": "object",
       "properties": {
-        "albums": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Album"
-          }
-        },
-        "attached": {
-          "type": "boolean"
-        },
-        "dirty": {
-          "type": "boolean"
-        },
-        "dirtyPropertyNames": {
-          "type": "array",
-          "items": {
-            "type": "object"
-          }
-        },
-        "errors": {
-          "$ref": "#/definitions/Errors"
-        },
         "id": {
           "type": "integer",
           "format": "int64"
         },
         "name": {
           "type": "string"
-        },
-        "properties": {
-          "type": "object"
-        },
-        "version": {
-          "type": "integer",
-          "format": "int64"
         }
       }
     }

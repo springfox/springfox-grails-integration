@@ -18,7 +18,9 @@ class MethodBackedActionSpecificationFactory implements ActionSpecificationFacto
   private final HandlerMethodResolver handlerMethodResolver;
 
   @Autowired
-  public MethodBackedActionSpecificationFactory(TypeResolver resolver, GrailsActionAttributes urlProvider) {
+  public MethodBackedActionSpecificationFactory(
+      TypeResolver resolver,
+      GrailsActionAttributes urlProvider) {
     this.urlProvider = urlProvider;
     this.handlerMethodResolver = new HandlerMethodResolver(resolver);
   }
@@ -29,7 +31,7 @@ class MethodBackedActionSpecificationFactory implements ActionSpecificationFacto
     HandlerMethod handlerMethod = actions.get(context.getAction());
     return new ActionSpecification(
         urlProvider.httpMethod(context),
-        new HashSet<>(),
+        producesOverrides(context),
         new HashSet<>(),
         handlerMethod,
         handlerMethodResolver.methodParameters(handlerMethod),

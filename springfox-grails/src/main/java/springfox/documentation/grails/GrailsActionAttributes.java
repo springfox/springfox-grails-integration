@@ -13,6 +13,8 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import static springfox.documentation.grails.Actions.*;
+
 @Component
 class GrailsActionAttributes {
   private final LinkGenerator linkGenerator;
@@ -38,11 +40,15 @@ class GrailsActionAttributes {
   }
 
   Set<RequestMethod> httpMethod(GrailsActionContext context) {
-    return Arrays.stream(urlMappings.getUrlMappings())
-        .filter(mapping ->
-            Objects.equals(mapping.getControllerName(), context.getController().getName())
-                && Objects.equals(mapping.getActionName(), context.getAction()))
-        .map(mapping -> RequestMethod.valueOf(mapping.getHttpMethod()))
-        .collect(Collectors.toSet());
+    Set<RequestMethod> requestMethods = methodOverrides(context);
+    if (requestMethods.isEmpty()) {
+      return Arrays.stream(urlMappings.getUrlMappings())
+          .filter(mapping ->
+              Objects.equals(mapping.getControllerName(), context.getController().getName())
+                  && Objects.equals(mapping.getActionName(), context.getAction()))
+          .map(mapping -> RequestMethod.valueOf(mapping.getHttpMethod()))
+          .collect(Collectors.toSet());
+    }
+    return requestMethods;
   }
 }
