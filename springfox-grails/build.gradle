@@ -68,6 +68,7 @@ dependencies {
     compile "io.springfox:springfox-spi:${springfox}"
     compile "io.springfox:springfox-core:${springfox}"
     compile "io.springfox:springfox-swagger2:${springfox}"
+    //compile "net.bytebuddy:byte-buddy:${byteBuddyVersion}"
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {

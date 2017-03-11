@@ -4,12 +4,15 @@ import com.fasterxml.classmate.TypeResolver
 import grails.core.GrailsControllerClass
 import grails.core.GrailsDomainClass
 import grails.core.GrailsDomainClassProperty
+import grails.web.mapping.LinkGenerator
+import grails.web.mapping.UrlMappings
 import spock.lang.Specification
 
 class RestfulActionSpecificationFactorySpec extends Specification {
   def controller = Mock(GrailsControllerClass)
   def domain = Mock(GrailsDomainClass)
   def identifierProperty = Mock(GrailsDomainClassProperty)
+  def actionAttributes = new GrailsActionAttributes(Mock(LinkGenerator), Mock(UrlMappings))
 
   def setup() {
     controller.clazz >> AController
@@ -23,7 +26,7 @@ class RestfulActionSpecificationFactorySpec extends Specification {
       def resolver = new TypeResolver()
       def sut = new RestfulActionSpecificationFactory(resolver)
     when:
-      def actionSpec = sut.create(new GrailsActionContext(controller, domain, action.toLowerCase()))
+      def actionSpec = sut.create(new GrailsActionContext(controller, domain, actionAttributes, action.toLowerCase()))
     then:
       actionSpec.handlerMethod.method.name == action
     where:
@@ -35,7 +38,7 @@ class RestfulActionSpecificationFactorySpec extends Specification {
       def resolver = new TypeResolver()
       def sut = new RestfulActionSpecificationFactory(resolver)
     when:
-      sut.create(new GrailsActionContext(controller, domain, "unknown"))
+      sut.create(new GrailsActionContext(controller, domain, actionAttributes, "unknown"))
     then:
       def exception = thrown(IllegalArgumentException)
       exception.message.contains("Action unknown is not a restful action")

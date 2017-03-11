@@ -48,7 +48,8 @@ class GrailsRequestHandlerProvider implements RequestHandlerProvider {
     return controller.getActions()
         .stream()
         .map(action -> {
-          GrailsActionContext actionContext = new GrailsActionContext(controller, inferredDomain, action);
+          GrailsActionContext actionContext
+              = new GrailsActionContext(controller, inferredDomain, urlProvider, action);
           return new GrailsRequestHandler(
               actionContext,
               urlProvider,

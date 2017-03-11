@@ -6,11 +6,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.method.HandlerMethod;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;
 
+import static com.google.common.collect.Sets.*;
 import static springfox.documentation.grails.Actions.*;
 
 class CreateActionSpecificationFactory implements ActionSpecificationFactory {
@@ -25,7 +25,7 @@ class CreateActionSpecificationFactory implements ActionSpecificationFactory {
     Map<String, HandlerMethod> actions = actionsToHandler(context.getController().getClazz());
     HandlerMethod handlerMethod = actions.get(context.getAction());
     return new ActionSpecification(
-        new HashSet<>(Arrays.asList(RequestMethod.POST, RequestMethod.PUT)),
+        methodOverrides(context, newHashSet(RequestMethod.POST, RequestMethod.PUT)),
         new HashSet<>(producesOverrides(context)),
         new HashSet<>(Collections.singletonList(MediaType.APPLICATION_JSON)),
         handlerMethod,

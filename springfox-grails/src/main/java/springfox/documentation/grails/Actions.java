@@ -46,7 +46,9 @@ class Actions {
     return handlerLookup;
   }
 
-  static Set<RequestMethod> methodOverrides(GrailsActionContext context) {
+  static Set<RequestMethod> methodOverrides(
+      GrailsActionContext context,
+      Set<RequestMethod> defaultMethods) {
     Set<RequestMethod> methods = new HashSet<>();
     Map<String, String> allowedMethods;
     try {
@@ -57,10 +59,17 @@ class Actions {
       allowedMethods = (Map<String, String>) allowedMethodsField.get(clazz);
       if (allowedMethods != null && allowedMethods.containsKey(context.getAction())) {
         methods.add(RequestMethod.valueOf(allowedMethods.get(context.getAction())));
+      } else {
+        methods.addAll(defaultMethods);
       }
     } catch (NoSuchFieldException | IllegalAccessException ignored) {
+      methods.addAll(defaultMethods);
     }
     return methods;
+  }
+
+  static Set<RequestMethod> methodOverrides(GrailsActionContext context) {
+    return methodOverrides(context, newHashSet());
   }
 
   private static void setFinalStatic(Field field, Object newValue) throws Exception {

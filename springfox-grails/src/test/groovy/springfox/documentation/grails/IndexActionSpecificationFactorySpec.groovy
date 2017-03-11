@@ -3,6 +3,8 @@ package springfox.documentation.grails
 import com.fasterxml.classmate.TypeResolver
 import grails.core.GrailsControllerClass
 import grails.core.GrailsDomainClass
+import grails.web.mapping.LinkGenerator
+import grails.web.mapping.UrlMappings
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.RequestMethod
 import spock.lang.Specification
@@ -10,6 +12,7 @@ import spock.lang.Specification
 class IndexActionSpecificationFactorySpec extends Specification {
   def controller = Mock(GrailsControllerClass)
   def domain = Mock(GrailsDomainClass)
+  def actionAttributes = new GrailsActionAttributes(Mock(LinkGenerator), Mock(UrlMappings))
 
   def setup() {
     controller.clazz >> AController
@@ -21,7 +24,7 @@ class IndexActionSpecificationFactorySpec extends Specification {
       def resolver = new TypeResolver()
       def sut = new IndexActionSpecificationFactory(resolver)
     when:
-      def spec = sut.create(new GrailsActionContext(controller, domain, "index"))
+      def spec = sut.create(new GrailsActionContext(controller, domain, actionAttributes, "index"))
     then:
       spec.consumes == [MediaType.APPLICATION_JSON] as Set
       spec.produces == [MediaType.APPLICATION_JSON] as Set
@@ -40,7 +43,7 @@ class IndexActionSpecificationFactorySpec extends Specification {
       def resolver = new TypeResolver()
       def sut = new IndexActionSpecificationFactory(resolver)
     when:
-      sut.create(new GrailsActionContext(controller, domain, "unknown"))
+      sut.create(new GrailsActionContext(controller, domain, actionAttributes, "unknown"))
     then:
       def exception = thrown(NullPointerException)
       exception.message.contains("Handler method is null")

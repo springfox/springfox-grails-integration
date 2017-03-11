@@ -37,7 +37,7 @@ class ActionSpecificationResolverSpec extends Specification {
     and:
       urlMappings.urlMappings >> [otherMapping(Mock(UrlMapping))]
     when:
-      def spec = sut.resolve(new GrailsActionContext(controller, domain, action))
+      def spec = sut.resolve(new GrailsActionContext(controller, domain, actionAttributes, action))
     then:
       spec != null
       spec.handlerMethod.method.name == action

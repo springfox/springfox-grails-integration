@@ -35,7 +35,7 @@ class MethodBackedActionSpecificationFactorySpec extends Specification {
     and:
       urlMappings.urlMappings >> [otherMapping(Mock(UrlMapping))]
     when:
-      def spec = sut.create(new GrailsActionContext(controller, domain, "other"))
+      def spec = sut.create(new GrailsActionContext(controller, domain, actionAttributes, "other"))
     then:
       spec.consumes == [] as Set
       spec.produces == [MediaType.APPLICATION_JSON] as Set
