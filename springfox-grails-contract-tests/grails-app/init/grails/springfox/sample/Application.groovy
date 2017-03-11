@@ -49,8 +49,10 @@ class Application extends GrailsAutoConfiguration {
   }
 
   @Bean
-  Docket api(AlternateTypeRuleConvention convention) {
-    def typeRules = convention.rules()
+  Docket api(List<AlternateTypeRuleConvention> conventions) {
+    def typeRules = conventions.collectMany {
+      it.rules()
+    }
     new Docket(DocumentationType.SWAGGER_2)
         .ignoredParameterTypes(MetaClass)
         .select()

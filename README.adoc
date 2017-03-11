@@ -71,9 +71,11 @@ repositories {
 }
 
 dependencies {
-    compile "io.springfox:springfox-grails:{releaseVersion}"
+    compile "io.springfox.grails:springfox-grails:{releaseVersion}" //<1>
 }
 ----
+
+NOTE: This project has not been released yet.
 
 ===== Snapshot
 
@@ -85,51 +87,11 @@ repositories {
 }
 
 dependencies {
-    compile "io.springfox:springfox-grails:{snapshotVersion}"
+    compile "io.springfox:springfox-grails:{snapshotVersion}" //<1>
 }
 ----
 
-
-==== Maven
-===== Release
-
-[source,xml]
-[subs="verbatim,attributes"]
-----
-<repositories>
-    <repository>
-      <id>jcenter-snapshots</id>
-      <name>jcenter</name>
-      <url>https://jcenter.bintray.com/</url>
-    </repository>
-</repositories>
-
-<dependency>
-    <groupId>io.springfox</groupId>
-    <artifactId>springfox-grails</artifactId>
-    <version>{releaseVersion}</version>
-</dependency>
-----
-
-===== Snapshot
-
-[source,xml]
-[subs="verbatim,attributes"]
-----
-<repositories>
-    <repository>
-      <id>jcenter-snapshots</id>
-      <name>jcenter</name>
-      <url>http://oss.jfrog.org/artifactory/oss-snapshot-local/</url>
-    </repository>
-</repositories>
-
-<dependency>
-    <groupId>io.springfox</groupId>
-    <artifactId>springfox-grails</artifactId>
-    <version>{snapshotVersion}</version>
-</dependency>
-----
+NOTE: The current snapshot version that is available is `1.0.0-SNAPSHOT`
 
 ===== Configure the springfox grails integration
 
@@ -144,40 +106,85 @@ In your Application (GrailsAutoConfiguration) startup entry-point follow the ste
 // 2. Import the springfox grails integration configuration
 @Import([springfox.documentation.grails.SpringfoxGrailsIntegrationConfiguration])
 class Application extends GrailsAutoConfiguration {
-    static void main(String[] args) {
-        GrailsApp.run(Application, args)
+  static void main(String[] args) {
+    GrailsApp.run(Application, args)
+  }
+
+  // 3. **Optionally** define a custom docket or omit this step to use the default
+  // For grails it is preferrable to use use the following settings.
+  @Bean
+  Docket api(List<AlternateTypeRuleConvention> conventions) { //<1>
+    def typeRules = conventions.collectMany {
+      it.rules()
     }
+    new Docket(DocumentationType.SWAGGER_2)
+        .ignoredParameterTypes(MetaClass)
+        .select()
+        .paths(not(ant("/error")))
+        .build()
+        .alternateTypeRules(typeRules.toArray(new AlternateTypeRule[typeRules.size()]))
+  }
 
-
-    // 3. **Optionally** define a custom docket or omit this step to use the default
-    @Bean
-    Docket api() {
-        new Docket(DocumentationType.SWAGGER_2)
-                .ignoredParameterTypes(MetaClass)
-    }
-
-    // 4. **Optionally** configure the swagger-ui webjar to serve the scaffolded swagger UI
-    @Bean
-    static WebMvcConfigurerAdapter webConfigurer() {
-        new WebMvcConfigurerAdapter() {
-            @Override
-            void addResourceHandlers(ResourceHandlerRegistry registry) {
-                if (!registry.hasMappingForPattern("/webjars/**")) {
-                    registry
-                        .addResourceHandler("/webjars/**")
-                        .addResourceLocations("classpath:/META-INF/resources/webjars/")
-                }
-                if (!registry.hasMappingForPattern("/swagger-ui.html")) {
-                    registry
-                        .addResourceHandler("/swagger-ui.html")
-                        .addResourceLocations("classpath:/META-INF/resources/swagger-ui.html")
-                }
-            }
-        }
+   // 4. **Optionally** in the absense of asset pipeline configure the swagger-ui webjar to serve the scaffolded
+   swagger UI
+   @Bean
+   static WebMvcConfigurerAdapter webConfigurer() {
+     new WebMvcConfigurerAdapter() {
+       @Override
+       void addResourceHandlers(ResourceHandlerRegistry registry) {
+         if (!registry.hasMappingForPattern("/webjars/**")) {
+           registry
+               .addResourceHandler("/webjars/**")
+               .addResourceLocations("classpath:/META-INF/resources/webjars/")
+         }
+         if (!registry.hasMappingForPattern("/swagger-ui.html")) {
+           registry
+               .addResourceHandler("/swagger-ui.html")
+               .addResourceLocations("classpath:/META-INF/resources/swagger-ui.html")
+         }
+       }
+      }
     }
 }
-
 ----
+<1> Conventions are way to describe conventions specific to grails
+
+==== Swagger UI integration
+
+IMPORTANT: In order to use the bundled swagger UI as explained in ___step 4___ above. The following library needs to be
+included in the `build.gradle`
+
+===== Release
+[source,groovy]
+[subs="verbatim,attributes"]
+----
+repositories {
+  jcenter()
+}
+
+dependencies {
+    compile "compile "io.springfox:springfox-swagger-ui:{springfoxReleaseVersion}" //<1>
+}
+----
+
+NOTE: The latest released version is image:https://api.bintray.com/packages/springfox/maven-repo/springfox/images/download.svg["Springfox Version",
+link="https://bintray.com/springfox/maven-repo/springfox/_latestVersion"]
+
+===== Snapshot
+
+[source,groovy]
+[subs="verbatim,attributes"]
+----
+repositories {
+   maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }
+}
+
+dependencies {
+    compile "compile "io.springfox:springfox-swagger-ui:{springfoxSnapshotVersion}" //<1>
+}
+----
+
+NOTE: The current snapshot in development is `2.7.0-SNAPSHOT`
 
 If you get an exception when you try to run your app, this might be because of the chosen profile for your application. If you use the `rest-api` profile, everything should be fine, but if you've chosen the `web` profile, it is likely that you have to add something like
 
