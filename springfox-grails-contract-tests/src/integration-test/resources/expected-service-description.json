@@ -3636,27 +3636,6 @@
     "Artist": {
       "type": "object",
       "properties": {
-        "albums": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Album"
-          }
-        },
-        "attached": {
-          "type": "boolean"
-        },
-        "dirty": {
-          "type": "boolean"
-        },
-        "dirtyPropertyNames": {
-          "type": "array",
-          "items": {
-            "type": "object"
-          }
-        },
-        "errors": {
-          "$ref": "#/definitions/Errors"
-        },
         "id": {
           "type": "integer",
           "format": "int64"
@@ -3667,22 +3646,7 @@
         "name": {
           "type": "string"
         },
-        "properties": {
-          "type": "object"
-        },
-        "signedTo": {
-          "$ref": "#/definitions/Label"
-        },
         "signedToId": {
-          "type": "object"
-        },
-        "songs": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Song"
-          }
-        },
-        "version": {
           "type": "integer",
           "format": "int64"
         }
@@ -3738,52 +3702,24 @@
     "Song": {
       "type": "object",
       "properties": {
-        "album": {
-          "$ref": "#/definitions/Album"
-        },
         "albumId": {
-          "type": "object"
-        },
-        "artist": {
-          "$ref": "#/definitions/Artist"
+          "type": "integer",
+          "format": "int64"
         },
         "artistId": {
-          "type": "object"
-        },
-        "attached": {
-          "type": "boolean"
-        },
-        "dirty": {
-          "type": "boolean"
-        },
-        "dirtyPropertyNames": {
-          "type": "array",
-          "items": {
-            "type": "object"
-          }
-        },
-        "errors": {
-          "$ref": "#/definitions/Errors"
-        },
-        "genre": {
-          "$ref": "#/definitions/Genre"
+          "type": "integer",
+          "format": "int64"
         },
         "genreId": {
-          "type": "object"
+          "type": "integer",
+          "format": "int64"
         },
         "id": {
           "type": "integer",
           "format": "int64"
         },
-        "properties": {
-          "type": "object"
-        },
         "title": {
           "type": "string"
-        },
-        "version": {
-          "type": "integer",
-          "format": "int64"
         }
       }
     },
@@ -3819,94 +3755,36 @@
         "address": {
           "type": "string"
         },
-        "albums": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Album"
-          }
-        },
-        "artists": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Artist"
-          }
-        },
-        "attached": {
-          "type": "boolean"
-        },
-        "dirty": {
-          "type": "boolean"
-        },
-        "dirtyPropertyNames": {
-          "type": "array",
-          "items": {
-            "type": "object"
-          }
-        },
-        "errors": {
-          "$ref": "#/definitions/Errors"
-        },
         "id": {
           "type": "integer",
           "format": "int64"
         },
         "name": {
           "type": "string"
-        },
-        "properties": {
-          "type": "object"
-        },
-        "version": {
-          "type": "integer",
-          "format": "int64"
         }
       }
     },
     "Album": {
       "type": "object",
       "properties": {
-        "albumArtist": {
-          "$ref": "#/definitions/Artist"
-        },
         "albumArtistId": {
-          "type": "object"
-        },
-        "attached": {
-          "type": "boolean"
+          "type": "integer",
+          "format": "int64"
         },
         "coverImage": {
           "type": "string"
         },
-        "dirty": {
-          "type": "boolean"
-        },
-        "dirtyPropertyNames": {
-          "type": "array",
-          "items": {
-            "type": "object"
-          }
-        },
-        "errors": {
-          "$ref": "#/definitions/Errors"
-        },
-        "genre": {
-          "$ref": "#/definitions/Genre"
-        },
         "genreId": {
-          "type": "object"
+          "type": "integer",
+          "format": "int64"
         },
         "id": {
           "type": "integer",
           "format": "int64"
         },
-        "label": {
-          "$ref": "#/definitions/Label"
-        },
         "labelId": {
-          "type": "object"
-        },
-        "properties": {
-          "type": "object"
+          "type": "integer",
+          "format": "int64"
         },
         "rating": {
           "type": "string",
@@ -3922,21 +3800,11 @@
           "type": "string",
           "format": "date-time"
         },
-        "songs": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Song"
-          }
-        },
         "subtitle": {
           "type": "string"
         },
         "title": {
           "type": "string"
-        },
-        "version": {
-          "type": "integer",
-          "format": "int64"
         }
       }
     },
@@ -3978,40 +3846,12 @@
     "Genre": {
       "type": "object",
       "properties": {
-        "albums": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Album"
-          }
-        },
-        "attached": {
-          "type": "boolean"
-        },
-        "dirty": {
-          "type": "boolean"
-        },
-        "dirtyPropertyNames": {
-          "type": "array",
-          "items": {
-            "type": "object"
-          }
-        },
-        "errors": {
-          "$ref": "#/definitions/Errors"
-        },
         "id": {
           "type": "integer",
           "format": "int64"
         },
         "name": {
           "type": "string"
-        },
-        "properties": {
-          "type": "object"
-        },
-        "version": {
-          "type": "integer",
-          "format": "int64"
         }
       }
     }

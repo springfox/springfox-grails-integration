@@ -1,5 +1,6 @@
 package springfox.documentation.grails;
 
+import com.google.common.base.Optional;
 import grails.core.GrailsApplication;
 import grails.core.GrailsClass;
 import grails.core.GrailsControllerClass;
@@ -7,6 +8,7 @@ import grails.core.GrailsDomainClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import springfox.documentation.RequestHandler;
+import springfox.documentation.schema.AlternateTypeRule;
 import springfox.documentation.spi.service.RequestHandlerProvider;
 
 import java.util.Arrays;
@@ -20,15 +22,18 @@ class GrailsRequestHandlerProvider implements RequestHandlerProvider {
   private final GrailsActionAttributes urlProvider;
   private final GrailsApplication grailsApplication;
   private final ActionSpecificationResolver actionResolver;
+  private final AlternateTypeRuleConvention convention;
 
   @Autowired
   public GrailsRequestHandlerProvider(
       GrailsApplication grailsApplication,
       GrailsActionAttributes urlProvider,
-      ActionSpecificationResolver actionResolver) {
+      ActionSpecificationResolver actionResolver,
+      AlternateTypeRuleConvention convention) {
     this.urlProvider = urlProvider;
     this.grailsApplication = grailsApplication;
     this.actionResolver = actionResolver;
+    this.convention = convention;
   }
 
   @Override
@@ -43,7 +48,6 @@ class GrailsRequestHandlerProvider implements RequestHandlerProvider {
         .filter(d -> Objects.equals(d.getLogicalPropertyName(), grailsClass.getLogicalPropertyName()))
         .findFirst()
         .orElse(null);
-
     GrailsControllerClass controller = (GrailsControllerClass) grailsClass;
     return controller.getActions()
         .stream()
