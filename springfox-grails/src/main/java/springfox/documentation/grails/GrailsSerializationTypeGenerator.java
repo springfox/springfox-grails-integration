@@ -5,6 +5,8 @@ import com.google.common.collect.ImmutableList;
 import grails.core.GrailsDomainClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import springfox.documentation.builders.AlternateTypeBuilder;
+import springfox.documentation.builders.AlternateTypePropertyBuilder;
 
 import static com.google.common.collect.Lists.*;
 

@@ -1,6 +1,7 @@
 package springfox.documentation.grails;
 
 import grails.core.GrailsDomainClassProperty;
+import springfox.documentation.builders.AlternateTypePropertyBuilder;
 
 public class DefaultGrailsPropertyTransformer implements GrailsPropertyTransformer {
   @Override

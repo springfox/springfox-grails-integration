@@ -18,7 +18,6 @@ class GrailsSerializationTypeGeneratorSpec extends Specification {
       clazz.declaredFields.length == 1
       clazz.declaredFields[0].name == "name"
       instance.getName() == "Dilip"
-
   }
 
   def grailsApplication() {

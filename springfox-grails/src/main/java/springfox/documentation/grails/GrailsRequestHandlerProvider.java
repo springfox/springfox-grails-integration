@@ -8,7 +8,6 @@ import grails.core.GrailsDomainClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import springfox.documentation.RequestHandler;
-import springfox.documentation.schema.AlternateTypeRule;
 import springfox.documentation.spi.service.RequestHandlerProvider;
 
 import java.util.Arrays;
@@ -22,18 +21,15 @@ class GrailsRequestHandlerProvider implements RequestHandlerProvider {
   private final GrailsActionAttributes urlProvider;
   private final GrailsApplication grailsApplication;
   private final ActionSpecificationResolver actionResolver;
-  private final AlternateTypeRuleConvention convention;
 
   @Autowired
   public GrailsRequestHandlerProvider(
       GrailsApplication grailsApplication,
       GrailsActionAttributes urlProvider,
-      ActionSpecificationResolver actionResolver,
-      AlternateTypeRuleConvention convention) {
+      ActionSpecificationResolver actionResolver) {
     this.urlProvider = urlProvider;
     this.grailsApplication = grailsApplication;
     this.actionResolver = actionResolver;
-    this.convention = convention;
   }
 
   @Override

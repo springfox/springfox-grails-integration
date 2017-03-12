@@ -21,15 +21,8 @@ class GrailsRequestHandlerProviderSpec extends Specification {
           attributes,
           new ActionSpecificationResolver(
               new RestfulActionSpecificationFactory(resolver),
-              new MethodBackedActionSpecificationFactory(resolver, attributes)
-          ),
-          new DefaultGrailsAlternateTypeRuleConvention(resolver, application,
-              new GrailsSerializationTypeGenerator(
-                  new DefaultGrailsPropertySelector(),
-                  new DefaultGrailsPropertyTransformer(),
-                  new DefaultGeneratedClassNamingStrategy())
-          )
-        )
+              new MethodBackedActionSpecificationFactory(resolver, attributes))
+      )
     expect:
       sut.requestHandlers().size() == 1
   }
