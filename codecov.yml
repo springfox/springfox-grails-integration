@@ -38,3 +38,4 @@ comment:
 ignore:
   - "/springfox-grails/src/main/java/springfox/documentation/grails/SynthesizedAnnotations.java"
   - "/springfox-grails/src/main/java/springfox/documentation/grails/ActionSpecificationFactory.java"
+  - "/springfox-grails/src/main/java/springfox/documentation/grails/SpringfoxGrailsIntegrationConfiguration.java"

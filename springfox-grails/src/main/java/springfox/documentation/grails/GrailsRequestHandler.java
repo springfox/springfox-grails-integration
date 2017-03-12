@@ -2,7 +2,6 @@ package springfox.documentation.grails;
 
 import com.fasterxml.classmate.ResolvedType;
 import com.google.common.base.Optional;
-import grails.core.GrailsDomainClass;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +13,7 @@ import org.springframework.web.servlet.mvc.method.RequestMappingInfo;
 import springfox.documentation.RequestHandler;
 import springfox.documentation.RequestHandlerKey;
 import springfox.documentation.service.ResolvedMethodParameter;
+import springfox.documentation.spring.web.plugins.CombinedRequestHandler;
 
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
@@ -22,6 +22,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import static org.springframework.util.StringUtils.capitalize;
 
 class GrailsRequestHandler implements RequestHandler {
   private final GrailsActionContext actionContext;
@@ -70,11 +72,13 @@ class GrailsRequestHandler implements RequestHandler {
 
   @Override
   public String getName() {
-    GrailsDomainClass domainClass = actionContext.getDomainClass();
-    if (domainClass != null) {
-      return String.format("%s%s", actionContext.getAction(), domainClass.getName());
-    }
-    return actionContext.getAction();
+    return Optional.fromNullable(actionContext.getDomainClass())
+        .transform(domain ->
+            String.format(
+                "%s%s",
+                actionContext.getAction(),
+                capitalize(domain.getLogicalPropertyName())))
+        .or(actionContext.getAction());
   }
 
   @Override
@@ -141,7 +145,7 @@ class GrailsRequestHandler implements RequestHandler {
 
   @Override
   public RequestHandler combine(RequestHandler other) {
-    throw new UnsupportedOperationException();
+    return new CombinedRequestHandler(this, other);
   }
 
 }

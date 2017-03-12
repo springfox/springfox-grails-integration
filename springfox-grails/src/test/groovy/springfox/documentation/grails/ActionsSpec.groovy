@@ -4,10 +4,10 @@ import grails.core.GrailsControllerClass
 import grails.core.GrailsDomainClass
 import grails.web.mapping.LinkGenerator
 import grails.web.mapping.UrlMappings
+import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.RequestMethod
 import spock.lang.Specification
 import spock.lang.Unroll
-
 
 class ActionsSpec extends Specification implements GrailsControllerSupport {
   def "Cannot instantiate this class"() {
@@ -65,6 +65,21 @@ class ActionsSpec extends Specification implements GrailsControllerSupport {
       OverridenController | "noOverrides"   | [RequestMethod.GET] as Set
   }
 
+  @Unroll
+  def "Detects grails produces overrides for #controller"() {
+    given:
+      def grailsController = grailsController(controller)
+      def context = context(grailsController, "any")
+    when:
+      def methods = Actions.producesOverrides(context)
+    then:
+      methods == expected
+    where:
+      controller          | expected
+      AController         | [MediaType.APPLICATION_JSON] as Set
+      OverridenController | [MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML] as Set
+  }
+
   def grailsController(Class controller) {
     def grails = Mock(GrailsControllerClass)
     grails.clazz >> controller
@@ -87,7 +102,8 @@ class ActionsSpec extends Specification implements GrailsControllerSupport {
 
   class OverridenController {
     static allowedMethods = [withOverrides: "POST", update: "PUT", delete: "DELETE"]
-
+    static responseFormats = ['json', 'xml']
+    
     def withOverrides() {
     }
 

@@ -12,7 +12,8 @@ import spock.lang.Unroll
 
 class ActionSpecificationResolverSpec extends Specification {
   def resolver = new TypeResolver()
-  def controller = Mock(GrailsControllerClass)
+  def restfulController = Mock(GrailsControllerClass)
+  def regularController = Mock(GrailsControllerClass)
   def domain = Mock(GrailsDomainClass)
   def identifierProperty = Mock(GrailsDomainClassProperty)
   def links = Mock(LinkGenerator)
@@ -20,8 +21,10 @@ class ActionSpecificationResolverSpec extends Specification {
   GrailsActionAttributes actionAttributes
 
   def setup() {
-    controller.clazz >> AController
-    controller.name >> "A"
+    regularController.clazz >> BookController
+    regularController.name >> "Book"
+    restfulController.clazz >> AController
+    restfulController.name >> "A"
     domain.clazz >> ADomain
     domain.identifier >> identifierProperty
     domain.identifier.type >> Integer
@@ -37,12 +40,29 @@ class ActionSpecificationResolverSpec extends Specification {
     and:
       urlMappings.urlMappings >> [otherMapping(Mock(UrlMapping))]
     when:
-      def spec = sut.resolve(new GrailsActionContext(controller, domain, actionAttributes, action))
+      def spec = sut.resolve(new GrailsActionContext(restfulController, domain, actionAttributes, action))
     then:
       spec != null
       spec.handlerMethod.method.name == action
     where:
       action << ["index", "save", "show", "edit", "update", "delete", "patch", "create", "other"]
+  }
+
+  @Unroll
+  def "Resolves action #action on non-restful controller"() {
+    given:
+      def sut = new ActionSpecificationResolver(
+          new RestfulActionSpecificationFactory(resolver),
+          new MethodBackedActionSpecificationFactory(resolver, actionAttributes))
+    and:
+      urlMappings.urlMappings >> [otherMapping(Mock(UrlMapping))]
+    when:
+      def spec = sut.resolve(new GrailsActionContext(regularController, null, actionAttributes, action))
+    then:
+      spec != null
+      spec.handlerMethod.method.name == action
+    where:
+      action << ["index", "save", "show", "edit", "update", "delete", "create"]
   }
 
   def otherMapping(UrlMapping urlMapping) {

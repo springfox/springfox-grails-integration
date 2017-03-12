@@ -42,6 +42,8 @@ class GrailsRequestHandlerSpec extends Specification {
       sut.returnType == resolver.resolve(Pet)
       sut.key() == new RequestHandlerKey(paths.getPatterns(), [RequestMethod.GET] as Set, mediaTypes, mediaTypes)
       sut.handlerMethod.equals(handlerMethod())
+      sut.name == "testActionTestDomainLogicalPropertyName"
+      sut.groupName() == "AnotherLogicalPropertyName"
   }
 
   def areEqual(ResolvedMethodParameter a, ResolvedMethodParameter b) {
@@ -59,7 +61,7 @@ class GrailsRequestHandlerSpec extends Specification {
               controller(),
               domain(),
               attributes,
-              "test"
+              "testAction"
           ),
           attributes,
           actionSpecification()
@@ -95,13 +97,17 @@ class GrailsRequestHandlerSpec extends Specification {
   }
 
   GrailsDomainClass domain() {
-    Mock(GrailsDomainClass)
+    def domain = Mock(GrailsDomainClass)
+    domain.name >> "testDomain"
+    domain.logicalPropertyName >> "TestDomainLogicalPropertyName"
+    domain
   }
 
   GrailsControllerClass controller() {
     def controller = Mock(GrailsControllerClass)
     controller.getClazz() >> AnotherController
-    controller.name >> "Another"
+    controller.name >> "AnotherName"
+    controller.logicalPropertyName >> "AnotherLogicalPropertyName"
     controller
   }
 
