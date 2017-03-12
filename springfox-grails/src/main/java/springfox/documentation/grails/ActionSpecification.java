@@ -36,27 +36,27 @@ class ActionSpecification {
     this.handlerMethod = handlerMethod;
   }
 
-  Set<RequestMethod> getSupportedMethods() {
+  public Set<RequestMethod> getSupportedMethods() {
     return supportedMethods;
   }
 
-  Set<MediaType> getProduces() {
+  public Set<MediaType> getProduces() {
     return produces;
   }
 
-  Set<MediaType> getConsumes() {
+  public Set<MediaType> getConsumes() {
     return consumes;
   }
 
-  List<ResolvedMethodParameter> getParameters() {
+  public List<ResolvedMethodParameter> getParameters() {
     return parameters;
   }
 
-  ResolvedType getReturnType() {
+  public ResolvedType getReturnType() {
     return returnType;
   }
 
-  HandlerMethod getHandlerMethod() {
+  public HandlerMethod getHandlerMethod() {
     return handlerMethod;
   }
 }

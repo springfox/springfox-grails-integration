@@ -28,7 +28,7 @@ class GrailsActionAttributes {
     this.urlMappings = urlMappings;
   }
 
-  String actionUrl(GrailsActionContext context, Map<String, String> value) {
+  public String actionUrl(GrailsActionContext context, Map<String, String> value) {
     LinkedHashMap<String, Object> map = new LinkedHashMap<>(2);
     map.put("controller", context.getController().getName());
     map.put("action", context.getAction());

@@ -1,6 +1,5 @@
 package springfox.documentation.grails;
 
-import com.google.common.base.Optional;
 import grails.core.GrailsApplication;
 import grails.core.GrailsClass;
 import grails.core.GrailsControllerClass;
@@ -56,5 +55,4 @@ class GrailsRequestHandlerProvider implements RequestHandlerProvider {
               actionResolver.resolve(actionContext));
         });
   }
-
 }

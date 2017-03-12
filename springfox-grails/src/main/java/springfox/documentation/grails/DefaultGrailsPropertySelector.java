@@ -5,7 +5,7 @@ import grails.core.GrailsDomainClassProperty;
 
 public class DefaultGrailsPropertySelector implements GrailsPropertySelector {
   @Override
-  public boolean apply(GrailsDomainClassProperty each) {
+  public boolean test(GrailsDomainClassProperty each) {
     return each.getReferencedDomainClass() == null
         && !Objects.equal(each.getName(), "version");
   }

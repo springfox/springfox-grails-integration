@@ -32,7 +32,7 @@ class Actions {
     throw new UnsupportedOperationException();
   }
 
-  static Map<String, HandlerMethod> actionsToHandler(Class grailsController) {
+  public static Map<String, HandlerMethod> actionsToHandler(Class grailsController) {
     Map<String, HandlerMethod> handlerLookup = new HashMap<>();
     Class superClass = grailsController;
     while (superClass != Object.class && superClass != GroovyObject.class) {
@@ -46,7 +46,7 @@ class Actions {
     return handlerLookup;
   }
 
-  static Set<RequestMethod> methodOverrides(
+  public static Set<RequestMethod> methodOverrides(
       GrailsActionContext context,
       Set<RequestMethod> defaultMethods) {
     Set<RequestMethod> methods = new HashSet<>();
@@ -68,11 +68,11 @@ class Actions {
     return methods;
   }
 
-  static Set<RequestMethod> methodOverrides(GrailsActionContext context) {
+  public static Set<RequestMethod> methodOverrides(GrailsActionContext context) {
     return methodOverrides(context, newHashSet());
   }
 
-  static Set<MediaType> producesOverrides(GrailsActionContext context) {
+  public static Set<MediaType> producesOverrides(GrailsActionContext context) {
     Set<MediaType> produces = newHashSet(MediaType.APPLICATION_JSON);
     List<String> responseFormats;
     try {

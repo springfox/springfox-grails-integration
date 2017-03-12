@@ -12,7 +12,7 @@ class DefaultGrailsPropertySelectorSpec extends Specification {
     given:
       def sut = new DefaultGrailsPropertySelector()
     expect:
-      sut.apply(property) == expected
+      sut.test(property) == expected
     where:
       property        | expected
       version()       | false

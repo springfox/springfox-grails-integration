@@ -3,7 +3,7 @@ package springfox.documentation.grails;
 import grails.core.GrailsControllerClass;
 import grails.core.GrailsDomainClass;
 
-public class GrailsActionContext {
+class GrailsActionContext {
   private final GrailsControllerClass controller;
   private final GrailsDomainClass domainClass;
   private final GrailsActionAttributes urlProvider;

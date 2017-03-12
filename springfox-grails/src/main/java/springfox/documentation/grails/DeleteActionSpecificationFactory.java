@@ -16,7 +16,7 @@ import static springfox.documentation.grails.Actions.*;
 class DeleteActionSpecificationFactory implements ActionSpecificationFactory {
   private final TypeResolver resolver;
 
-  DeleteActionSpecificationFactory(TypeResolver resolver) {
+  public DeleteActionSpecificationFactory(TypeResolver resolver) {
     this.resolver = resolver;
   }
 

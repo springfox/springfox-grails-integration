@@ -16,7 +16,7 @@ class ActionSpecificationResolver {
     this.methodBackedActions = methodBackedActions;
   }
 
-  ActionSpecification resolve(GrailsActionContext context) {
+  public ActionSpecification resolve(GrailsActionContext context) {
     if (isRestfulController(context)) {
       return restfulActions.create(context);
     }

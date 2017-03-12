@@ -1,8 +1,6 @@
 package springfox.documentation.grails;
 
 import com.fasterxml.classmate.TypeResolver;
-import com.google.common.base.Function;
-import com.google.common.collect.FluentIterable;
 import grails.core.GrailsApplication;
 import grails.core.GrailsDomainClass;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +11,7 @@ import springfox.documentation.schema.AlternateTypeRuleConvention;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static springfox.documentation.schema.AlternateTypeRules.*;
 
@@ -28,7 +27,7 @@ public class DefaultGrailsAlternateTypeRuleConvention implements AlternateTypeRu
       TypeResolver resolver,
       GrailsApplication application,
       GrailsSerializationTypeGenerator typeGenerator) {
-    
+
     this.resolver = resolver;
     this.application = application;
     this.typeGenerator = typeGenerator;
@@ -36,21 +35,12 @@ public class DefaultGrailsAlternateTypeRuleConvention implements AlternateTypeRu
 
   @Override
   public List<AlternateTypeRule> rules() {
-    return FluentIterable.from(Arrays.asList(application.getArtefacts("Domain")))
-        .filter(GrailsDomainClass.class)
-        .transform(toAlternateTypeRule())
-        .toList();
-  }
-
-  private Function<GrailsDomainClass, AlternateTypeRule> toAlternateTypeRule() {
-    return new Function<GrailsDomainClass, AlternateTypeRule>() {
-      @Override
-      public AlternateTypeRule apply(GrailsDomainClass domain) {
-        return newRule(
+    return Arrays.stream(application.getArtefacts("Domain"))
+        .filter(GrailsDomainClass.class::isInstance)
+        .map(domain -> newRule(
             domain.getClazz(),
-            resolver.resolve(typeGenerator.from(domain)), getOrder());
-      }
-    };
+            resolver.resolve(typeGenerator.from((GrailsDomainClass) domain)), getOrder()))
+        .collect(Collectors.toList());
   }
 
   @Override

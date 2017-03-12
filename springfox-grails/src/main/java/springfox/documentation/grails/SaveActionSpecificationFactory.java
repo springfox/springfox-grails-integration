@@ -17,7 +17,7 @@ import static springfox.documentation.grails.Actions.*;
 class SaveActionSpecificationFactory implements ActionSpecificationFactory {
   private final TypeResolver resolver;
 
-  SaveActionSpecificationFactory(TypeResolver resolver) {
+  public SaveActionSpecificationFactory(TypeResolver resolver) {
     this.resolver = resolver;
   }
 

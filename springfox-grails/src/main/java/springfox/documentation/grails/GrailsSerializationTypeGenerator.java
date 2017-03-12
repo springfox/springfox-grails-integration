@@ -1,14 +1,14 @@
 package springfox.documentation.grails;
 
-import com.google.common.collect.FluentIterable;
-import com.google.common.collect.ImmutableList;
 import grails.core.GrailsDomainClass;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import springfox.documentation.builders.AlternateTypeBuilder;
 import springfox.documentation.builders.AlternateTypePropertyBuilder;
 
-import static com.google.common.collect.Lists.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class GrailsSerializationTypeGenerator {
@@ -28,11 +28,11 @@ public class GrailsSerializationTypeGenerator {
   }
 
   public Class<?> from(GrailsDomainClass domain) {
-    ImmutableList<AlternateTypePropertyBuilder> properties =
-        FluentIterable.from(newArrayList(domain.getProperties()))
+    List<AlternateTypePropertyBuilder> properties =
+        Arrays.stream(domain.getProperties())
             .filter(propertySelector)
-            .transform(propertyTransformer)
-            .toList();
+            .map(propertyTransformer)
+            .collect(Collectors.toList());
     return new AlternateTypeBuilder()
         .fullyQualifiedClassName(naming.name(domain.getClazz()))
         .withProperties(properties)
