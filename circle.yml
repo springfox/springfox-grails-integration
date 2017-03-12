@@ -27,5 +27,5 @@ dependencies:
     - ~/.gradle
 test:
   override:
-  - ./gradlew clean build jacocoTestReport artifactoryPublish
+  - ./gradlew clean build jacocoTestReport artifactoryPublish --refresh-dependencies
   - bash <(curl -s https://codecov.io/bash)
