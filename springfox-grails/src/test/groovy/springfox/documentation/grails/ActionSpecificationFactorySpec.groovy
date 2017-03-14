@@ -45,7 +45,7 @@ class ActionSpecificationFactorySpec extends Specification implements UrlMapping
   def mockDomain() {
     def domain = Mock(GrailsDomainClass)
     domain.clazz >> ADomain
-    domain.hasPersistentProperty("id") >> true
+    domain.hasProperty("id") >> true
     def id = idProperty()
     domain.getPropertyByName("id") >> id
     domain.identifier >> id

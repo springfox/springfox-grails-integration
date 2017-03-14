@@ -18,7 +18,7 @@ class SaveActionSpecificationFactorySpec extends ActionSpecificationFactorySpec 
       spec.produces == [MediaType.APPLICATION_JSON] as Set
       spec.supportedMethods == [RequestMethod.POST] as Set
       spec.handlerMethod.method == AController.methods.find {it.name == "save" }
-      spec.path == "/a.{format}"
+      spec.path == "/a"
 
     and: "Parameters match"
       spec.parameters.size() == 1

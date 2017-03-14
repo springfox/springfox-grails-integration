@@ -18,7 +18,7 @@ class UpdateActionSpecificationFactorySpec extends ActionSpecificationFactorySpe
       spec.produces == [MediaType.APPLICATION_JSON] as Set
       spec.supportedMethods == [RequestMethod.PUT] as Set
       spec.handlerMethod.method == AController.methods.find {it.name == "update" }
-      spec.path == "/a/{id}.{format}"
+      spec.path == "/a/{id}"
 
     and: "Parameters match"
       spec.parameters.size() == 2

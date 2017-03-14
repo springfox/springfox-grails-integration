@@ -17,7 +17,7 @@ class PatchActionSpecificationFactorySpec extends ActionSpecificationFactorySpec
       spec.produces == [MediaType.APPLICATION_JSON] as Set
       spec.supportedMethods == [RequestMethod.PATCH] as Set
       spec.handlerMethod.method == AController.methods.find {it.name == "patch" }
-      spec.path == "/a/{id}.{format}"
+      spec.path == "/a/{id}"
 
     and: "Parameters match"
       spec.parameters.size() == 2

@@ -17,7 +17,7 @@ class ShowActionSpecificationFactorySpec extends ActionSpecificationFactorySpec 
       spec.produces == [MediaType.APPLICATION_JSON] as Set
       spec.supportedMethods == [RequestMethod.GET] as Set
       spec.handlerMethod.method == AController.methods.find {it.name == "show" }
-      spec.path == "/a/{id}.{format}"
+      spec.path == "/a/{id}"
     
     and: "Parameters match"
       spec.parameters.size() == 1

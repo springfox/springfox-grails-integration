@@ -46,7 +46,7 @@
     }
   ],
   "paths": {
-    "/album.{format}": {
+    "/album": {
       "get": {
         "tags": [
           "album"
@@ -244,7 +244,7 @@
         }
       }
     },
-    "/album/{id}.{format}": {
+    "/album/{id}": {
       "get": {
         "tags": [
           "album"
@@ -258,6 +258,16 @@
         "produces": [
           "application/xml",
           "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
         ],
         "responses": {
           "200": {
@@ -460,7 +470,7 @@
         }
       }
     },
-    "/artist.{format}": {
+    "/artist": {
       "get": {
         "tags": [
           "artist"
@@ -658,7 +668,7 @@
         }
       }
     },
-    "/artist/{id}.{format}": {
+    "/artist/{id}": {
       "get": {
         "tags": [
           "artist"
@@ -672,6 +682,16 @@
         "produces": [
           "application/xml",
           "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
         ],
         "responses": {
           "200": {
@@ -839,7 +859,7 @@
         }
       }
     },
-    "/book.{format}": {
+    "/book": {
       "post": {
         "tags": [
           "book"
@@ -956,7 +976,7 @@
         }
       }
     },
-    "/book/{id}.{format}": {
+    "/book/{id}": {
       "put": {
         "tags": [
           "book"
@@ -969,6 +989,16 @@
         ],
         "produces": [
           "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
         ],
         "responses": {
           "200": {
@@ -1033,7 +1063,7 @@
         }
       }
     },
-    "/genre.{format}": {
+    "/genre": {
       "get": {
         "tags": [
           "genre"
@@ -1231,7 +1261,7 @@
         }
       }
     },
-    "/genre/{id}.{format}": {
+    "/genre/{id}": {
       "get": {
         "tags": [
           "genre"
@@ -1245,6 +1275,16 @@
         "produces": [
           "application/xml",
           "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
         ],
         "responses": {
           "200": {
@@ -1412,7 +1452,7 @@
         }
       }
     },
-    "/label.{format}": {
+    "/label": {
       "get": {
         "tags": [
           "label"
@@ -1610,7 +1650,7 @@
         }
       }
     },
-    "/label/{id}.{format}": {
+    "/label/{id}": {
       "get": {
         "tags": [
           "label"
@@ -1624,6 +1664,16 @@
         "produces": [
           "application/xml",
           "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
         ],
         "responses": {
           "200": {
@@ -1791,7 +1841,7 @@
         }
       }
     },
-    "/song.{format}": {
+    "/song": {
       "get": {
         "tags": [
           "song"
@@ -1989,7 +2039,7 @@
         }
       }
     },
-    "/song/{id}.{format}": {
+    "/song/{id}": {
       "get": {
         "tags": [
           "song"
@@ -2003,6 +2053,16 @@
         "produces": [
           "application/xml",
           "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
         ],
         "responses": {
           "200": {

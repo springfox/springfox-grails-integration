@@ -32,14 +32,14 @@ class IndexActionSpecificationFactory implements ActionSpecificationFactory {
 
   private List<ResolvedMethodParameter> parameters(Set<MediaType> mediaTypes) {
     List<ResolvedMethodParameter> parameters = newArrayList(queryParameter(
-        1,
+        0,
         "max",
         resolver.resolve(Integer.class),
         false,
         ""));
     if (mediaTypes.size() > 1) {
       parameters.add(pathParameter(
-          2,
+          1,
           "format",
           resolver.resolve(String.class)));
     }

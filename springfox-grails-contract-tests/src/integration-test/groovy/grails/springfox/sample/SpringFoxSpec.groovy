@@ -15,7 +15,7 @@ class SpringFoxSpec extends Specification implements FileAccess {
   @LocalServerPort
   private int port
 
-  void "test something"() {
+  void "Contract tests for the api documentation"() {
     given:
       def expected = fileContents("/expected-service-description.json")
       def actual = get("http://localhost:$port/v2/api-docs").asString()

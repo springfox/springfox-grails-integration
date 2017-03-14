@@ -18,7 +18,7 @@ class DeleteActionSpecificationFactorySpec extends ActionSpecificationFactorySpe
       spec.produces == [MediaType.APPLICATION_JSON] as Set
       spec.supportedMethods == [RequestMethod.DELETE] as Set
       spec.handlerMethod.method == AController.methods.find {it.name == "delete" }
-      spec.path == "/a/{id}.{format}"
+      spec.path == "/a/{id}"
 
     and: "Parameters match"
       spec.parameters.size() == 1

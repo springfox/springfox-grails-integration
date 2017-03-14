@@ -65,6 +65,7 @@ class GrailsActionAttributes {
   public boolean isRestfulAction(String action) {
     return methodMap.containsKey(action);
   }
+
   public Optional<UrlMapping> urlMapping(Predicate<UrlMapping> selector) {
     return Arrays.stream(urlMappings.getUrlMappings())
         .filter(selector)
@@ -79,6 +80,7 @@ class GrailsActionAttributes {
         "UTF-8")
         .replace("%7B", "{").replace("%7D", "}")
         .replace(linkGenerator.getServerBaseURL(), "")
+        .replace(".{format}", "")
         .toLowerCase();
   }
 

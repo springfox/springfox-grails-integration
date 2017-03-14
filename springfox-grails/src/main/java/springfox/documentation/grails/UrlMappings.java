@@ -80,7 +80,7 @@ class UrlMappings {
   }
 
   private static Predicate<ConstrainedProperty> domainProperties(GrailsDomainClass domain) {
-    return c -> domain.hasPersistentProperty(c.getPropertyName());
+    return c -> domain.hasProperty(c.getPropertyName());
   }
 
   private static boolean httpMethodMatches(String methodName, UrlMapping urlMapping) {
