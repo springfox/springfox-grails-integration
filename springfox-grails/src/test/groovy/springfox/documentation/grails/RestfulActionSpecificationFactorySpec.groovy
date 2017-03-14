@@ -5,20 +5,24 @@ import grails.core.GrailsControllerClass
 import grails.core.GrailsDomainClass
 import grails.core.GrailsDomainClassProperty
 import grails.web.mapping.LinkGenerator
-import grails.web.mapping.UrlMappings
 import spock.lang.Specification
 
-class RestfulActionSpecificationFactorySpec extends Specification {
+class RestfulActionSpecificationFactorySpec extends Specification implements UrlMappingSupport {
   def controller = Mock(GrailsControllerClass)
   def domain = Mock(GrailsDomainClass)
   def identifierProperty = Mock(GrailsDomainClassProperty)
-  def actionAttributes = new GrailsActionAttributes(Mock(LinkGenerator), Mock(UrlMappings))
+  def urlMappings = Mock(grails.web.mapping.UrlMappings)
+  def links = Mock(LinkGenerator)
+  def actionAttributes = new GrailsActionAttributes(links, urlMappings)
 
   def setup() {
     controller.clazz >> AController
+    controller.logicalPropertyName >> "A"
     domain.clazz >> ADomain
     domain.identifier >> identifierProperty
     domain.identifier.type >> Integer
+    urlMappings.urlMappings >> urlMappings()
+    links.getServerBaseURL() >> "http://localhost:8080"
   }
 
   def "Resolves all restful actions"() {
@@ -26,7 +30,7 @@ class RestfulActionSpecificationFactorySpec extends Specification {
       def resolver = new TypeResolver()
       def sut = new RestfulActionSpecificationFactory(resolver)
     when:
-      def actionSpec = sut.create(new GrailsActionContext(controller, domain, actionAttributes, action.toLowerCase()))
+      def actionSpec = sut.create(new GrailsActionContext(controller, domain, actionAttributes, action.toLowerCase(), resolver))
     then:
       actionSpec.handlerMethod.method.name == action
     where:
@@ -38,7 +42,7 @@ class RestfulActionSpecificationFactorySpec extends Specification {
       def resolver = new TypeResolver()
       def sut = new RestfulActionSpecificationFactory(resolver)
     when:
-      sut.create(new GrailsActionContext(controller, domain, actionAttributes, "unknown"))
+      sut.create(new GrailsActionContext(controller, domain, actionAttributes, "unknown", resolver))
     then:
       def exception = thrown(IllegalArgumentException)
       exception.message.contains("Action unknown is not a restful action")

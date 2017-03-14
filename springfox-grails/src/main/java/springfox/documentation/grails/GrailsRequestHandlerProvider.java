@@ -1,5 +1,6 @@
 package springfox.documentation.grails;
 
+import com.fasterxml.classmate.TypeResolver;
 import grails.core.GrailsApplication;
 import grails.core.GrailsClass;
 import grails.core.GrailsControllerClass;
@@ -17,15 +18,21 @@ import java.util.stream.Stream;
 
 @Component
 class GrailsRequestHandlerProvider implements RequestHandlerProvider {
+
+
+  private final TypeResolver resolver;
   private final GrailsActionAttributes urlProvider;
   private final GrailsApplication grailsApplication;
   private final ActionSpecificationResolver actionResolver;
 
+
   @Autowired
   public GrailsRequestHandlerProvider(
+      TypeResolver resolver,
       GrailsApplication grailsApplication,
       GrailsActionAttributes urlProvider,
       ActionSpecificationResolver actionResolver) {
+    this.resolver = resolver;
     this.urlProvider = urlProvider;
     this.grailsApplication = grailsApplication;
     this.actionResolver = actionResolver;
@@ -47,12 +54,18 @@ class GrailsRequestHandlerProvider implements RequestHandlerProvider {
     return controller.getActions()
         .stream()
         .map(action -> {
-          GrailsActionContext actionContext
-              = new GrailsActionContext(controller, inferredDomain, urlProvider, action);
+          GrailsActionContext actionContext = new GrailsActionContext(
+              controller,
+              inferredDomain,
+              urlProvider,
+              action,
+              resolver);
           return new GrailsRequestHandler(
               actionContext,
-              urlProvider,
-              actionResolver.resolve(actionContext));
+              actionResolver.resolve(actionContext)
+          );
         });
   }
+
+
 }

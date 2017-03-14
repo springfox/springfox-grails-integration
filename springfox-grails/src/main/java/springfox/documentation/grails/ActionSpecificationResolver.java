@@ -17,20 +17,9 @@ class ActionSpecificationResolver {
   }
 
   public ActionSpecification resolve(GrailsActionContext context) {
-    if (isRestfulController(context)) {
+    if (context.isRestfulController()) {
       return restfulActions.create(context);
     }
     return methodBackedActions.create(context);
-  }
-
-  @SuppressWarnings({"unchecked", "squid:S1166"})
-  private boolean isRestfulController(GrailsActionContext context) {
-    try {
-      Class<?> restfulController = Class.forName("grails.rest.RestfulController");
-      return restfulController.isAssignableFrom(context.getController().getClazz())
-          && restfulActions.canHandle(context.getAction());
-    } catch (ClassNotFoundException e) {
-      return false;
-    }
   }
 }

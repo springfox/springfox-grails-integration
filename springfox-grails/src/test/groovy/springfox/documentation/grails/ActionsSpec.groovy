@@ -1,15 +1,13 @@
 package springfox.documentation.grails
 
+import com.fasterxml.classmate.TypeResolver
 import grails.core.GrailsControllerClass
 import grails.core.GrailsDomainClass
-import grails.web.mapping.LinkGenerator
-import grails.web.mapping.UrlMappings
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.RequestMethod
-import spock.lang.Specification
 import spock.lang.Unroll
 
-class ActionsSpec extends Specification implements GrailsControllerSupport {
+class ActionsSpec extends ActionSpecificationFactorySpec implements GrailsControllerSupport {
   def "Cannot instantiate this class"() {
     when:
       new Actions()
@@ -71,7 +69,7 @@ class ActionsSpec extends Specification implements GrailsControllerSupport {
       def grailsController = grailsController(controller)
       def context = context(grailsController, "any")
     when:
-      def methods = Actions.producesOverrides(context)
+      def methods = Actions.mediaTypeOverrides(context)
     then:
       methods == expected
     where:
@@ -90,14 +88,9 @@ class ActionsSpec extends Specification implements GrailsControllerSupport {
     new GrailsActionContext(
         controller,
         Mock(GrailsDomainClass),
-        actionAttributes(),
-        action)
-  }
-
-  def actionAttributes() {
-    new GrailsActionAttributes(
-        Mock(LinkGenerator),
-        Mock(UrlMappings))
+        actionAttributes,
+        action,
+        new TypeResolver())
   }
 
   class OverridenController {

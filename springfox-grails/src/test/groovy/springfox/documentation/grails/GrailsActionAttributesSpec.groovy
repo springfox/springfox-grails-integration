@@ -1,5 +1,6 @@
 package springfox.documentation.grails
 
+import com.fasterxml.classmate.TypeResolver
 import grails.core.GrailsControllerClass
 import grails.core.GrailsDomainClass
 import grails.web.mapping.LinkGenerator
@@ -37,7 +38,8 @@ class GrailsActionAttributesSpec extends Specification {
         controller,
         Mock(GrailsDomainClass),
         actionAttributes(linkGenerator(), urlMappings()),
-        action)
+        action,
+        new TypeResolver())
   }
 
   def noOverridesController() {

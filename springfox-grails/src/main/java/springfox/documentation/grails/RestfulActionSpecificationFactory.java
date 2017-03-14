@@ -30,7 +30,7 @@ class RestfulActionSpecificationFactory implements ActionSpecificationFactory {
     return factoryLookup.containsKey(action);
   }
 
-  private static Map<String, ActionSpecificationFactory> restfulActions(TypeResolver resolver) {
+  private Map<String, ActionSpecificationFactory> restfulActions(TypeResolver resolver) {
     LinkedHashMap<String, ActionSpecificationFactory> map = new LinkedHashMap<>(8);
     map.put("index", new IndexActionSpecificationFactory(resolver));
     map.put("show", new ShowActionSpecificationFactory(resolver));

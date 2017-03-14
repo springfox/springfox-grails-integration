@@ -87,7 +87,7 @@ repositories {
 }
 
 dependencies {
-    compile "io.springfox:springfox-grails:{snapshotVersion}" //<1>
+    compile "io.springfox.grails:springfox-grails:{snapshotVersion}" //<1>
 }
 ----
 

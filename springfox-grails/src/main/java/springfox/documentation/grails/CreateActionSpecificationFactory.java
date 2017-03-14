@@ -1,17 +1,10 @@
 package springfox.documentation.grails;
 
 import com.fasterxml.classmate.TypeResolver;
-import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.method.HandlerMethod;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Map;
 
-import static com.google.common.collect.Sets.*;
-import static springfox.documentation.grails.Actions.*;
+import static springfox.documentation.grails.Parameters.*;
 
 class CreateActionSpecificationFactory implements ActionSpecificationFactory {
   private final TypeResolver resolver;
@@ -22,15 +15,14 @@ class CreateActionSpecificationFactory implements ActionSpecificationFactory {
 
   @Override
   public ActionSpecification create(GrailsActionContext context) {
-    Map<String, HandlerMethod> actions = actionsToHandler(context.getController().getClazz());
-    HandlerMethod handlerMethod = actions.get(context.getAction());
     return new ActionSpecification(
-        methodOverrides(context, newHashSet(RequestMethod.POST, RequestMethod.PUT)),
-        new HashSet<>(producesOverrides(context)),
-        new HashSet<>(Collections.singletonList(MediaType.APPLICATION_JSON)),
-        handlerMethod,
-        new ArrayList<>(Collections.singletonList(
-            bodyParameter(1, resolver.resolve(domainClass(context.getDomainClass()))))),
+        context.path(),
+        Collections.singleton(context.getRequestMethod()),
+        context.supportedMediaTypes(),
+        context.supportedMediaTypes(),
+        context.handlerMethod(),
+        Collections.singletonList(
+            bodyParameter(1, resolver.resolve(domainClass(context.getDomainClass())))),
         resolver.resolve(domainClass(context.getDomainClass())));
   }
 }

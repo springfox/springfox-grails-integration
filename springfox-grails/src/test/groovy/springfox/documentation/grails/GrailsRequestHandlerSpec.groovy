@@ -15,7 +15,7 @@ import spock.lang.Specification
 import springfox.documentation.RequestHandlerKey
 import springfox.documentation.service.ResolvedMethodParameter
 
-class GrailsRequestHandlerSpec extends Specification {
+class GrailsRequestHandlerSpec extends Specification implements UrlMappingSupport {
   def resolver = new TypeResolver()
   def controller = new AnotherController()
 
@@ -55,21 +55,22 @@ class GrailsRequestHandlerSpec extends Specification {
   def grailsRequestHandler(){
     def attributes = new GrailsActionAttributes(
         linkGenerator(),
-        urlMappings())
+        urlMappingsHolder())
     new GrailsRequestHandler(
-          new GrailsActionContext(
-              controller(),
-              domain(),
-              attributes,
-              "testAction"
-          ),
-          attributes,
-          actionSpecification()
-      )
+        new GrailsActionContext(
+            controller(),
+            domain(),
+            attributes,
+            "testAction",
+            resolver)
+        ,
+        actionSpecification()
+    )
   }
 
   ActionSpecification actionSpecification() {
     new ActionSpecification(
+        "/test",
         [RequestMethod.GET] as Set,
         [MediaType.APPLICATION_JSON] as Set,
         [MediaType.APPLICATION_JSON] as Set,
@@ -85,8 +86,10 @@ class GrailsRequestHandlerSpec extends Specification {
         AnotherController.methods[0])
   }
 
-  UrlMappings urlMappings() {
-    Mock(UrlMappings)
+  UrlMappings urlMappingsHolder() {
+    def mock = Mock(UrlMappings)
+    mock.urlMappings >> urlMappings()
+    mock
   }
 
   LinkGenerator linkGenerator() {

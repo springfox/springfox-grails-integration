@@ -1,45 +1,28 @@
 package springfox.documentation.grails
 
 import com.fasterxml.classmate.TypeResolver
-import grails.core.GrailsControllerClass
-import grails.core.GrailsDomainClass
-import grails.core.GrailsDomainClassProperty
-import grails.web.mapping.LinkGenerator
 import grails.web.mapping.UrlMapping
-import grails.web.mapping.UrlMappings
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.RequestMethod
-import spock.lang.Specification
 
-class MethodBackedActionSpecificationFactorySpec extends Specification {
-  def resolver = new TypeResolver()
-  def controller = Mock(GrailsControllerClass)
-  def domain = Mock(GrailsDomainClass)
-  def identifierProperty = Mock(GrailsDomainClassProperty)
-  def links = Mock(LinkGenerator)
-  def urlMappings = Mock(UrlMappings)
-  GrailsActionAttributes actionAttributes
-
-  def setup() {
-    controller.clazz >> AController
-    controller.name >> "A"
-    domain.clazz >> ADomain
-    domain.identifier >> identifierProperty
-    domain.identifier.type >> Integer
-    actionAttributes = new GrailsActionAttributes(links, urlMappings)
-  }
+class MethodBackedActionSpecificationFactorySpec extends ActionSpecificationFactorySpec {
 
   def "Resolves all method backed actions"() {
     given:
-      def sut = new MethodBackedActionSpecificationFactory(resolver, actionAttributes)
+      def resolver = new TypeResolver()
+      def sut = new MethodBackedActionSpecificationFactory(resolver)
     and:
       urlMappings.urlMappings >> [otherMapping(Mock(UrlMapping))]
     when:
-      def spec = sut.create(new GrailsActionContext(controller, domain, actionAttributes, "other"))
-    then:
-      spec.consumes == [] as Set
+      def spec = sut.create(new GrailsActionContext(controller, domain, actionAttributes, "other", resolver))
+    then: "All http attributes match"
+      spec.consumes == [MediaType.APPLICATION_JSON] as Set
       spec.produces == [MediaType.APPLICATION_JSON] as Set
       spec.supportedMethods == [RequestMethod.POST] as Set
+      spec.handlerMethod.method == AController.methods.find {it.name == "other" }
+      spec.path == "/a/other"
+
+    and: "Parameters match"
       spec.parameters.size() == 2
       spec.parameters[0].parameterType == resolver.resolve(Integer)
       spec.parameters[0].parameterIndex == 0
@@ -50,8 +33,10 @@ class MethodBackedActionSpecificationFactorySpec extends Specification {
       spec.parameters[1].parameterIndex == 1
       spec.parameters[1].defaultName().isPresent()
       spec.parameters[1].defaultName().get() == "domain"
+
+    and: "Return type matches"
       spec.returnType == resolver.resolve(ADomain)
-      spec.handlerMethod.method == AController.methods.find {it.name == "other" }
+
   }
 
   def otherMapping(UrlMapping urlMapping) {

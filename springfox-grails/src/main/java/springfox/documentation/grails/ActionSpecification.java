@@ -17,8 +17,10 @@ class ActionSpecification {
   private final List<ResolvedMethodParameter> parameters;
   private final ResolvedType returnType;
   private final HandlerMethod handlerMethod;
+  private final String path;
 
   public ActionSpecification(
+      String path,
       Set<RequestMethod> supportedMethods,
       Set<MediaType> produces,
       Set<MediaType> consumes,
@@ -28,12 +30,17 @@ class ActionSpecification {
 
     Preconditions.checkNotNull(handlerMethod, "Handler method is null");
 
+    this.path = path;
     this.supportedMethods = supportedMethods;
     this.produces = produces;
     this.consumes = consumes;
     this.parameters = parameters;
     this.returnType = returnType;
     this.handlerMethod = handlerMethod;
+  }
+
+  public String getPath() {
+    return path;
   }
 
   public Set<RequestMethod> getSupportedMethods() {
