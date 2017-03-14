@@ -17,7 +17,7 @@ class CreateActionSpecificationFactory implements ActionSpecificationFactory {
   public ActionSpecification create(GrailsActionContext context) {
     return new ActionSpecification(
         context.path(),
-        Collections.singleton(context.getRequestMethod()),
+        context.getRequestMethods(),
         context.supportedMediaTypes(),
         context.supportedMediaTypes(),
         context.handlerMethod(),

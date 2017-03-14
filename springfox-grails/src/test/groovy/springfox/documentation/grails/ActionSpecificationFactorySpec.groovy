@@ -48,8 +48,17 @@ class ActionSpecificationFactorySpec extends Specification implements UrlMapping
     domain.hasProperty("id") >> true
     def id = idProperty()
     domain.getPropertyByName("id") >> id
+    domain.getPropertyByName(_) >> {args -> property(args[0])}
+    domain.hasProperty(_) >> {args -> "format" != args[0]}
     domain.identifier >> id
     domain
+  }
+
+  GrailsDomainClassProperty property(name) {
+    def property = Mock(GrailsDomainClassProperty)
+    property.type >> String
+    property.name >> name
+    property
   }
 
   GrailsDomainClassProperty idProperty() {

@@ -7,11 +7,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.method.HandlerMethod;
 import springfox.documentation.service.ResolvedMethodParameter;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
 class ActionSpecification {
-  private final Set<RequestMethod> supportedMethods;
+  private final Collection<RequestMethod> supportedMethods;
   private final Set<MediaType> produces;
   private final Set<MediaType> consumes;
   private final List<ResolvedMethodParameter> parameters;
@@ -21,7 +22,7 @@ class ActionSpecification {
 
   public ActionSpecification(
       String path,
-      Set<RequestMethod> supportedMethods,
+      Collection<RequestMethod> supportedMethods,
       Set<MediaType> produces,
       Set<MediaType> consumes,
       HandlerMethod handlerMethod,
@@ -43,7 +44,7 @@ class ActionSpecification {
     return path;
   }
 
-  public Set<RequestMethod> getSupportedMethods() {
+  public Collection<RequestMethod> getSupportedMethods() {
     return supportedMethods;
   }
 

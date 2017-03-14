@@ -18,7 +18,7 @@ class Parameters {
     return new ResolvedMethodParameter(
         index,
         name,
-        singletonList(pathVariable(name, name)),
+        singletonList(pathVariable(name)),
         resolvedType);
   }
 

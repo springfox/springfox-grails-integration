@@ -21,8 +21,17 @@ class RestfulActionSpecificationFactorySpec extends Specification implements Url
     domain.clazz >> ADomain
     domain.identifier >> identifierProperty
     domain.identifier.type >> Integer
+    domain.getPropertyByName(_) >> {args -> property(args[0])}
+    domain.hasProperty(_) >> {args -> "format" != args[0]}
     urlMappings.urlMappings >> urlMappings()
     links.getServerBaseURL() >> "http://localhost:8080"
+  }
+
+  def property(name) {
+    def mock = Mock(GrailsDomainClassProperty)
+    mock.name >> name
+    mock.type >> (ADomain.declaredFields.find { it.name == name }?.type ?: String)
+    mock
   }
 
   def "Resolves all restful actions"() {

@@ -15,7 +15,7 @@ class CreateActionSpecificationFactorySpec extends ActionSpecificationFactorySpe
     then: "All http attributes match"
       spec.consumes == [MediaType.APPLICATION_JSON] as Set
       spec.produces == [MediaType.APPLICATION_JSON] as Set
-      spec.supportedMethods == [RequestMethod.GET] as Set
+      spec.supportedMethods == [RequestMethod.OPTIONS] as Set
       spec.handlerMethod.method == AController.methods.find {it.name == "create" }
       spec.path == "/a/create"
 

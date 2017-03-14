@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.method.HandlerMethod;
 import springfox.documentation.service.ResolvedMethodParameter;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -27,8 +28,9 @@ class GrailsActionContext {
   private final TypeResolver resolver;
   private final Optional<UrlMapping> urlMapping;
   private final boolean isRestfulController;
-  private final String method;
   private final Set<MediaType> mediaTypes;
+  private final Collection<RequestMethod> requestMethods;
+  private final boolean missingMapping;
 
   public GrailsActionContext(
       GrailsControllerClass controller,
@@ -42,11 +44,13 @@ class GrailsActionContext {
     this.action = action;
     this.resolver = resolver;
     this.isRestfulController = isRestfulController(controller, action);
-    this.method = urlProvider.httpMethod(this)
+    this.requestMethods = urlProvider.httpMethods(this);
+    String method = requestMethods
         .stream()
         .findFirst()
         .map(Enum::toString)
         .orElse(null);
+    this.missingMapping = requestMethods.isEmpty();
     this.urlMapping = urlProvider.urlMapping(selector(this, method));
     this.mediaTypes = mediaTypeOverrides(this);
     maybeAddDefaultMediaType(mediaTypes);
@@ -86,8 +90,8 @@ class GrailsActionContext {
         .orElse(newArrayList());
   }
 
-  public RequestMethod getRequestMethod() {
-    return RequestMethod.valueOf(method);
+  public Collection<RequestMethod> getRequestMethods() {
+    return requestMethods;
   }
 
   public HandlerMethod handlerMethod() {
@@ -101,6 +105,10 @@ class GrailsActionContext {
 
   public boolean isRestfulController() {
     return isRestfulController;
+  }
+
+  public boolean isMissingMapping() {
+    return missingMapping;
   }
 
   private boolean isRestfulController(GrailsControllerClass controller, String action) {

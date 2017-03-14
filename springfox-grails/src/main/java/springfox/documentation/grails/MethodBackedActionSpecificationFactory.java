@@ -7,7 +7,6 @@ import springfox.documentation.service.ResolvedMethodParameter;
 import springfox.documentation.spring.web.readers.operation.HandlerMethodResolver;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 @Component
@@ -25,7 +24,7 @@ class MethodBackedActionSpecificationFactory implements ActionSpecificationFacto
     methodParameters.addAll(handlerMethodResolver.methodParameters(context.handlerMethod()));
     return new ActionSpecification(
         context.path(),
-        Collections.singleton(context.getRequestMethod()),
+        context.getRequestMethods(),
         context.supportedMediaTypes(),
         context.supportedMediaTypes(),
         context.handlerMethod(),

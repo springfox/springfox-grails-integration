@@ -58,7 +58,6 @@ class UrlMappings {
     List<ConstrainedProperty> pathProperties = IntStream.range(0, constraints.length)
         .filter(indicesToUse(mapping))
         .mapToObj(i -> constraints[i])
-        .filter(domainProperties(domainClass))
         .collect(Collectors.toList());
     List<ResolvedMethodParameter> resolved = newArrayList();
     for (int index = 0; index < pathProperties.size(); index++) {
@@ -76,11 +75,10 @@ class UrlMappings {
       TypeResolver resolver,
       GrailsDomainClass domainClass,
       ConstrainedProperty property) {
-    return resolver.resolve(domainClass.getPropertyByName(property.getPropertyName()).getType());
-  }
-
-  private static Predicate<ConstrainedProperty> domainProperties(GrailsDomainClass domain) {
-    return c -> domain.hasProperty(c.getPropertyName());
+    if (domainClass.hasProperty(property.getPropertyName())) {
+      return resolver.resolve(domainClass.getPropertyByName(property.getPropertyName()).getType());
+    }
+    return resolver.resolve(String.class);
   }
 
   private static boolean httpMethodMatches(String methodName, UrlMapping urlMapping) {
@@ -104,7 +102,7 @@ class UrlMappings {
   }
 
   private static boolean explicitController(UrlMapping urlMapping, GrailsActionContext context) {
-    return Objects.equals(urlMapping.getControllerName(), context.getController().getName());
+    return Objects.equals(urlMapping.getControllerName(), context.getController().getLogicalPropertyName());
   }
 
   private static boolean isWildcardController(UrlMapping urlMapping) {

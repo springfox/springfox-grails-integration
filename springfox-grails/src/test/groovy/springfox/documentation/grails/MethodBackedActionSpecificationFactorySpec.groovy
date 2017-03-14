@@ -14,28 +14,28 @@ class MethodBackedActionSpecificationFactorySpec extends ActionSpecificationFact
     and:
       urlMappings.urlMappings >> [otherMapping(Mock(UrlMapping))]
     when:
-      def spec = sut.create(new GrailsActionContext(controller, domain, actionAttributes, "other", resolver))
+      def spec = sut.create(new GrailsActionContext(regularController, domain, actionAttributes, "save", resolver))
     then: "All http attributes match"
       spec.consumes == [MediaType.APPLICATION_JSON] as Set
       spec.produces == [MediaType.APPLICATION_JSON] as Set
       spec.supportedMethods == [RequestMethod.POST] as Set
-      spec.handlerMethod.method == AController.methods.find {it.name == "other" }
-      spec.path == "/a/other"
+      spec.handlerMethod.method == BookController.methods.find {it.name == "save" }
+      spec.path == "/book.{format}"
 
     and: "Parameters match"
       spec.parameters.size() == 2
-      spec.parameters[0].parameterType == resolver.resolve(Integer)
+      spec.parameters[0].parameterType == resolver.resolve(String)
       spec.parameters[0].parameterIndex == 0
       spec.parameters[0].defaultName().isPresent()
-      spec.parameters[0].defaultName().get() == "first"
+      spec.parameters[0].defaultName().get() == "format"
 
-      spec.parameters[1].parameterType == resolver.resolve(ADomain)
-      spec.parameters[1].parameterIndex == 1
+      spec.parameters[1].parameterType == resolver.resolve(Book)
+      spec.parameters[1].parameterIndex == 0
       spec.parameters[1].defaultName().isPresent()
-      spec.parameters[1].defaultName().get() == "domain"
+      spec.parameters[1].defaultName().get() == "book"
 
     and: "Return type matches"
-      spec.returnType == resolver.resolve(ADomain)
+      spec.returnType == resolver.resolve(Object)
 
   }
 

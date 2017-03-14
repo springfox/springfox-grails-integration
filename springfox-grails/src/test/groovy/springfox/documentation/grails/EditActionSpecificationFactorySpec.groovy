@@ -21,16 +21,11 @@ class EditActionSpecificationFactorySpec extends ActionSpecificationFactorySpec 
       spec.path == "/a/{id}/edit"
 
     and: "Parameters match"
-      spec.parameters.size() == 2
+      spec.parameters.size() == 1
       spec.parameters[0].parameterType == resolver.resolve(Long)
-      spec.parameters[0].parameterIndex == 1
+      spec.parameters[0].parameterIndex == 0
       spec.parameters[0].defaultName().isPresent()
       spec.parameters[0].defaultName().get() == "id"
-
-      spec.parameters[1].parameterType == resolver.resolve(ADomain)
-      spec.parameters[1].parameterIndex == 2
-      spec.parameters[1].defaultName().isPresent()
-      spec.parameters[1].defaultName().get() == "body"
 
     and: "Return type matches"
       spec.returnType == resolver.resolve(ADomain)

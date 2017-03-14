@@ -24,7 +24,7 @@ class SynthesizedAnnotations {
     throw new UnsupportedOperationException();
   }
 
-  static PathVariable pathVariable(final String name, final String value) {
+  static PathVariable pathVariable(final String name) {
     return new PathVariable() {
       @Override
       public Class<? extends Annotation> annotationType() {
@@ -38,7 +38,7 @@ class SynthesizedAnnotations {
 
       @Override
       public String name() {
-        return value;
+        return name;
       }
 
       @Override

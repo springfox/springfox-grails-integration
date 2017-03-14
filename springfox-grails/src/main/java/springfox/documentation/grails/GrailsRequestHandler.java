@@ -2,6 +2,7 @@ package springfox.documentation.grails;
 
 import com.fasterxml.classmate.ResolvedType;
 import com.google.common.base.Optional;
+import com.google.common.collect.ImmutableSet;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -65,7 +66,7 @@ class GrailsRequestHandler implements RequestHandler {
 
   @Override
   public Set<RequestMethod> supportedMethods() {
-    return actionSpecification.getSupportedMethods();
+    return ImmutableSet.copyOf(actionSpecification.getSupportedMethods());
   }
 
   @Override

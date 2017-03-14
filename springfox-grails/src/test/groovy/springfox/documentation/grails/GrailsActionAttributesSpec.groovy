@@ -8,20 +8,22 @@ import grails.web.mapping.UrlMapping
 import grails.web.mapping.UrlMappings
 import org.springframework.web.bind.annotation.RequestMethod
 import spock.lang.Specification
+import spock.lang.Unroll
 
 
 class GrailsActionAttributesSpec extends Specification {
 
+  @Unroll
   def "Gets the http methods for operations correctly" () {
     given:
       def sut = actionAttributes(linkGenerator(), urlMappings())
     when:
-      def actual = sut.httpMethod(context)
+      def actual = sut.httpMethods(context)
     then:
       actual == methods
     where:
       context           | methods
-      noOverrides()     | [RequestMethod.GET] as Set
+      noOverrides()     | [RequestMethod.OPTIONS] as Set
       withOverrides()   | [RequestMethod.POST] as Set
   }
 

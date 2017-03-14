@@ -5,43 +5,48 @@ import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.RequestMethod
 
 class PatchActionSpecificationFactorySpec extends ActionSpecificationFactorySpec {
-  def "Patch action produces action specification" () {
+  def "Patch action produces action specification"() {
     given:
-      def resolver = new TypeResolver()
-      def sut = new PatchActionSpecificationFactory(resolver)
+    def resolver = new TypeResolver()
+    def sut = new PatchActionSpecificationFactory(resolver)
     when:
-      def spec = sut.create(new GrailsActionContext(controller, domain, actionAttributes, "patch", resolver))
+    def spec = sut.create(new GrailsActionContext(controller, domain, actionAttributes, "patch", resolver))
 
     then: "All http attributes match"
-      spec.consumes == [MediaType.APPLICATION_JSON] as Set
-      spec.produces == [MediaType.APPLICATION_JSON] as Set
-      spec.supportedMethods == [RequestMethod.PATCH] as Set
-      spec.handlerMethod.method == AController.methods.find {it.name == "patch" }
-      spec.path == "/a/{id}"
+    spec.consumes == [MediaType.APPLICATION_JSON] as Set
+    spec.produces == [MediaType.APPLICATION_JSON] as Set
+    spec.supportedMethods == [RequestMethod.PATCH] as Set
+    spec.handlerMethod.method == AController.methods.find { it.name == "patch" }
+    spec.path == "/a/{id}.{format}"
 
     and: "Parameters match"
-      spec.parameters.size() == 2
-      spec.parameters[0].parameterType == resolver.resolve(Long)
-      spec.parameters[0].parameterIndex == 1
-      spec.parameters[0].defaultName().isPresent()
-      spec.parameters[0].defaultName().get() == "id"
+    spec.parameters.size() == 3
+    spec.parameters[0].parameterType == resolver.resolve(Long)
+    spec.parameters[0].parameterIndex == 0
+    spec.parameters[0].defaultName().isPresent()
+    spec.parameters[0].defaultName().get() == "id"
 
-      spec.parameters[1].parameterType == resolver.resolve(ADomain)
-      spec.parameters[1].parameterIndex == 2
-      spec.parameters[1].defaultName().isPresent()
-      spec.parameters[1].defaultName().get() == "body"
+    spec.parameters[1].parameterType == resolver.resolve(String)
+    spec.parameters[1].parameterIndex == 1
+    spec.parameters[1].defaultName().isPresent()
+    spec.parameters[1].defaultName().get() == "format"
+
+    spec.parameters[2].parameterType == resolver.resolve(ADomain)
+    spec.parameters[2].parameterIndex == 2
+    spec.parameters[2].defaultName().isPresent()
+    spec.parameters[2].defaultName().get() == "body"
 
     and: "Return type matches"
-      spec.returnType == resolver.resolve(ADomain)
+    spec.returnType == resolver.resolve(ADomain)
   }
 
-  def "Patch action throws exception when action is not found" () {
+  def "Patch action throws exception when action is not found"() {
     given:
-      def resolver = new TypeResolver()
-      def sut = new PatchActionSpecificationFactory(resolver)
+    def resolver = new TypeResolver()
+    def sut = new PatchActionSpecificationFactory(resolver)
     when:
-      sut.create(new GrailsActionContext(controller, domain, actionAttributes, "unknown", resolver))
+    sut.create(new GrailsActionContext(controller, domain, actionAttributes, "unknown", resolver))
     then:
-      thrown(NullPointerException)
+    thrown(NullPointerException)
   }
 }

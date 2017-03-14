@@ -58,6 +58,7 @@ class DefaultGrailsPropertyTransformerSpec extends Specification {
   GrailsDomainClass domainClass() {
     def domain = Mock(GrailsDomainClass)
     domain.getPropertyByName("relatedEntity") >> relatedEntityProperty()
+    domain.hasProperty(_) >> {args -> "format" != args[0]}
     domain
   }
 
