@@ -45,14 +45,6 @@ class UrlMappings {
             c -> String.format("{%s}", c.getPropertyName())));
   }
 
-  private static IntPredicate indicesToUse(UrlMapping mapping) {
-    return index -> {
-      ConstrainedProperty property = mapping.getConstraints()[index];
-      return !property.getPropertyName().equals("controller")
-          && !property.getPropertyName().equals("action");
-    };
-  }
-
   public static List<ResolvedMethodParameter> resolvedPathParameters(
       TypeResolver resolver,
       UrlMapping mapping,
@@ -72,6 +64,14 @@ class UrlMappings {
     }
 
     return resolved;
+  }
+
+  private static IntPredicate indicesToUse(UrlMapping mapping) {
+    return index -> {
+      ConstrainedProperty property = mapping.getConstraints()[index];
+      return !property.getPropertyName().equals("controller")
+          && !property.getPropertyName().equals("action");
+    };
   }
 
   private static ResolvedType resolvedPropertyType(

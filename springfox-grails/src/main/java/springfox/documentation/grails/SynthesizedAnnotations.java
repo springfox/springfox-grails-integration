@@ -8,7 +8,11 @@ import java.lang.annotation.Annotation;
 
 @SuppressWarnings({"squid:S1188"})
 class SynthesizedAnnotations {
-  static final RequestBody REQUEST_BODY_ANNOTATION = new RequestBody() {
+  private SynthesizedAnnotations() {
+    throw new UnsupportedOperationException();
+  }
+
+  public static final RequestBody REQUEST_BODY_ANNOTATION = new RequestBody() {
     @Override
     public Class<? extends Annotation> annotationType() {
       return RequestBody.class;
@@ -20,11 +24,7 @@ class SynthesizedAnnotations {
     }
   };
 
-  private SynthesizedAnnotations() {
-    throw new UnsupportedOperationException();
-  }
-
-  static PathVariable pathVariable(final String name) {
+  public static PathVariable pathVariable(final String name) {
     return new PathVariable() {
       @Override
       public Class<? extends Annotation> annotationType() {
@@ -48,7 +48,7 @@ class SynthesizedAnnotations {
     };
   }
 
-  static RequestParam requestParam(final String name, final String value, final boolean required, final String
+  public static RequestParam requestParam(final String name, final String value, final boolean required, final String
       defaultValue) {
     return new RequestParam() {
 
