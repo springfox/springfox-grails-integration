@@ -6,7 +6,6 @@ import grails.web.mapping.UrlMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.mvc.condition.RequestCondition;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -18,12 +17,12 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static com.google.common.collect.Lists.*;
 import static springfox.documentation.builders.BuilderDefaults.*;
 import static springfox.documentation.grails.Actions.*;
+import static springfox.documentation.grails.UrlMappings.*;
 
 @Component
 class GrailsActionAttributes {
@@ -63,7 +62,10 @@ class GrailsActionAttributes {
     Set<RequestMethod> requestMethods = methodOverrides(context);
     if (requestMethods.isEmpty()) {
       Stream<UrlMapping> sorted = Arrays.stream(urlMappings.getUrlMappings())
-          .filter(UrlMappings.selector(context, null))
+          .filter(selector(
+              context.getController().getLogicalPropertyName(),
+              context.getAction(),
+              null))
           .sorted(Comparator.comparing(this::score));
       return sorted.findFirst()
           .map(m -> httpMethods(defaultIfAbsent(m.getHttpMethod(), "*")))

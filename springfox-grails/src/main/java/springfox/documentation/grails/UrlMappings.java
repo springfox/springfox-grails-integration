@@ -26,10 +26,13 @@ class UrlMappings {
     throw new UnsupportedOperationException();
   }
 
-  public static Predicate<UrlMapping> selector(GrailsActionContext context, String methodName) {
-    return u -> httpMethodMatches(methodName, u)
-        && controllerMatches(context, u)
-        && actionMatches(context, u);
+  public static Predicate<UrlMapping> selector(
+      String logicalControllerName,
+      String action,
+      String httpMethod) {
+    return u -> httpMethodMatches(httpMethod, u)
+        && controllerMatches(u, logicalControllerName)
+        && actionMatches(action, u);
   }
 
   public static Map<String, String> pathParameters(UrlMapping mapping) {
@@ -81,28 +84,28 @@ class UrlMappings {
     return resolver.resolve(String.class);
   }
 
-  private static boolean httpMethodMatches(String methodName, UrlMapping urlMapping) {
-    return anyMethod(methodName) || Objects.equals(urlMapping.getHttpMethod(), methodName);
+  private static boolean httpMethodMatches(String httpMethod, UrlMapping urlMapping) {
+    return anyMethod(httpMethod) || Objects.equals(urlMapping.getHttpMethod(), httpMethod);
   }
 
   private static boolean anyMethod(String methodName) {
     return Strings.isNullOrEmpty(methodName);
   }
 
-  private static boolean actionMatches(GrailsActionContext context, UrlMapping urlMapping) {
+  private static boolean actionMatches(String context, UrlMapping urlMapping) {
     return isWildcardAction(urlMapping) || explicitAction(context, urlMapping);
   }
 
-  private static boolean explicitAction(GrailsActionContext context, UrlMapping urlMapping) {
-    return Objects.equals(urlMapping.getActionName(), context.getAction());
+  private static boolean explicitAction(String action, UrlMapping urlMapping) {
+    return Objects.equals(urlMapping.getActionName(), action);
   }
 
-  private static boolean controllerMatches(GrailsActionContext context, UrlMapping urlMapping) {
-    return isWildcardController(urlMapping) || explicitController(urlMapping, context);
+  private static boolean controllerMatches(UrlMapping urlMapping, String logicalControllerName) {
+    return isWildcardController(urlMapping) || explicitController(urlMapping, logicalControllerName);
   }
 
-  private static boolean explicitController(UrlMapping urlMapping, GrailsActionContext context) {
-    return Objects.equals(urlMapping.getControllerName(), context.getController().getLogicalPropertyName());
+  private static boolean explicitController(UrlMapping urlMapping, String logicalControllerName) {
+    return Objects.equals(urlMapping.getControllerName(), logicalControllerName);
   }
 
   private static boolean isWildcardController(UrlMapping urlMapping) {

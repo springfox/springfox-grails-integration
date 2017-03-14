@@ -45,13 +45,17 @@ class GrailsActionContext {
     this.resolver = resolver;
     this.isRestfulController = isRestfulController(controller, action);
     this.requestMethods = urlProvider.httpMethods(this);
-    String method = requestMethods
+    String httpMethod = requestMethods
         .stream()
         .findFirst()
         .map(Enum::toString)
         .orElse(null);
     this.missingMapping = requestMethods.isEmpty();
-    this.urlMapping = urlProvider.urlMapping(selector(this, method));
+    this.urlMapping = urlProvider.urlMapping(
+        selector(
+            controller.getLogicalPropertyName(),
+            action,
+            httpMethod));
     this.mediaTypes = mediaTypeOverrides(this);
     maybeAddDefaultMediaType(mediaTypes);
   }
