@@ -11,6 +11,13 @@ import static springfox.documentation.grails.Parameters.*
 class ParametersSpec extends Specification {
   def resolvedType = new TypeResolver().resolve(String)
 
+  def "cannot instantiate this class" () {
+    when:
+      new Parameters()
+    then:
+      thrown(UnsupportedOperationException)
+  }
+
   def "creates path parameter"() {
     given:
       def sut = pathParameter(0, "test", resolvedType)

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.method.HandlerMethod
 import org.springframework.web.servlet.mvc.condition.PatternsRequestCondition
 import spock.lang.Specification
+import springfox.documentation.RequestHandler
 import springfox.documentation.RequestHandlerKey
 import springfox.documentation.service.ResolvedMethodParameter
 
@@ -44,6 +45,9 @@ class GrailsRequestHandlerSpec extends Specification implements UrlMappingSuppor
       sut.handlerMethod.equals(handlerMethod())
       sut.name == "testActionTestDomainLogicalPropertyName"
       sut.groupName() == "AnotherLogicalPropertyName"
+      sut.headers() == [] as Set
+      sut.params() == [] as Set
+      sut.combine(Mock(RequestHandler)) != sut
   }
 
   def areEqual(ResolvedMethodParameter a, ResolvedMethodParameter b) {
