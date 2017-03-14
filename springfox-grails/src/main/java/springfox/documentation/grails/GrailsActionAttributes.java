@@ -80,8 +80,8 @@ class GrailsActionAttributes {
         .map(Object::toString)
         .orElse("*");
 
-    int methodScore = method.equals("*") ? 1000 : 0;
-    int actionScore = action.equals("*") ? 1000 : 0;
+    int methodScore = "*".equals(method) ? 1000 : 0;
+    int actionScore = "*".equals(action) ? 1000 : 0;
     return (actionScore * 10) + methodScore;
   }
 
@@ -106,7 +106,7 @@ class GrailsActionAttributes {
     return mapping.createRelativeURL(
         context.getController().getLogicalPropertyName(),
         context.getAction(),
-        UrlMappings.pathParameters(mapping),
+        pathParameters(mapping),
         "UTF-8")
         .replace("%7B", "{").replace("%7D", "}")
         .replace(linkGenerator.getServerBaseURL(), "")

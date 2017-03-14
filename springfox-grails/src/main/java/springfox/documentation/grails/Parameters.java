@@ -39,6 +39,6 @@ class Parameters {
     return new ResolvedMethodParameter(
         parameterIndex,
         "body",
-        singletonList(SynthesizedAnnotations.REQUEST_BODY_ANNOTATION), resolvedType);
+        singletonList(REQUEST_BODY_ANNOTATION), resolvedType);
   }
 }
