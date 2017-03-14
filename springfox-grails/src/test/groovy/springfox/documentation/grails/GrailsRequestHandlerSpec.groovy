@@ -12,10 +12,11 @@ import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.method.HandlerMethod
 import org.springframework.web.servlet.mvc.condition.PatternsRequestCondition
 import spock.lang.Specification
+import springfox.documentation.RequestHandler
 import springfox.documentation.RequestHandlerKey
 import springfox.documentation.service.ResolvedMethodParameter
 
-class GrailsRequestHandlerSpec extends Specification {
+class GrailsRequestHandlerSpec extends Specification implements UrlMappingSupport {
   def resolver = new TypeResolver()
   def controller = new AnotherController()
 
@@ -44,6 +45,9 @@ class GrailsRequestHandlerSpec extends Specification {
       sut.handlerMethod.equals(handlerMethod())
       sut.name == "testActionTestDomainLogicalPropertyName"
       sut.groupName() == "AnotherLogicalPropertyName"
+      sut.headers() == [] as Set
+      sut.params() == [] as Set
+      sut.combine(Mock(RequestHandler)) != sut
   }
 
   def areEqual(ResolvedMethodParameter a, ResolvedMethodParameter b) {
@@ -55,21 +59,22 @@ class GrailsRequestHandlerSpec extends Specification {
   def grailsRequestHandler(){
     def attributes = new GrailsActionAttributes(
         linkGenerator(),
-        urlMappings())
+        urlMappingsHolder())
     new GrailsRequestHandler(
-          new GrailsActionContext(
-              controller(),
-              domain(),
-              attributes,
-              "testAction"
-          ),
-          attributes,
-          actionSpecification()
-      )
+        new GrailsActionContext(
+            controller(),
+            domain(),
+            attributes,
+            "testAction",
+            resolver)
+        ,
+        actionSpecification()
+    )
   }
 
   ActionSpecification actionSpecification() {
     new ActionSpecification(
+        "/test",
         [RequestMethod.GET] as Set,
         [MediaType.APPLICATION_JSON] as Set,
         [MediaType.APPLICATION_JSON] as Set,
@@ -85,8 +90,10 @@ class GrailsRequestHandlerSpec extends Specification {
         AnotherController.methods[0])
   }
 
-  UrlMappings urlMappings() {
-    Mock(UrlMappings)
+  UrlMappings urlMappingsHolder() {
+    def mock = Mock(UrlMappings)
+    mock.urlMappings >> urlMappings()
+    mock
   }
 
   LinkGenerator linkGenerator() {

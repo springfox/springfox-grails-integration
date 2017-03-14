@@ -3,39 +3,33 @@ package springfox.documentation.grails;
 import com.fasterxml.classmate.TypeResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.method.HandlerMethod;
+import springfox.documentation.service.ResolvedMethodParameter;
 import springfox.documentation.spring.web.readers.operation.HandlerMethodResolver;
 
-import java.util.HashSet;
-import java.util.Map;
-
-import static springfox.documentation.grails.Actions.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 class MethodBackedActionSpecificationFactory implements ActionSpecificationFactory {
-
-  private final GrailsActionAttributes urlProvider;
   private final HandlerMethodResolver handlerMethodResolver;
 
   @Autowired
-  public MethodBackedActionSpecificationFactory(
-      TypeResolver resolver,
-      GrailsActionAttributes urlProvider) {
-    this.urlProvider = urlProvider;
+  public MethodBackedActionSpecificationFactory(TypeResolver resolver) {
     this.handlerMethodResolver = new HandlerMethodResolver(resolver);
   }
 
   @Override
   public ActionSpecification create(GrailsActionContext context) {
-    Map<String, HandlerMethod> actions = actionsToHandler(context.getController().getClazz());
-    HandlerMethod handlerMethod = actions.get(context.getAction());
+    List<ResolvedMethodParameter> methodParameters = new ArrayList<>(context.pathParameters()) ;
+    methodParameters.addAll(handlerMethodResolver.methodParameters(context.handlerMethod()));
     return new ActionSpecification(
-        urlProvider.httpMethod(context),
-        producesOverrides(context),
-        new HashSet<>(),
-        handlerMethod,
-        handlerMethodResolver.methodParameters(handlerMethod),
-        handlerMethodResolver.methodReturnType(handlerMethod)
+        context.path(),
+        context.getRequestMethods(),
+        context.supportedMediaTypes(),
+        context.supportedMediaTypes(),
+        context.handlerMethod(),
+        methodParameters,
+        handlerMethodResolver.methodReturnType(context.handlerMethod())
     );
   }
 }

@@ -17,7 +17,7 @@ import static springfox.documentation.schema.AlternateTypeRules.*;
 
 @Component
 public class DefaultGrailsAlternateTypeRuleConvention implements AlternateTypeRuleConvention {
-  private static final int DEFAULT_CONVENTION_PRECEDENCE = Ordered.LOWEST_PRECEDENCE + 1000;
+  private static final int DEFAULT_CONVENTION_PRECEDENCE = Ordered.HIGHEST_PRECEDENCE + 2000;
   private final TypeResolver resolver;
   private final GrailsApplication application;
   private final GrailsSerializationTypeGenerator typeGenerator;

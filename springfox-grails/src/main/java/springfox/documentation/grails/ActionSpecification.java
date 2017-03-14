@@ -7,19 +7,22 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.method.HandlerMethod;
 import springfox.documentation.service.ResolvedMethodParameter;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
 class ActionSpecification {
-  private final Set<RequestMethod> supportedMethods;
+  private final Collection<RequestMethod> supportedMethods;
   private final Set<MediaType> produces;
   private final Set<MediaType> consumes;
   private final List<ResolvedMethodParameter> parameters;
   private final ResolvedType returnType;
   private final HandlerMethod handlerMethod;
+  private final String path;
 
   public ActionSpecification(
-      Set<RequestMethod> supportedMethods,
+      String path,
+      Collection<RequestMethod> supportedMethods,
       Set<MediaType> produces,
       Set<MediaType> consumes,
       HandlerMethod handlerMethod,
@@ -28,6 +31,7 @@ class ActionSpecification {
 
     Preconditions.checkNotNull(handlerMethod, "Handler method is null");
 
+    this.path = path;
     this.supportedMethods = supportedMethods;
     this.produces = produces;
     this.consumes = consumes;
@@ -36,7 +40,11 @@ class ActionSpecification {
     this.handlerMethod = handlerMethod;
   }
 
-  public Set<RequestMethod> getSupportedMethods() {
+  public String getPath() {
+    return path;
+  }
+
+  public Collection<RequestMethod> getSupportedMethods() {
     return supportedMethods;
   }
 

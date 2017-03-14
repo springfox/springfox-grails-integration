@@ -9,7 +9,7 @@ import grails.web.mapping.UrlMapping
 import grails.web.mapping.UrlMappings
 import spock.lang.Specification
 
-class GrailsRequestHandlerProviderSpec extends Specification {
+class GrailsRequestHandlerProviderSpec extends Specification implements UrlMappingSupport {
   def "Integration test" () {
     given:
       def resolver = new TypeResolver()
@@ -17,19 +17,20 @@ class GrailsRequestHandlerProviderSpec extends Specification {
       def application = application()
     and:
       def sut = new GrailsRequestHandlerProvider(
+          resolver,
           application,
           attributes,
           new ActionSpecificationResolver(
               new RestfulActionSpecificationFactory(resolver),
-              new MethodBackedActionSpecificationFactory(resolver, attributes))
+              new MethodBackedActionSpecificationFactory(resolver))
       )
     expect:
       sut.requestHandlers().size() == 1
   }
 
-  UrlMappings urlMappings() {
+  UrlMappings urlMappingsHolder() {
     def mappings = Mock(UrlMappings)
-    mappings.urlMappings >> [mapping()]
+    mappings.urlMappings >> urlMappings()
     mappings
   }
 
@@ -51,7 +52,7 @@ class GrailsRequestHandlerProviderSpec extends Specification {
   GrailsActionAttributes attributes() {
     new GrailsActionAttributes(
         linkGenerator(),
-        urlMappings())
+        urlMappingsHolder())
   }
 
   GrailsApplication application() {

@@ -39,7 +39,7 @@ class BookController {
 
   @Action
   @Transactional
-  @ApiOperation(value = "save", httpMethod = "POST", notes = "Saves a book")
+  @ApiOperation(value = "save", httpMethod = "POST", notes = "Saves a book", response = Book)
   def save(Book book) {
     if (book == null) {
       transactionStatus.setRollbackOnly()

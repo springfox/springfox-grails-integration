@@ -72,7 +72,7 @@ class Actions {
     return methodOverrides(context, newHashSet());
   }
 
-  public static Set<MediaType> producesOverrides(GrailsActionContext context) {
+  public static Set<MediaType> mediaTypeOverrides(GrailsActionContext context) {
     Set<MediaType> produces = newHashSet(MediaType.APPLICATION_JSON);
     List<String> responseFormats;
     try {

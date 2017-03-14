@@ -1,45 +1,33 @@
 package springfox.documentation.grails
 
 import com.fasterxml.classmate.TypeResolver
-import grails.core.GrailsControllerClass
-import grails.core.GrailsDomainClass
-import grails.core.GrailsDomainClassProperty
-import grails.web.mapping.LinkGenerator
-import grails.web.mapping.UrlMappings
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.RequestMethod
-import spock.lang.Specification
 
-class CreateActionSpecificationFactorySpec extends Specification {
-  def controller = Mock(GrailsControllerClass)
-  def domain = Mock(GrailsDomainClass)
-  def identifierProperty = Mock(GrailsDomainClassProperty)
-  def actionAttributes = new GrailsActionAttributes(Mock(LinkGenerator), Mock(UrlMappings))
-
-  def setup() {
-    controller.clazz >> AController
-    domain.clazz >> ADomain
-    domain.identifier >> identifierProperty
-    domain.identifier.type >> Integer
-  }
-
+class CreateActionSpecificationFactorySpec extends ActionSpecificationFactorySpec {
   def "Create action produces action specification" () {
     given:
       def resolver = new TypeResolver()
       def sut = new CreateActionSpecificationFactory(resolver)
     when:
-      def spec = sut.create(new GrailsActionContext(controller, domain, actionAttributes, "create"))
-    then:
+      def spec = sut.create(new GrailsActionContext(controller, domain, actionAttributes, "create", resolver))
+
+    then: "All http attributes match"
       spec.consumes == [MediaType.APPLICATION_JSON] as Set
       spec.produces == [MediaType.APPLICATION_JSON] as Set
-      spec.supportedMethods == [RequestMethod.PUT, RequestMethod.POST] as Set
+      spec.supportedMethods == [RequestMethod.OPTIONS] as Set
+      spec.handlerMethod.method == AController.methods.find {it.name == "create" }
+      spec.path == "/a/create"
+
+    and: "Parameters match"
       spec.parameters.size() == 1
       spec.parameters[0].parameterType == resolver.resolve(ADomain)
       spec.parameters[0].parameterIndex == 1
       spec.parameters[0].defaultName().isPresent()
       spec.parameters[0].defaultName().get() == "body"
+
+    and: "Return type matches"
       spec.returnType == resolver.resolve(ADomain)
-      spec.handlerMethod.method == AController.methods.find {it.name == "create" }
   }
 
   def "Create action throws exception when action is not found" () {
@@ -47,9 +35,8 @@ class CreateActionSpecificationFactorySpec extends Specification {
       def resolver = new TypeResolver()
       def sut = new CreateActionSpecificationFactory(resolver)
     when:
-      sut.create(new GrailsActionContext(controller, domain, actionAttributes, "unknown"))
+      sut.create(new GrailsActionContext(controller, domain, actionAttributes, "unknown", resolver))
     then:
-      def exception = thrown(NullPointerException)
-      exception.message.contains("Handler method is null")
+      thrown(NullPointerException)
   }
 }

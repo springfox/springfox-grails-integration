@@ -2,9 +2,9 @@ package springfox.documentation.grails;
 
 import com.fasterxml.classmate.ResolvedType;
 import com.google.common.base.Optional;
+import com.google.common.collect.ImmutableSet;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.mvc.condition.NameValueExpression;
@@ -19,23 +19,18 @@ import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
-import java.util.stream.Collectors;
 
-import static org.springframework.util.StringUtils.capitalize;
+import static org.springframework.util.StringUtils.*;
 
 class GrailsRequestHandler implements RequestHandler {
   private final GrailsActionContext actionContext;
-  private final GrailsActionAttributes urlProvider;
   private final ActionSpecification actionSpecification;
 
   GrailsRequestHandler(
       GrailsActionContext actionContext,
-      GrailsActionAttributes urlProvider,
       ActionSpecification actionSpecification) {
     this.actionContext = actionContext;
-    this.urlProvider = urlProvider;
     this.actionSpecification = actionSpecification;
   }
 
@@ -51,18 +46,7 @@ class GrailsRequestHandler implements RequestHandler {
 
   @Override
   public PatternsRequestCondition getPatternsCondition() {
-    return new PatternsRequestCondition(
-        urlProvider.actionUrl(actionContext, pathParameters()));
-  }
-
-  private Map<String, String> pathParameters() {
-    return actionSpecification.getParameters().stream()
-        .filter(p -> p.hasParameterAnnotation(PathVariable.class))
-        .filter(p -> p.defaultName().isPresent())
-        .collect(
-            Collectors.toMap(
-                p -> p.defaultName().get(),
-                p -> String.format("{%s}", p.defaultName().get())));
+    return new PatternsRequestCondition(actionSpecification.getPath());
   }
 
   @Override
@@ -72,18 +56,17 @@ class GrailsRequestHandler implements RequestHandler {
 
   @Override
   public String getName() {
-    return Optional.fromNullable(actionContext.getDomainClass())
-        .transform(domain ->
-            String.format(
-                "%s%s",
-                actionContext.getAction(),
-                capitalize(domain.getLogicalPropertyName())))
-        .or(actionContext.getAction());
+    return java.util.Optional.ofNullable(actionContext.getDomainClass())
+        .map(domain -> String.format(
+            "%s%s",
+            actionContext.getAction(),
+            capitalize(domain.getLogicalPropertyName())))
+        .orElse(actionContext.getAction());
   }
 
   @Override
   public Set<RequestMethod> supportedMethods() {
-    return actionSpecification.getSupportedMethods();
+    return ImmutableSet.copyOf(actionSpecification.getSupportedMethods());
   }
 
   @Override
