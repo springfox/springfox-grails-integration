@@ -70,7 +70,8 @@ class UrlMappings {
     return index -> {
       ConstrainedProperty property = mapping.getConstraints()[index];
       return !property.getPropertyName().equals("controller")
-          && !property.getPropertyName().equals("action");
+          && !property.getPropertyName().equals("action")
+          && !property.isNullable();
     };
   }
 

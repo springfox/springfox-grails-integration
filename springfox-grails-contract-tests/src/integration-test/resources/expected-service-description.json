@@ -46,7 +46,7 @@
     }
   ],
   "paths": {
-    "/album.{format}": {
+    "/album": {
       "get": {
         "tags": [
           "album"
@@ -62,13 +62,6 @@
           "application/json"
         ],
         "parameters": [
-          {
-            "name": "format",
-            "in": "path",
-            "description": "format",
-            "required": true,
-            "type": "string"
-          },
           {
             "name": "max",
             "in": "query",
@@ -115,13 +108,6 @@
         ],
         "parameters": [
           {
-            "name": "format",
-            "in": "path",
-            "description": "format",
-            "required": true,
-            "type": "string"
-          },
-          {
             "in": "body",
             "name": "body",
             "description": "body",
@@ -153,7 +139,7 @@
         }
       }
     },
-    "/album/{id}.{format}": {
+    "/album/{id}": {
       "get": {
         "tags": [
           "album"
@@ -176,13 +162,6 @@
             "required": true,
             "type": "integer",
             "format": "int64"
-          },
-          {
-            "name": "format",
-            "in": "path",
-            "description": "format",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -225,13 +204,6 @@
             "required": true,
             "type": "integer",
             "format": "int64"
-          },
-          {
-            "name": "format",
-            "in": "path",
-            "description": "format",
-            "required": true,
-            "type": "string"
           },
           {
             "in": "body",
@@ -286,13 +258,6 @@
             "required": true,
             "type": "integer",
             "format": "int64"
-          },
-          {
-            "name": "format",
-            "in": "path",
-            "description": "format",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -337,13 +302,6 @@
             "format": "int64"
           },
           {
-            "name": "format",
-            "in": "path",
-            "description": "format",
-            "required": true,
-            "type": "string"
-          },
-          {
             "in": "body",
             "name": "body",
             "description": "body",
@@ -372,7 +330,7 @@
         }
       }
     },
-    "/application.{format}": {
+    "/application": {
       "get": {
         "tags": [
           "application"
@@ -404,7 +362,7 @@
         }
       }
     },
-    "/artist.{format}": {
+    "/artist": {
       "get": {
         "tags": [
           "artist"
@@ -420,13 +378,6 @@
           "application/json"
         ],
         "parameters": [
-          {
-            "name": "format",
-            "in": "path",
-            "description": "format",
-            "required": true,
-            "type": "string"
-          },
           {
             "name": "max",
             "in": "query",
@@ -473,13 +424,6 @@
         ],
         "parameters": [
           {
-            "name": "format",
-            "in": "path",
-            "description": "format",
-            "required": true,
-            "type": "string"
-          },
-          {
             "in": "body",
             "name": "body",
             "description": "body",
@@ -511,7 +455,7 @@
         }
       }
     },
-    "/artist/{id}.{format}": {
+    "/artist/{id}": {
       "get": {
         "tags": [
           "artist"
@@ -534,13 +478,6 @@
             "required": true,
             "type": "integer",
             "format": "int64"
-          },
-          {
-            "name": "format",
-            "in": "path",
-            "description": "format",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -583,13 +520,6 @@
             "required": true,
             "type": "integer",
             "format": "int64"
-          },
-          {
-            "name": "format",
-            "in": "path",
-            "description": "format",
-            "required": true,
-            "type": "string"
           },
           {
             "in": "body",
@@ -644,13 +574,6 @@
             "required": true,
             "type": "integer",
             "format": "int64"
-          },
-          {
-            "name": "format",
-            "in": "path",
-            "description": "format",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -695,13 +618,6 @@
             "format": "int64"
           },
           {
-            "name": "format",
-            "in": "path",
-            "description": "format",
-            "required": true,
-            "type": "string"
-          },
-          {
             "in": "body",
             "name": "body",
             "description": "body",
@@ -726,6 +642,73 @@
           },
           "403": {
             "description": "Forbidden"
+          }
+        }
+      }
+    },
+    "/books": {
+      "get": {
+        "tags": [
+          "book"
+        ],
+        "summary": "index",
+        "description": "Creates a book",
+        "operationId": "indexBookUsingGET",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "book"
+        ],
+        "summary": "save",
+        "description": "Saves a book",
+        "operationId": "saveBookUsingPOST",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "201": {
+            "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "404": {
+            "description": "Not Found"
           }
         }
       }
@@ -772,7 +755,7 @@
         }
       }
     },
-    "/books/{id}?format={format}": {
+    "/books/{id}": {
       "put": {
         "tags": [
           "book"
@@ -794,13 +777,6 @@
             "required": true,
             "type": "integer",
             "format": "int64"
-          },
-          {
-            "name": "format",
-            "in": "path",
-            "description": "format",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -839,13 +815,6 @@
         ],
         "parameters": [
           {
-            "name": "format",
-            "in": "path",
-            "description": "format",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "id",
             "in": "formData",
             "description": "Id of the book",
@@ -873,92 +842,7 @@
         }
       }
     },
-    "/books?format={format}": {
-      "get": {
-        "tags": [
-          "book"
-        ],
-        "summary": "index",
-        "description": "Creates a book",
-        "operationId": "indexBookUsingGET",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "format",
-            "in": "path",
-            "description": "format",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "book"
-        ],
-        "summary": "save",
-        "description": "Saves a book",
-        "operationId": "saveBookUsingPOST",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "format",
-            "in": "path",
-            "description": "format",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object"
-            }
-          },
-          "201": {
-            "description": "Created"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden"
-          },
-          "404": {
-            "description": "Not Found"
-          }
-        }
-      }
-    },
-    "/genre.{format}": {
+    "/genre": {
       "get": {
         "tags": [
           "genre"
@@ -974,13 +858,6 @@
           "application/json"
         ],
         "parameters": [
-          {
-            "name": "format",
-            "in": "path",
-            "description": "format",
-            "required": true,
-            "type": "string"
-          },
           {
             "name": "max",
             "in": "query",
@@ -1027,13 +904,6 @@
         ],
         "parameters": [
           {
-            "name": "format",
-            "in": "path",
-            "description": "format",
-            "required": true,
-            "type": "string"
-          },
-          {
             "in": "body",
             "name": "body",
             "description": "body",
@@ -1065,7 +935,7 @@
         }
       }
     },
-    "/genre/{id}.{format}": {
+    "/genre/{id}": {
       "get": {
         "tags": [
           "genre"
@@ -1088,13 +958,6 @@
             "required": true,
             "type": "integer",
             "format": "int64"
-          },
-          {
-            "name": "format",
-            "in": "path",
-            "description": "format",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -1137,13 +1000,6 @@
             "required": true,
             "type": "integer",
             "format": "int64"
-          },
-          {
-            "name": "format",
-            "in": "path",
-            "description": "format",
-            "required": true,
-            "type": "string"
           },
           {
             "in": "body",
@@ -1198,13 +1054,6 @@
             "required": true,
             "type": "integer",
             "format": "int64"
-          },
-          {
-            "name": "format",
-            "in": "path",
-            "description": "format",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -1249,13 +1098,6 @@
             "format": "int64"
           },
           {
-            "name": "format",
-            "in": "path",
-            "description": "format",
-            "required": true,
-            "type": "string"
-          },
-          {
             "in": "body",
             "name": "body",
             "description": "body",
@@ -1284,7 +1126,7 @@
         }
       }
     },
-    "/label.{format}": {
+    "/label": {
       "get": {
         "tags": [
           "label"
@@ -1300,13 +1142,6 @@
           "application/json"
         ],
         "parameters": [
-          {
-            "name": "format",
-            "in": "path",
-            "description": "format",
-            "required": true,
-            "type": "string"
-          },
           {
             "name": "max",
             "in": "query",
@@ -1353,13 +1188,6 @@
         ],
         "parameters": [
           {
-            "name": "format",
-            "in": "path",
-            "description": "format",
-            "required": true,
-            "type": "string"
-          },
-          {
             "in": "body",
             "name": "body",
             "description": "body",
@@ -1391,7 +1219,7 @@
         }
       }
     },
-    "/label/{id}.{format}": {
+    "/label/{id}": {
       "get": {
         "tags": [
           "label"
@@ -1414,13 +1242,6 @@
             "required": true,
             "type": "integer",
             "format": "int64"
-          },
-          {
-            "name": "format",
-            "in": "path",
-            "description": "format",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -1463,13 +1284,6 @@
             "required": true,
             "type": "integer",
             "format": "int64"
-          },
-          {
-            "name": "format",
-            "in": "path",
-            "description": "format",
-            "required": true,
-            "type": "string"
           },
           {
             "in": "body",
@@ -1524,13 +1338,6 @@
             "required": true,
             "type": "integer",
             "format": "int64"
-          },
-          {
-            "name": "format",
-            "in": "path",
-            "description": "format",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -1575,13 +1382,6 @@
             "format": "int64"
           },
           {
-            "name": "format",
-            "in": "path",
-            "description": "format",
-            "required": true,
-            "type": "string"
-          },
-          {
             "in": "body",
             "name": "body",
             "description": "body",
@@ -1610,7 +1410,7 @@
         }
       }
     },
-    "/song.{format}": {
+    "/song": {
       "get": {
         "tags": [
           "song"
@@ -1626,13 +1426,6 @@
           "application/json"
         ],
         "parameters": [
-          {
-            "name": "format",
-            "in": "path",
-            "description": "format",
-            "required": true,
-            "type": "string"
-          },
           {
             "name": "max",
             "in": "query",
@@ -1679,13 +1472,6 @@
         ],
         "parameters": [
           {
-            "name": "format",
-            "in": "path",
-            "description": "format",
-            "required": true,
-            "type": "string"
-          },
-          {
             "in": "body",
             "name": "body",
             "description": "body",
@@ -1717,7 +1503,7 @@
         }
       }
     },
-    "/song/{id}.{format}": {
+    "/song/{id}": {
       "get": {
         "tags": [
           "song"
@@ -1740,13 +1526,6 @@
             "required": true,
             "type": "integer",
             "format": "int64"
-          },
-          {
-            "name": "format",
-            "in": "path",
-            "description": "format",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -1789,13 +1568,6 @@
             "required": true,
             "type": "integer",
             "format": "int64"
-          },
-          {
-            "name": "format",
-            "in": "path",
-            "description": "format",
-            "required": true,
-            "type": "string"
           },
           {
             "in": "body",
@@ -1850,13 +1622,6 @@
             "required": true,
             "type": "integer",
             "format": "int64"
-          },
-          {
-            "name": "format",
-            "in": "path",
-            "description": "format",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -1899,13 +1664,6 @@
             "required": true,
             "type": "integer",
             "format": "int64"
-          },
-          {
-            "name": "format",
-            "in": "path",
-            "description": "format",
-            "required": true,
-            "type": "string"
           },
           {
             "in": "body",

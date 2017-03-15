@@ -18,19 +18,15 @@ class IndexActionSpecificationFactorySpec extends ActionSpecificationFactorySpec
       spec.produces == [MediaType.APPLICATION_JSON] as Set
       spec.supportedMethods == [RequestMethod.GET] as Set
       spec.handlerMethod.method == RestfulController.declaredMethods.find {it.name == "index" }
-      spec.path == "/a.{format}"
+      spec.path == "/a"
 
     and: "Parameters match"
-      spec.parameters.size() == 2
-      spec.parameters[0].parameterType == resolver.resolve(String)
-      spec.parameters[0].parameterIndex == 0
-      spec.parameters[0].defaultName().isPresent()
-      spec.parameters[0].defaultName().get() == "format"
+      spec.parameters.size() == 1
 
-      spec.parameters[1].parameterType == resolver.resolve(Integer)
-      spec.parameters[1].parameterIndex == 1
-      spec.parameters[1].defaultName().isPresent()
-      spec.parameters[1].defaultName().get() == "max"
+      spec.parameters[0].parameterType == resolver.resolve(Integer)
+      spec.parameters[0].parameterIndex == 1
+      spec.parameters[0].defaultName().isPresent()
+      spec.parameters[0].defaultName().get() == "max"
 
     and: "Return type matches"
       spec.returnType == resolver.resolve(List, ADomain)
