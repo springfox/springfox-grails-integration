@@ -23,7 +23,7 @@ public class SpringfoxGrailsIntegrationConfiguration {
 
   @Bean
   @ConditionalOnMissingBean(GeneratedClassNamingStrategy.class)
-  GeneratedClassNamingStrategy namingStrategy() {
+  public GeneratedClassNamingStrategy namingStrategy() {
     return new DefaultGeneratedClassNamingStrategy();
   }
 }
