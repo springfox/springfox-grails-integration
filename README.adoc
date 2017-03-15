@@ -93,6 +93,11 @@ dependencies {
 
 NOTE: The current snapshot version that is available is `1.0.0-SNAPSHOT`
 
+== Demo application
+
+The demo application is available in https://github.com/springfox/springfox-grails-demo[this repository]. You can
+see a live demo running or https://immense-escarpment-17128.herokuapp.com/swagger-ui.html[heroku here].
+
 ===== Configure the springfox grails integration
 
 In your Application (GrailsAutoConfiguration) startup entry-point follow the steps below
@@ -113,16 +118,12 @@ class Application extends GrailsAutoConfiguration {
   // 3. **Optionally** define a custom docket or omit this step to use the default
   // For grails it is preferrable to use use the following settings.
   @Bean
-  Docket api(List<AlternateTypeRuleConvention> conventions) { //<1>
-    def typeRules = conventions.collectMany {
-      it.rules()
-    }
+  Docket api() {
     new Docket(DocumentationType.SWAGGER_2)
         .ignoredParameterTypes(MetaClass)
         .select()
         .paths(not(ant("/error")))
         .build()
-        .alternateTypeRules(typeRules.toArray(new AlternateTypeRule[typeRules.size()]))
   }
 
    // 4. **Optionally** in the absense of asset pipeline configure the swagger-ui webjar to serve the scaffolded
@@ -147,7 +148,6 @@ class Application extends GrailsAutoConfiguration {
     }
 }
 ----
-<1> Conventions are way to describe conventions specific to grails
 
 ==== Swagger UI integration
 
@@ -185,6 +185,16 @@ dependencies {
 ----
 
 NOTE: The current snapshot in development is `2.7.0-SNAPSHOT`
+
+==== Extensibility
+
+TODO: Add more docs
+- Conventions - for adding custom conventions for replacing grails types
+- GrailsPropertySelector - for overriding the selection of grails properties by the default convention
+- GrailsPropertyTransformer - for overriding the transformer of the grails property
+- GeneratedClassNamingStrategy - for naming the generated class mixins
+
+==== Trouble shooting
 
 If you get an exception when you try to run your app, this might be because of the chosen profile for your application. If you use the `rest-api` profile, everything should be fine, but if you've chosen the `web` profile, it is likely that you have to add something like
 

@@ -57,6 +57,7 @@ dependencies {
     provided "org.springframework:spring-web:$spring"
     provided "org.springframework:spring-webmvc:$spring"
     provided "org.springframework:spring-context:$spring"
+    provided "org.springframework.boot:spring-boot-autoconfigure:$springBoot"
     provided "org.grails:grails-core:$grails"
     provided "org.grails:grails-web-url-mappings:$grails"
     provided "org.grails:grails-web-url-mappings:$grails"
