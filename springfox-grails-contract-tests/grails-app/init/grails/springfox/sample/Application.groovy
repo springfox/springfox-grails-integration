@@ -1,11 +1,15 @@
 package grails.springfox.sample
 
+import com.fasterxml.classmate.TypeResolver
 import grails.boot.GrailsApp
 import grails.boot.config.GrailsAutoConfiguration
+import grails.core.GrailsApplication
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Import
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
+import springfox.documentation.grails.DefaultGrailsAlternateTypeRuleConvention
+import springfox.documentation.grails.GrailsSerializationTypeGenerator
 import springfox.documentation.grails.SpringfoxGrailsIntegrationConfiguration
 import springfox.documentation.spi.DocumentationType
 import springfox.documentation.spring.web.plugins.Docket
@@ -22,7 +26,15 @@ class Application extends GrailsAutoConfiguration {
   }
 
   @Bean
-  Docket api() {
+  public DefaultGrailsAlternateTypeRuleConvention grailsModelConvention(
+      TypeResolver resolver,
+      GrailsApplication grailsApplication,
+      GrailsSerializationTypeGenerator typeGenerator) {
+    new DefaultGrailsAlternateTypeRuleConvention(resolver, grailsApplication, typeGenerator)
+  }
+
+  @Bean
+  public Docket api() {
     new Docket(DocumentationType.SWAGGER_2)
         .ignoredParameterTypes(MetaClass)
         .select()
