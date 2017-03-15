@@ -36,7 +36,7 @@ class GrailsRequestHandlerProviderSpec extends Specification implements UrlMappi
 
   def mapping() {
     def mapping = Mock(UrlMapping)
-    mapping.actionName >> "create"
+    mapping.actionName >> "save"
     mapping.httpMethod >> "POST"
     mapping.controllerName >> "BookController"
     mapping
@@ -75,7 +75,7 @@ class GrailsRequestHandlerProviderSpec extends Specification implements UrlMappi
     controller.name >> "BookController"
     controller.logicalPropertyName >> "Book"
     controller.clazz >> BookController
-    controller.actions >> ["create"]
+    controller.actions >> ["save"]
     controller
   }
 }

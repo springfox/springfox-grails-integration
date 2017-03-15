@@ -20,6 +20,7 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 import static com.google.common.collect.Lists.*;
+import static com.google.common.collect.Sets.newHashSet;
 import static springfox.documentation.builders.BuilderDefaults.*;
 import static springfox.documentation.grails.Actions.*;
 import static springfox.documentation.grails.UrlMappings.*;
@@ -69,7 +70,7 @@ class GrailsActionAttributes {
           .sorted(Comparator.comparing(this::score));
       return sorted.findFirst()
           .map(m -> httpMethods(defaultIfAbsent(m.getHttpMethod(), "*")))
-          .orElse(Collections.singleton(RequestMethod.OPTIONS));
+          .orElse(newHashSet());
     }
     return requestMethods;
   }

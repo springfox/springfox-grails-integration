@@ -2,7 +2,6 @@ package springfox.documentation.grails
 
 import com.fasterxml.classmate.TypeResolver
 import org.springframework.http.MediaType
-import org.springframework.web.bind.annotation.RequestMethod
 
 class CreateActionSpecificationFactorySpec extends ActionSpecificationFactorySpec {
   def "Create action produces action specification" () {
@@ -15,7 +14,7 @@ class CreateActionSpecificationFactorySpec extends ActionSpecificationFactorySpe
     then: "All http attributes match"
       spec.consumes == [MediaType.APPLICATION_JSON] as Set
       spec.produces == [MediaType.APPLICATION_JSON] as Set
-      spec.supportedMethods == [RequestMethod.OPTIONS] as Set
+      spec.supportedMethods == [] as Set
       spec.handlerMethod.method == AController.methods.find {it.name == "create" }
       spec.path == "/a/create"
 

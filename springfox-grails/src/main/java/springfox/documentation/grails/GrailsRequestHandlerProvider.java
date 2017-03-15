@@ -64,7 +64,8 @@ class GrailsRequestHandlerProvider implements RequestHandlerProvider {
               actionContext,
               actionResolver.resolve(actionContext)
           );
-        });
+        })
+        .filter(handler -> !handler.supportedMethods().isEmpty());
   }
 
 

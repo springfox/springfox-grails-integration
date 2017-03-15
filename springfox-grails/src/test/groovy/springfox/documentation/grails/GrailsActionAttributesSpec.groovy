@@ -23,7 +23,7 @@ class GrailsActionAttributesSpec extends Specification {
       actual == methods
     where:
       context           | methods
-      noOverrides()     | [RequestMethod.OPTIONS] as Set
+      noOverrides()     | [] as Set
       withOverrides()   | [RequestMethod.POST] as Set
   }
 
