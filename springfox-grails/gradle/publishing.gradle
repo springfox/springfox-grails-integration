@@ -59,17 +59,17 @@ publishing {
           it.scope*.value = 'compile'
         }
 
-        root.appendNode('name', 'springfox-grails')
+        root.appendNode('name', 'springfox-grails-integration')
         root.appendNode('packaging', 'jar')
-        root.appendNode('url', 'https://github.com/springfox/springfox-grails')
-        root.appendNode('description', 'Springfox Grails Module')
+        root.appendNode('url', 'https://github.com/springfox/springfox-grails-integration')
+        root.appendNode('description', 'Springfox Grails Integration Module')
 
         def license = root.appendNode('licenses').appendNode('license')
         license.appendNode('name', 'Apache-2.0')
-        license.appendNode('url', 'https://github.com/springfox/springfox-grails/blob/master/LICENSE.txt')
+        license.appendNode('url', 'https://github.com/springfox/springfox-grails-integration/blob/master/LICENSE.txt')
         license.appendNode('distribution', 'repo')
 
-        root.appendNode('scm').appendNode('url', 'https://github.com/springfox/springfox-grails/springfox-grails.git')
+        root.appendNode('scm').appendNode('url', 'https://github.com/springfox/springfox-grails-integration.git')
 
         def developers = root.appendNode('developers')
         devs.each {
