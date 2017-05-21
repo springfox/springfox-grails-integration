@@ -6,7 +6,7 @@ plugins {
 allprojects {
 
   group = 'io.springfox.grails'
-  version = '1.0.0-SNAPSHOT'
+  version = '1.0.0'
 
   repositories {
     jcenter()
@@ -36,6 +36,6 @@ allprojects {
     springPluginVersion = "1.2.0.RELEASE"
     swagger2Core = "1.5.12"
     springBoot = "1.4.4.RELEASE"
-    springfox = "2.7.0-SNAPSHOT"
+    springfox = "2.7.0"
   }
 }
