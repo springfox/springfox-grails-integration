@@ -1,13 +1,14 @@
-# SpringFox Grails Integration
+= SpringFox Grails Integration
 
 image:https://circleci.com/gh/springfox/springfox-grails-integration.svg?style=svg["CircleCI", link="https://circleci.com/gh/springfox/springfox-grails-integration"]
-image:https://codecov.io/gh/springfox/springfox-grails-integration/branch/master/graph/badge.svg["codecov",link="https://codecov.io/gh/springfox/springfox-grails-integration"] image:https://api.codacy.com/project/badge/Grade/77fbd793eb06447d9f1bf47eb8cdad8b["Codacy code quality", link="https://www.codacy.com/app/dilip-krishnan-github/springfox-grails-integration?utm_source=github.com&utm_medium=referral&utm_content=springfox/springfox-grails-integration&utm_campaign=Badge_Grade"]
+image:https://codecov.io/gh/springfox/springfox-grails-integration/branch/master/graph/badge.svg["codecov",link="https://codecov.io/gh/springfox/springfox-grails-integration"]
+image:https://api.codacy.com/project/badge/Grade/77fbd793eb06447d9f1bf47eb8cdad8b["Codacy code quality", link="https://www.codacy.com/app/dilip-krishnan-github/springfox-grails-integration?utm_source=github.com&utm_medium=referral&utm_content=springfox/springfox-grails-integration&utm_campaign=Badge_Grade"]
 
 SpringFox Grails integration library that produces grails specific documentation.
 
-=== Development Environment
+== Development Environment
 
-To build from source
+To build from source using IntelliJ IDEA
 
 - File >> open >> build.gradle
 - Make sure to check the 'use the default gradle wrapper' option.
@@ -31,18 +32,17 @@ To build from source
 
 == Getting Started
 
-:releaseVersion: {springfox-released-version}
-:snapshotVersion: {springfox-current-version}
-:springfoxRfc6570Version: {springfox-swagger-ui-rfc6570-version}
+:releaseVersion: 1.0.0
+:snapshotVersion: 1.0.1-SNAPSHOT
+:springfoxVersion: 2.7.0
+:springfoxRfc6570Version: 1.0.0
 
 The SpringFox Grails integration library depends on http://springfox.github.io/springfox/docs/current/[Springfox]
-[[img-download]]
-image:::https://api.bintray.com/packages/springfox/maven-repo/springfox/images/download.svg[alt="Download", link="https://bintray.com/springfox/maven-repo/springfox/_latestVersion"]
+
+image:https://api.bintray.com/packages/springfox/maven-repo/springfox/images/download.svg["Download", link="https://bintray.com/springfox/maven-repo/springfox/_latestVersion"]
 
 
-=== Dependencies
-NOTE: The snapshots haven't been published yet to jcenter as of (01/15/2017)
-
+== Dependencies
 The Springfox libraries are hosted on https://bintray.com/springfox/maven-repo/springfox/view[bintray] and jcenter.
 The artifacts can be viewed accessed at the following locations:
 
@@ -61,8 +61,7 @@ TIP: Refer the main documentation on how to http://springfox.github.io/springfox
 NOTE: Please refer the main documentation on  to http://springfox.github.io/springfox/docs/current/#dependencies[including the springfox-swagger2 dependencies]
 which are required for this integration library to work.
 
-==== Gradle
-===== Release
+=== Release
 [source,groovy]
 [subs="verbatim,attributes"]
 ----
@@ -77,7 +76,7 @@ dependencies {
 
 NOTE: This project has not been released yet.
 
-===== Snapshot
+=== Snapshot
 
 [source,groovy]
 [subs="verbatim,attributes"]
@@ -91,14 +90,10 @@ dependencies {
 }
 ----
 
-NOTE: The current snapshot version that is available is `1.0.0-SNAPSHOT`
+NOTE: The current snapshot version that is available is `{snapshotVersion}`
 
-== Demo application
 
-The demo application is available in https://github.com/springfox/springfox-grails-demo[this repository]. You can
-see a live demo running or https://immense-escarpment-17128.herokuapp.com/swagger-ui.html[heroku here].
-
-===== Configure the springfox grails integration
+== Configuration
 
 In your Application (GrailsAutoConfiguration) startup entry-point follow the steps below
 
@@ -149,12 +144,11 @@ class Application extends GrailsAutoConfiguration {
 }
 ----
 
-==== Swagger UI integration
+== Swagger UI integration
 
 IMPORTANT: In order to use the bundled swagger UI as explained in ___step 4___ above. The following library needs to be
 included in the `build.gradle`
 
-===== Release
 [source,groovy]
 [subs="verbatim,attributes"]
 ----
@@ -163,40 +157,33 @@ repositories {
 }
 
 dependencies {
-    compile "compile "io.springfox:springfox-swagger-ui:{springfoxReleaseVersion}" //<1>
+    compile "compile "io.springfox:springfox-swagger-ui:{springfoxVersion}" //<1>
 }
 ----
 
 NOTE: The latest released version is image:https://api.bintray.com/packages/springfox/maven-repo/springfox/images/download.svg["Springfox Version",
 link="https://bintray.com/springfox/maven-repo/springfox/_latestVersion"]
 
-===== Snapshot
-
-[source,groovy]
-[subs="verbatim,attributes"]
-----
-repositories {
-   maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }
-}
-
-dependencies {
-    compile "compile "io.springfox:springfox-swagger-ui:{springfoxSnapshotVersion}" //<1>
-}
-----
-
-NOTE: The current snapshot in development is `2.7.0-SNAPSHOT`
-
-==== Extensibility
-
-TODO: Add more docs
-- Conventions - for adding custom conventions for replacing grails types
+== Extensibility
+The library comes with intelligent defaults imeplemented by `DefaultGrailsAlternateTypeRuleConvention`. However the
+defaults can be tweaked using one of these extensibility mechanisms. The following classes can be implemented and
+registered as a bean to augment default behavior.
+- AlternateTypeRuleConvention - for adding custom conventions for replacing grails types
 - GrailsPropertySelector - for overriding the selection of grails properties by the default convention
 - GrailsPropertyTransformer - for overriding the transformer of the grails property
 - GeneratedClassNamingStrategy - for naming the generated class mixins
 
-==== Trouble shooting
 
-If you get an exception when you try to run your app, this might be because of the chosen profile for your application. If you use the `rest-api` profile, everything should be fine, but if you've chosen the `web` profile, it is likely that you have to add something like
+== Demo application
+
+The demo application is available in https://github.com/springfox/springfox-grails-demo[this repository]. You can
+see a live demo running or https://immense-escarpment-17128.herokuapp.com/swagger-ui.html[heroku here].
+
+== Trouble shooting
+
+If you get an exception when you try to run your app, this might be because of the chosen profile for your application.
+If you use the `rest-api` profile, everything should be fine, but if you've chosen the `web` profile, it is likely that
+you have to add something like this.
 
     grails.serverURL: http://localhost:8080
     

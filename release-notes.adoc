@@ -1,0 +1,20 @@
+= 1.0.0 Release
+
+# PRs (Thank you 🙇 )
+- (#15) Initialize some test data in order to easily test the demo app @rdmueller
+- (#14) fix for #13 @rdmueller
+- (#5 ) fix #4 - updated readme @rdmueller
+
+# Features
+- (#9) Move common infrastructure to springfox core current enhancement @dilipkrish
+- (#3) Support @JsonIgnoreProperties annotation current enhancement @zyro23
+- (#11) Format parameter should be optional enhancement @rdmueller
+
+# Bugs
+- (#13) Can't create new objects in test app @rdmueller
+- (#12) OPTIONS /edit? enhancement @rdmueller
+- (#8 ) Maven build file?  @rdmueller
+- (#7 ) Local maven dependency @rdmueller
+- (#10) Test-App doesn't work bug @rdmueller
+- (#6 ) Test run fine but... bug @rdmueller
+- (#4 ) Rest-Ressources need serverURL configured @rdmueller
