@@ -1,5 +1,6 @@
 = SpringFox Grails Integration
-image::https://api.bintray.com/packages/springfox/maven-repo/springfox-grails-integration/images/download.svg[link="https://bintray.com/springfox/maven-repo/springfox-grails-integration/_latestVersion"]
+
+image:https://api.bintray.com/packages/springfox/maven-repo/springfox-grails-integration/images/download.svg["Download", link="https://bintray.com/springfox/maven-repo/springfox-grails-integration/_latestVersion"]
 image:https://circleci.com/gh/springfox/springfox-grails-integration.svg?style=svg["CircleCI", link="https://circleci.com/gh/springfox/springfox-grails-integration"]
 image:https://codecov.io/gh/springfox/springfox-grails-integration/branch/master/graph/badge.svg["codecov",link="https://codecov.io/gh/springfox/springfox-grails-integration"]
 image:https://api.codacy.com/project/badge/Grade/77fbd793eb06447d9f1bf47eb8cdad8b["Codacy code quality", link="https://www.codacy.com/app/dilip-krishnan-github/springfox-grails-integration?utm_source=github.com&utm_medium=referral&utm_content=springfox/springfox-grails-integration&utm_campaign=Badge_Grade"]
