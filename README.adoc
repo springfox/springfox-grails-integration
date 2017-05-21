@@ -1,5 +1,5 @@
 = SpringFox Grails Integration
-
+image::https://api.bintray.com/packages/springfox/maven-repo/springfox-grails-integration/images/download.svg[link="https://bintray.com/springfox/maven-repo/springfox-grails-integration/_latestVersion"]
 image:https://circleci.com/gh/springfox/springfox-grails-integration.svg?style=svg["CircleCI", link="https://circleci.com/gh/springfox/springfox-grails-integration"]
 image:https://codecov.io/gh/springfox/springfox-grails-integration/branch/master/graph/badge.svg["codecov",link="https://codecov.io/gh/springfox/springfox-grails-integration"]
 image:https://api.codacy.com/project/badge/Grade/77fbd793eb06447d9f1bf47eb8cdad8b["Codacy code quality", link="https://www.codacy.com/app/dilip-krishnan-github/springfox-grails-integration?utm_source=github.com&utm_medium=referral&utm_content=springfox/springfox-grails-integration&utm_campaign=Badge_Grade"]
@@ -8,7 +8,9 @@ SpringFox Grails integration library that produces grails specific documentation
 
 == Development Environment
 
-To build from source using IntelliJ IDEA
+=== IDE setup 
+
+==== IntelliJ IDEA
 
 - File >> open >> build.gradle
 - Make sure to check the 'use the default gradle wrapper' option.
@@ -19,9 +21,11 @@ To build from source using IntelliJ IDEA
 
 ```
 
+=== Build
+
 - To get more output from any gradle commands/tasks append a `-i` (info) or `-d` (debug) e.g.
 ```bash
-./gradlew build -i
+./gradlew clean build -i
 
 ```
 - To publish to local maven repository
@@ -58,7 +62,7 @@ Below outlines how to include the springfox-swagger2 module which produces Swagg
 
 TIP: Refer the main documentation on how to http://springfox.github.io/springfox/docs/current/#swagger-ui[include springfox bundled swagger-ui] dependencies
 
-NOTE: Please refer the main documentation on  to http://springfox.github.io/springfox/docs/current/#dependencies[including the springfox-swagger2 dependencies]
+NOTE: Please refer the main documentation on how to http://springfox.github.io/springfox/docs/current/#dependencies[include the springfox-swagger2 dependencies]
 which are required for this integration library to work.
 
 === Release
@@ -74,8 +78,6 @@ dependencies {
 }
 ----
 
-NOTE: This project has not been released yet.
-
 === Snapshot
 
 [source,groovy]
@@ -89,9 +91,6 @@ dependencies {
     compile "io.springfox.grails:springfox-grails:{snapshotVersion}" //<1>
 }
 ----
-
-NOTE: The current snapshot version that is available is `{snapshotVersion}`
-
 
 == Configuration
 
@@ -168,6 +167,7 @@ link="https://bintray.com/springfox/maven-repo/springfox/_latestVersion"]
 The library comes with intelligent defaults imeplemented by `DefaultGrailsAlternateTypeRuleConvention`. However the
 defaults can be tweaked using one of these extensibility mechanisms. The following classes can be implemented and
 registered as a bean to augment default behavior.
+
 - AlternateTypeRuleConvention - for adding custom conventions for replacing grails types
 - GrailsPropertySelector - for overriding the selection of grails properties by the default convention
 - GrailsPropertyTransformer - for overriding the transformer of the grails property
