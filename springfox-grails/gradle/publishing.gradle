@@ -23,11 +23,11 @@ bintray {
   pkg {
     repo = 'maven-repo'
     userOrg = 'springfox' //An optional organization name when the repo belongs to one of the user's orgs
-    name = 'springfox-grails'
-    websiteUrl = 'https://github.com/springfox/springfox-grails'
-    issueTrackerUrl = 'https://github.com/springfox/springfox-grails/issues'
-    vcsUrl = 'https://github.com/springfox/springfox-grails/springfox-grails.git'
-    desc = 'SpringFox Grails module'
+    name = 'springfox-grails-integration'
+    websiteUrl = 'https://github.com/springfox/springfox-grails-integration'
+    issueTrackerUrl = 'https://github.com/springfox/springfox-grails-integration/issues'
+    vcsUrl = 'https://github.com/springfox/springfox-grails-integration/springfox-grails.git'
+    desc = 'SpringFox Grails Integration module'
     licenses = ['Apache-2.0']
     labels = ['spring', 'swagger', 'apis', 'grails']
     publicDownloadNumbers = true
