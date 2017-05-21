@@ -180,7 +180,7 @@ registered as a bean to augment default behavior.
 The demo application is available in https://github.com/springfox/springfox-grails-demo[this repository]. You can
 see a live demo running or https://immense-escarpment-17128.herokuapp.com/swagger-ui.html[heroku here].
 
-== Trouble shooting
+== Troubleshooting
 
 If you get an exception when you try to run your app, this might be because of the chosen profile for your application.
 If you use the `rest-api` profile, everything should be fine, but if you've chosen the `web` profile, it is likely that
