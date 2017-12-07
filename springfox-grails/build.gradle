@@ -51,6 +51,7 @@ dependencies {
     testCompile "org.codehaus.groovy:groovy-all:${groovy}"
     testCompile "org.grails:grails-plugin-testing:${grails}"
     testCompile "org.grails:grails-plugin-rest:${grails}"
+    testCompile "org.grails:grails-gsp:3.2.11"
 
     provided "io.swagger:swagger-annotations:${swagger2Core}"
     provided "org.springframework:spring-core:$spring"
