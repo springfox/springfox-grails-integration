@@ -53,8 +53,8 @@ dependencies {
     compile "org.grails:grails-logging"
     compile "org.grails.plugins:cache"
     compile "org.grails.plugins:hibernate5"
-    compile "org.hibernate:hibernate-core:5.1.1.Final"
-    compile "org.hibernate:hibernate-ehcache:5.1.1.Final"
+    compile "org.hibernate:hibernate-core:5.1.10.Final"
+    compile "org.hibernate:hibernate-ehcache:5.1.10.Final"
     compile "org.grails.plugins:views-json"
     compile "org.grails.plugins:views-json-templates"
     console "org.grails:grails-console"
@@ -68,9 +68,9 @@ dependencies {
     testCompile "org.grails:grails-plugin-testing"
     testCompile "org.grails.plugins:geb"
     testCompile "org.grails:grails-datastore-rest-client"
-    testCompile 'io.rest-assured:rest-assured:3.0.1'
-    testCompile 'io.rest-assured:json-path:3.0.1'
-    testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.47.1"
-    testRuntime "net.sourceforge.htmlunit:htmlunit:2.18"
+    testCompile 'io.rest-assured:rest-assured:3.0.6'
+    testCompile 'io.rest-assured:json-path:3.0.6'
+    testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.52.0"
+    testRuntime "net.sourceforge.htmlunit:htmlunit:2.29"
     testCompile "org.skyscreamer:jsonassert:${jsonAssert}"
 }
