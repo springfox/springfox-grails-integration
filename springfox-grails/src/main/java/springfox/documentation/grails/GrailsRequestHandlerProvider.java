@@ -4,7 +4,8 @@ import com.fasterxml.classmate.TypeResolver;
 import grails.core.GrailsApplication;
 import grails.core.GrailsClass;
 import grails.core.GrailsControllerClass;
-import grails.core.GrailsDomainClass;
+import org.grails.datastore.mapping.model.MappingContext;
+import org.grails.datastore.mapping.model.PersistentEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import springfox.documentation.RequestHandler;
@@ -36,6 +37,7 @@ class GrailsRequestHandlerProvider implements RequestHandlerProvider {
     this.urlProvider = urlProvider;
     this.grailsApplication = grailsApplication;
     this.actionResolver = actionResolver;
+    grailsApplication.initialise();
   }
 
   @Override
@@ -46,8 +48,9 @@ class GrailsRequestHandlerProvider implements RequestHandlerProvider {
   }
 
   private Stream<? extends RequestHandler> fromGrailsAction(GrailsClass grailsClass) {
-    GrailsDomainClass inferredDomain = (GrailsDomainClass) Arrays.stream(grailsApplication.getArtefacts("Domain"))
-        .filter(d -> Objects.equals(d.getLogicalPropertyName(), grailsClass.getLogicalPropertyName()))
+    PersistentEntity inferredDomain = grailsApplication.getMappingContext()
+        .getPersistentEntities().stream()
+        .filter(d -> Objects.equals(d.getName(), grailsClass.getLogicalPropertyName()))
         .findFirst()
         .orElse(null);
     GrailsControllerClass controller = (GrailsControllerClass) grailsClass;

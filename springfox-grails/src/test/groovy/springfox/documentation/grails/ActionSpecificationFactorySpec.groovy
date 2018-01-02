@@ -1,8 +1,9 @@
 package springfox.documentation.grails
 
 import grails.core.GrailsControllerClass
-import grails.core.GrailsDomainClass
 import grails.core.GrailsDomainClassProperty
+import org.grails.datastore.mapping.model.PersistentEntity
+import org.grails.datastore.mapping.model.PersistentProperty
 import org.grails.web.mapping.DefaultLinkGenerator
 import org.grails.web.mapping.DefaultUrlMappingsHolder
 import spock.lang.Specification
@@ -43,19 +44,19 @@ class ActionSpecificationFactorySpec extends Specification implements UrlMapping
   }
 
   def mockDomain() {
-    def domain = Mock(GrailsDomainClass)
-    domain.clazz >> ADomain
+    def domain = Mock(PersistentEntity)
+    domain.javaClass >> ADomain
     domain.hasProperty("id") >> true
     def id = idProperty()
     domain.getPropertyByName("id") >> id
     domain.getPropertyByName(_) >> {args -> property(args[0])}
     domain.hasProperty(_) >> {args -> "format" != args[0]}
-    domain.identifier >> id
+    domain.identity >> id
     domain
   }
 
   GrailsDomainClassProperty property(name) {
-    def property = Mock(GrailsDomainClassProperty)
+    def property = Mock(PersistentProperty)
     property.type >> String
     property.name >> name
     property

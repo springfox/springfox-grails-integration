@@ -2,9 +2,9 @@ package springfox.documentation.grails
 
 import com.fasterxml.classmate.TypeResolver
 import grails.core.GrailsControllerClass
-import grails.core.GrailsDomainClass
-import grails.core.GrailsDomainClassProperty
 import org.apache.commons.lang.StringUtils
+import org.grails.datastore.mapping.model.PersistentEntity
+import org.grails.datastore.mapping.model.PersistentProperty
 import org.grails.web.mapping.DefaultLinkGenerator
 import org.grails.web.mapping.DefaultUrlMappingsHolder
 import org.springframework.web.bind.annotation.RequestMethod
@@ -82,14 +82,14 @@ class GrailsActionContextSpec extends Specification implements UrlMappingSupport
     links
   }
 
-  GrailsDomainClass domain() {
-    def mock = Mock(GrailsDomainClass)
+  PersistentEntity domain() {
+    def mock = Mock(PersistentEntity)
     mock.getPropertyByName(_) >> { args -> property(args[0]) }
     mock
   }
 
   def property(name) {
-    def mock = Mock(GrailsDomainClassProperty)
+    def mock = Mock(PersistentProperty)
     mock.getType() >> String
     mock.name >> name
     mock

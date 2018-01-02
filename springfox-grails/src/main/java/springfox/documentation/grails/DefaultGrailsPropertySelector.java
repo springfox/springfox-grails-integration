@@ -1,12 +1,12 @@
 package springfox.documentation.grails;
 
 import com.google.common.base.Objects;
-import grails.core.GrailsDomainClassProperty;
+import org.grails.datastore.mapping.model.PersistentProperty;
 
 public class DefaultGrailsPropertySelector implements GrailsPropertySelector {
   @Override
-  public boolean test(GrailsDomainClassProperty each) {
-    return each.getReferencedDomainClass() == null
+  public boolean test(PersistentProperty each) {
+    return each.getOwner().getAssociations().stream().noneMatch(a -> a.getName().equals(each.getName()))
         && !Objects.equal(each.getName(), "version");
   }
 }

@@ -1,71 +1,90 @@
 package springfox.documentation.grails
 
-import grails.core.GrailsDomainClass
-import grails.core.GrailsDomainClassProperty
+import org.grails.datastore.mapping.model.PersistentEntity
+import org.grails.datastore.mapping.model.PersistentProperty
+import org.grails.datastore.mapping.model.types.Association
 import spock.lang.Specification
 import spock.lang.Unroll
 
-
 class DefaultGrailsPropertyTransformerSpec extends Specification {
   @Unroll
-  def "Infers types correctly for grails property #name" (){
+  def "Infers types correctly for grails property #name"() {
     given:
-      def sut = new DefaultGrailsPropertyTransformer()
+    def sut = new DefaultGrailsPropertyTransformer()
+
     when:
-      def transformed = sut.apply(property)
+    def transformed = sut.apply(property)
+
     then:
-      transformed.name == name
-      transformed.clazz == type
+    transformed.name == name
+    transformed.clazz == type
+
     where:
-      property                        | name                | type
-      id()                            | "id"                | Long
-      relatedEntityProperty()         | "relatedEntity"     | RelatedEntity
-      relatedEntityIdProperty()       | "relatedEntityId"   | Long
-      scalarProperty("test", String)  | "test"              | String
+    property                                    | name              | type
+    id(domainClass())                             | "id"              | Long
+    relatedEntityProperty(domainClass())          | "relatedEntity"   | RelatedEntity
+    relatedEntityIdProperty(domainClass())        | "relatedEntityId" | Long
+    scalarProperty("test", String, domainClass()) | "test"            | String
   }
 
-  def id() {
-    scalarProperty("id", Long)
+  def id(owner) {
+    scalarProperty("id", Long, owner)
   }
 
-  def scalarProperty(propertyName, propertyType) {
-    def property = Mock(GrailsDomainClassProperty)
-    property.referencedPropertyType >> propertyType
+  def scalarProperty(propertyName, propertyType, owner) {
+    def property = Mock(PersistentProperty)
     property.type >> propertyType
-    property.persistent >> true
     property.name >> propertyName
+    property.owner >> owner
+
+    if (propertyName == "Id") {
+      owner.identity >> property
+    }
     property
   }
 
-  def relatedEntityProperty() {
-    def property = Mock(GrailsDomainClassProperty)
-    property.referencedPropertyType >> RelatedEntity
-    property.persistent >> true
+  def relatedEntityProperty(owner) {
+    def property = Mock(PersistentProperty)
     property.name >> "relatedEntity"
-    property.domainClass >> relatedEntityDomain()
+    property.owner >> owner
+    property.type >> RelatedEntity
     property
   }
 
-  def relatedEntityIdProperty() {
-    def property = Mock(GrailsDomainClassProperty)
-    property.referencedPropertyType >> Long
-    property.persistent >> false
+  def relatedEntityIdProperty(owner) {
+    def property = Mock(PersistentProperty)
+    property.type >> Long
     property.name >> "relatedEntityId"
-    property.domainClass >> domainClass()
+    property.owner >> owner
     property
   }
 
-  GrailsDomainClass domainClass() {
-    def domain = Mock(GrailsDomainClass)
-    domain.getPropertyByName("relatedEntity") >> relatedEntityProperty()
-    domain.hasProperty(_) >> {args -> "format" != args[0]}
+  def domainClass() {
+    def domain = Mock(PersistentEntity)
+    domain.associations >> [association(domain)]
     domain
   }
 
-  GrailsDomainClass relatedEntityDomain() {
-    def domain = Mock(GrailsDomainClass)
-    domain.getIdentifier() >> id()
+  def relatedEntityDomain() {
+    def domain = Mock(PersistentEntity)
+    domain.identity >> id()
     domain
+  }
+
+  def association(domain) {
+    def association = Mock(Association)
+    association.inverseSide >> inverseAssociation()
+    association.name >> "relatedEntityId"
+    association.owner >> domain
+    association.type >> Long
+    association
+  }
+
+  def inverseAssociation() {
+    def association = Mock(Association)
+    association.owner >> relatedEntityDomain()
+    association.type >> RelatedEntity
+    association
   }
 
   class RelatedEntity {

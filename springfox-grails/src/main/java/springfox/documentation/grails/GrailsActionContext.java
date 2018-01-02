@@ -3,8 +3,8 @@ package springfox.documentation.grails;
 import com.fasterxml.classmate.TypeResolver;
 import com.google.common.collect.ImmutableSet;
 import grails.core.GrailsControllerClass;
-import grails.core.GrailsDomainClass;
 import grails.web.mapping.UrlMapping;
+import org.grails.datastore.mapping.model.PersistentEntity;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.method.HandlerMethod;
@@ -22,7 +22,7 @@ import static springfox.documentation.grails.UrlMappings.*;
 
 class GrailsActionContext {
   private final GrailsControllerClass controller;
-  private final GrailsDomainClass domainClass;
+  private final PersistentEntity domainClass;
   private final GrailsActionAttributes urlProvider;
   private final String action;
   private final TypeResolver resolver;
@@ -34,7 +34,7 @@ class GrailsActionContext {
 
   public GrailsActionContext(
       GrailsControllerClass controller,
-      GrailsDomainClass domainClass,
+      PersistentEntity domainClass,
       GrailsActionAttributes urlProvider,
       String action,
       TypeResolver resolver) {
@@ -70,7 +70,7 @@ class GrailsActionContext {
     return controller;
   }
 
-  public GrailsDomainClass getDomainClass() {
+  public PersistentEntity getDomainClass() {
     return domainClass;
   }
 

@@ -35,11 +35,10 @@ public class DefaultGrailsAlternateTypeRuleConvention implements AlternateTypeRu
 
   @Override
   public List<AlternateTypeRule> rules() {
-    return Arrays.stream(application.getArtefacts("Domain"))
-        .filter(GrailsDomainClass.class::isInstance)
+    return application.getMappingContext().getPersistentEntities().stream()
         .map(domain -> newRule(
-            domain.getClazz(),
-            resolver.resolve(typeGenerator.from((GrailsDomainClass) domain)), getOrder()))
+            domain.getJavaClass(),
+            resolver.resolve(typeGenerator.from(domain)), getOrder()))
         .collect(Collectors.toList());
   }
 
