@@ -2,7 +2,7 @@ package springfox.documentation.grails
 
 import com.fasterxml.classmate.TypeResolver
 import grails.core.GrailsControllerClass
-import grails.core.GrailsDomainClass
+import org.grails.datastore.mapping.model.PersistentEntity
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.RequestMethod
 import spock.lang.Unroll
@@ -87,7 +87,7 @@ class ActionsSpec extends ActionSpecificationFactorySpec implements GrailsContro
   GrailsActionContext context(controller, action) {
     new GrailsActionContext(
         controller,
-        Mock(GrailsDomainClass),
+        Mock(PersistentEntity),
         actionAttributes,
         action,
         new TypeResolver())

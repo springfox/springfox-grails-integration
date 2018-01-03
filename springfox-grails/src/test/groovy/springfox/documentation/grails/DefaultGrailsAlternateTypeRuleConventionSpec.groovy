@@ -2,10 +2,10 @@ package springfox.documentation.grails
 
 import com.fasterxml.classmate.TypeResolver
 import grails.core.GrailsApplication
-import grails.core.GrailsDomainClass
-import grails.core.GrailsDomainClassProperty
+import org.grails.datastore.mapping.model.MappingContext
+import org.grails.datastore.mapping.model.PersistentEntity
+import org.grails.datastore.mapping.model.PersistentProperty
 import spock.lang.Specification
-
 
 class DefaultGrailsAlternateTypeRuleConventionSpec extends Specification {
   def "Alternate types for grails classes are created" () {
@@ -35,22 +35,30 @@ class DefaultGrailsAlternateTypeRuleConventionSpec extends Specification {
 
   def grailsApplication() {
     def app = Mock(GrailsApplication)
-    app.getArtefacts("Domain") >> [petDomain()]
+    app.mappingContext >> mappingContext()
     app
   }
 
+  MappingContext mappingContext() {
+    def mappingContext = Mock(MappingContext)
+    mappingContext.persistentEntities >> [petDomain()]
+    mappingContext
+  }
+
   def petDomain() {
-    def domain = Mock(GrailsDomainClass)
+    def domain = Mock(PersistentEntity)
     domain.name >> "Pet"
-    domain.clazz >> Pet
-    domain.properties >> [property("name", String)]
+    domain.javaClass >> Pet
+    domain.persistentProperties >> [property("name", String, domain)]
+    domain.associations >> []
     domain
   }
 
-  def property(name, type) {
-    def property = Mock(GrailsDomainClassProperty)
+  def property(name, type, domain) {
+    def property = Mock(PersistentProperty)
     property.name >> name
-    property.referencedPropertyType >> type
+    property.owner >> domain
+    property.type >> type
     property
   }
 }

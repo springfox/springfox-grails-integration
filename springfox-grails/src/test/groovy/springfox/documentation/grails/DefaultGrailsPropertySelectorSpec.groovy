@@ -1,10 +1,10 @@
 package springfox.documentation.grails
 
-import grails.core.GrailsDomainClass
-import grails.core.GrailsDomainClassProperty
+import org.grails.datastore.mapping.model.PersistentEntity
+import org.grails.datastore.mapping.model.PersistentProperty
+import org.grails.datastore.mapping.model.types.Association
 import spock.lang.Specification
 import spock.lang.Unroll
-
 
 class DefaultGrailsPropertySelectorSpec extends Specification {
   @Unroll
@@ -21,26 +21,53 @@ class DefaultGrailsPropertySelectorSpec extends Specification {
       versionEntity() | false
   }
 
-  GrailsDomainClassProperty version() {
-    property("version", null)
+  PersistentProperty version() {
+    property("version", String, petDomain(false))
   }
 
-  GrailsDomainClassProperty scalar() {
-    property("name", null)
+  PersistentProperty scalar() {
+    property("name", String, petDomain(false))
   }
 
-  GrailsDomainClassProperty entity() {
-    property("name", Mock(GrailsDomainClass))
+  PersistentProperty entity() {
+    property("siblingId", Pet, petDomain(true))
   }
 
-  GrailsDomainClassProperty versionEntity() {
-    property("version", Mock(GrailsDomainClass))
+  PersistentProperty versionEntity() {
+    property("version", Pet, petDomain(true))
   }
   
-  def property(name, domain) {
-    def property = Mock(GrailsDomainClassProperty)
+  def property(name, type, domain) {
+    def property = Mock(PersistentProperty)
     property.name >> name
-    property.referencedDomainClass >> domain
+    property.owner >> domain
+    property.type >> type
     property
+  }
+
+  def petDomain(boolean addAssociation) {
+    def domain = Mock(PersistentEntity)
+    domain.name >> "Pet"
+    domain.javaClass >> Pet
+    domain.persistentProperties >> [property("name", String, domain), property("siblingId", String, domain)]
+    if (addAssociation) {
+      domain.associations >> [association()]
+    } else {
+      domain.associations >> []
+    }
+    domain
+  }
+
+  def association() {
+    def association = Mock(Association)
+    association.inverseSide >> inverseAssociation()
+    association.name >> "siblingId"
+    association
+  }
+
+  def inverseAssociation() {
+    def association = Mock(Association)
+    association.owner >> petDomain(false)
+    association
   }
 }

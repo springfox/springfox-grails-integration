@@ -1,12 +1,11 @@
 package springfox.documentation.grails;
 
-import grails.core.GrailsDomainClass;
+import org.grails.datastore.mapping.model.PersistentEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import springfox.documentation.builders.AlternateTypeBuilder;
 import springfox.documentation.builders.AlternateTypePropertyBuilder;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -27,14 +26,14 @@ public class GrailsSerializationTypeGenerator {
     this.naming = naming;
   }
 
-  public Class<?> from(GrailsDomainClass domain) {
+  public Class<?> from(PersistentEntity domain) {
     List<AlternateTypePropertyBuilder> properties =
-        Arrays.stream(domain.getProperties())
+        domain.getPersistentProperties().stream()
             .filter(propertySelector)
             .map(propertyTransformer)
             .collect(Collectors.toList());
     return new AlternateTypeBuilder()
-        .fullyQualifiedClassName(naming.name(domain.getClazz()))
+        .fullyQualifiedClassName(naming.name(domain.getJavaClass()))
         .withProperties(properties)
         .build();
   }

@@ -60,7 +60,7 @@ class GrailsRequestHandler implements RequestHandler {
         .map(domain -> String.format(
             "%s%s",
             actionContext.getAction(),
-            capitalize(domain.getLogicalPropertyName())))
+            capitalize(domain.getName())))
         .orElse(actionContext.getAction());
   }
 
