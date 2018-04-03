@@ -4,7 +4,7 @@ import com.fasterxml.classmate.ResolvedType;
 import com.fasterxml.classmate.TypeResolver;
 import com.google.common.base.Strings;
 import grails.core.GrailsDomainClass;
-import grails.validation.ConstrainedProperty;
+import grails.gorm.validation.ConstrainedProperty;
 import grails.web.mapping.UrlMapping;
 import springfox.documentation.service.ResolvedMethodParameter;
 
@@ -36,7 +36,7 @@ class UrlMappings {
   }
 
   public static Map<String, String> pathParameters(UrlMapping mapping) {
-    ConstrainedProperty[] constraints = mapping.getConstraints();
+    ConstrainedProperty[] constraints = (ConstrainedProperty[])mapping.getConstraints();
     return IntStream.range(0, constraints.length)
         .filter(indicesToUse(mapping))
         .mapToObj(i -> constraints[i])
@@ -49,7 +49,7 @@ class UrlMappings {
       TypeResolver resolver,
       UrlMapping mapping,
       GrailsDomainClass domainClass) {
-    ConstrainedProperty[] constraints = mapping.getConstraints();
+    ConstrainedProperty[] constraints = (ConstrainedProperty[])mapping.getConstraints();
     List<ConstrainedProperty> pathProperties = IntStream.range(0, constraints.length)
         .filter(indicesToUse(mapping))
         .mapToObj(i -> constraints[i])
@@ -68,7 +68,7 @@ class UrlMappings {
 
   private static IntPredicate indicesToUse(UrlMapping mapping) {
     return index -> {
-      ConstrainedProperty property = mapping.getConstraints()[index];
+      ConstrainedProperty property = (ConstrainedProperty)mapping.getConstraints()[index];
       return !property.getPropertyName().equals("controller")
           && !property.getPropertyName().equals("action")
           && !property.isNullable();
@@ -120,7 +120,7 @@ class UrlMappings {
   }
 
   private static boolean hasControllerConstraint(UrlMapping urlMapping, String name) {
-    return !Arrays.stream(urlMapping.getConstraints())
+    return !Arrays.stream((ConstrainedProperty[])urlMapping.getConstraints())
         .filter(c -> c.getPropertyName().equals(name))
         .collect(Collectors.toList()).isEmpty();
   }
