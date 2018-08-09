@@ -41,7 +41,7 @@ jobs:
            mkdir -p ~/junit/
            mkdir -p ~/reports/
            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/junit/ \;
-           cp -R swagger-grails-contract-tests/build/reports/tests ~/reports
+           cp -R springfox-grails-contract-tests/build/reports/tests ~/reports
           when: always
       - store_test_results:
           path: ~/junit

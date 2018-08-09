@@ -22,6 +22,7 @@ allprojects {
     guava = "20.0"
     grails = "3.2.4"
     htmlUnit = "2.29"
+    jacocoVersion = '0.8.1'
     jackson = '2.7.7'
     joda = "2.9.4"
     jsonPath = "2.4.0"
