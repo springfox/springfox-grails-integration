@@ -68,9 +68,15 @@ dependencies {
     testCompile "org.grails:grails-plugin-testing"
     testCompile "org.grails.plugins:geb"
     testCompile "org.grails:grails-datastore-rest-client"
-    testCompile 'io.rest-assured:rest-assured:3.0.6'
-    testCompile 'io.rest-assured:json-path:3.0.6'
+
+    testCompile "io.rest-assured:rest-assured:$restAssured"
+    testCompile "io.rest-assured:json-path:$restAssured"
+
     testRuntime "org.seleniumhq.selenium:selenium-htmlunit-driver:2.52.0"
-    testRuntime "net.sourceforge.htmlunit:htmlunit:2.29"
+
+    testRuntime "net.sourceforge.htmlunit:htmlunit:$htmlUnit"
     testCompile "org.skyscreamer:jsonassert:${jsonAssert}"
+}
+springBoot {
+  mainClass = 'grails.springfox.sample.Application'
 }
