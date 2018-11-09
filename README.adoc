@@ -1,3 +1,5 @@
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fspringfox%2Fspringfox-grails-integration.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fspringfox%2Fspringfox-grails-integration?ref=badge_shield)
+
 = SpringFox Grails Integration
 
 image:https://api.bintray.com/packages/springfox/maven-repo/springfox-grails-integration/images/download.svg["Download", link="https://bintray.com/springfox/maven-repo/springfox-grails-integration/_latestVersion"]
@@ -190,3 +192,7 @@ you have to add something like this.
     
 to your `application.yml` for the plugin to render absolute links.
 
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fspringfox%2Fspringfox-grails-integration.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fspringfox%2Fspringfox-grails-integration?ref=badge_large)
