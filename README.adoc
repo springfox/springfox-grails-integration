@@ -1,11 +1,10 @@
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fspringfox%2Fspringfox-grails-integration.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fspringfox%2Fspringfox-grails-integration?ref=badge_shield)
-
 = SpringFox Grails Integration
 
 image:https://api.bintray.com/packages/springfox/maven-repo/springfox-grails-integration/images/download.svg["Download", link="https://bintray.com/springfox/maven-repo/springfox-grails-integration/_latestVersion"]
 image:https://circleci.com/gh/springfox/springfox-grails-integration.svg?style=svg["CircleCI", link="https://circleci.com/gh/springfox/springfox-grails-integration"]
 image:https://codecov.io/gh/springfox/springfox-grails-integration/branch/master/graph/badge.svg["codecov",link="https://codecov.io/gh/springfox/springfox-grails-integration"]
 image:https://api.codacy.com/project/badge/Grade/77fbd793eb06447d9f1bf47eb8cdad8b["Codacy code quality", link="https://www.codacy.com/app/dilip-krishnan-github/springfox-grails-integration?utm_source=github.com&utm_medium=referral&utm_content=springfox/springfox-grails-integration&utm_campaign=Badge_Grade"]
+image:https://app.fossa.io/api/projects/git%2Bgithub.com%2Fspringfox%2Fspringfox-grails-integration.svg?type=shield["FOSSA Status", link="https://app.fossa.io/projects/git%2Bgithub.com%2Fspringfox%2Fspringfox-grails-integration?ref=badge_shield"]
 
 SpringFox Grails integration library that produces grails specific documentation.
 
@@ -195,4 +194,4 @@ to your `application.yml` for the plugin to render absolute links.
 
 
 ## License
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fspringfox%2Fspringfox-grails-integration.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fspringfox%2Fspringfox-grails-integration?ref=badge_large)
+image:https://app.fossa.io/api/projects/git%2Bgithub.com%2Fspringfox%2Fspringfox-grails-integration.svg?type=large["FOSSA Status", link="https://app.fossa.io/projects/git%2Bgithub.com%2Fspringfox%2Fspringfox-grails-integration?ref=badge_large"]
