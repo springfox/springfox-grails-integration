@@ -1,6 +1,6 @@
 package grails.springfox.sample
 
-import grails.transaction.Transactional
+import grails.gorm.transactions.Transactional
 import io.swagger.annotations.ApiImplicitParam
 import io.swagger.annotations.ApiImplicitParams
 import io.swagger.annotations.ApiOperation
