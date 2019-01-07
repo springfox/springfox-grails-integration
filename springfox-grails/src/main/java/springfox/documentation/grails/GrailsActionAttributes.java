@@ -104,7 +104,7 @@ class GrailsActionAttributes {
   }
 
   public String actionUrl(GrailsActionContext context, UrlMapping mapping) {
-    String lowerAction = context.getAction().toLowerCase();
+    String lowerAction = context.getAction() != null ? context.getAction().toLowerCase() : null;
     return mapping.createRelativeURL(
         context.getController().getLogicalPropertyName(),
         lowerAction,

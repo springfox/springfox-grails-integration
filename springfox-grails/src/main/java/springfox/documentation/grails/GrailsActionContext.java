@@ -78,9 +78,7 @@ class GrailsActionContext {
     return action;
   }
 
-  //@TODO this is probably where the controller name is messed up
   public String path() {
-    String loweredAction = action.toLowerCase();
     return urlMapping
         .map(mapping -> urlProvider.actionUrl(this, mapping))
         .orElse(String.format("/%s/%s", controller.getLogicalPropertyName(), action));
