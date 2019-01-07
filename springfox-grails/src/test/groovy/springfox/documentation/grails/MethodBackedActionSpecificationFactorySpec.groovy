@@ -20,7 +20,7 @@ class MethodBackedActionSpecificationFactorySpec extends ActionSpecificationFact
       spec.produces == [MediaType.APPLICATION_JSON] as Set
       spec.supportedMethods == [RequestMethod.POST] as Set
       spec.handlerMethod.method == BookController.methods.find {it.name == "save" }
-      spec.path == "/book"
+      spec.path == "/books"
 
     and: "Parameters match"
       spec.parameters.size() == 1
