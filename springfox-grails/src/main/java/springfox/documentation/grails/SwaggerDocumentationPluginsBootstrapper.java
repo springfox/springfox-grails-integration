@@ -1,6 +1,7 @@
 package springfox.documentation.grails;
 
 import com.fasterxml.classmate.TypeResolver;
+import org.springframework.core.env.Environment;
 import springfox.documentation.spi.service.RequestHandlerProvider;
 import springfox.documentation.spi.service.contexts.Defaults;
 import springfox.documentation.spring.web.DocumentationCache;
@@ -19,8 +20,9 @@ public class SwaggerDocumentationPluginsBootstrapper extends DocumentationPlugin
                                                 ApiDocumentationScanner resourceListing,
                                                 TypeResolver typeResolver,
                                                 Defaults defaults,
-                                                ServletContext servletContext) {
-            super(documentationPluginsManager, handlerProviders, scanned, resourceListing, typeResolver, defaults, servletContext);
+                                                ServletContext servletContext,
+                                                Environment environment) {
+            super(documentationPluginsManager, handlerProviders, scanned, resourceListing, typeResolver, defaults, servletContext,environment);
         }
 
         @Override

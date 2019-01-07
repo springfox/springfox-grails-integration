@@ -5,6 +5,7 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.env.Environment;
 import springfox.documentation.spi.service.RequestHandlerProvider;
 import springfox.documentation.spi.service.contexts.Defaults;
 import springfox.documentation.spring.web.DocumentationCache;
@@ -45,7 +46,8 @@ public class SpringfoxGrailsIntegrationConfiguration {
           ApiDocumentationScanner resourceListing,
           TypeResolver typeResolver,
           Defaults defaults,
-          ServletContext servletContext) {
+          ServletContext servletContext,
+          Environment environment) {
 
     return new SwaggerDocumentationPluginsBootstrapper(
             documentationPluginsManager,
@@ -54,6 +56,7 @@ public class SpringfoxGrailsIntegrationConfiguration {
             resourceListing,
             typeResolver,
             defaults,
-            servletContext);
+            servletContext,
+            environment);
   }
 }
