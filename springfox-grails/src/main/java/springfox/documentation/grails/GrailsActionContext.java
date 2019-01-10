@@ -81,8 +81,8 @@ class GrailsActionContext {
   public String path() {
     return urlMapping
         .map(mapping -> urlProvider.actionUrl(this, mapping))
-        .orElse(String.format("/%s/%s", controller.getLogicalPropertyName(), action))
-        .toLowerCase();
+        .orElse(String.format("/%s/%s", controller.getLogicalPropertyName(), action));
+//        .toLowerCase();
   }
 
   public List<ResolvedMethodParameter> pathParameters() {

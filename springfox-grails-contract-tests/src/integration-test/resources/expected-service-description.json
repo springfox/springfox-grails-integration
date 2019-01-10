@@ -642,6 +642,16 @@
         "produces": [
           "application/json"
         ],
+        "parameters": [
+          {
+            "name": "max",
+            "in": "query",
+            "description": "max",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -673,6 +683,21 @@
         ],
         "produces": [
           "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
         ],
         "responses": {
           "200": {
@@ -762,6 +787,19 @@
             "required": true,
             "type": "integer",
             "format": "int64"
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -804,6 +842,12 @@
             "required": true,
             "type": "integer",
             "format": "int64"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {

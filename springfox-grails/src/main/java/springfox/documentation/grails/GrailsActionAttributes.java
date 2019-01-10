@@ -104,14 +104,15 @@ class GrailsActionAttributes {
   }
 
   public String actionUrl(GrailsActionContext context, UrlMapping mapping) {
+    String lowerAction = context.getAction() != null ? context.getAction().toLowerCase() : null;
     return mapping.createRelativeURL(
         context.getController().getLogicalPropertyName(),
-        context.getAction(),
+        lowerAction,
         pathParameters(mapping),
         "UTF-8")
         .replace("%7B", "{").replace("%7D", "}")
-        .replace(linkGenerator.getServerBaseURL(), "")
-        .toLowerCase();
+        .replace(linkGenerator.getServerBaseURL(), "");
+//        .toLowerCase();
   }
 
 }

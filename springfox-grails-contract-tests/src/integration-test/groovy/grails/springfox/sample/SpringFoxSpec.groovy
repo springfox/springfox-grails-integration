@@ -1,6 +1,6 @@
 package grails.springfox.sample
 
-import grails.test.mixin.integration.Integration
+import grails.testing.mixin.integration.Integration
 import groovy.json.JsonOutput
 import org.junit.Assert
 import org.skyscreamer.jsonassert.JSONAssert
