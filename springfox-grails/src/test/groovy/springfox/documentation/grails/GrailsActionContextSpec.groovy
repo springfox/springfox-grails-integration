@@ -30,13 +30,13 @@ class GrailsActionContextSpec extends Specification implements UrlMappingSupport
 
     where:
     controller | action   | params            | method   | path
-    "author"   | "index"  | ["novelId"]       | "GET"    | "/novels/{novelid}/authors"
-    "author"   | "update" | ["novelId", "id"] | "PUT"    | "/novels/{novelid}/authors/{id}"
-    "author"   | "create" | ["novelId"]       | "GET"    | "/novels/{novelid}/authors/create"
-    "author"   | "show"   | ["novelId", "id"] | "GET"    | "/novels/{novelid}/authors/{id}"
-    "author"   | "save"   | ["novelId"]       | "POST"   | "/novels/{novelid}/authors"
-    "author"   | "edit"   | ["novelId", "id"] | "GET"    | "/novels/{novelid}/authors/{id}/edit"
-    "author"   | "delete" | ["novelId", "id"] | "DELETE" | "/novels/{novelid}/authors/{id}"
+    "author"   | "index"  | ["novelId"]       | "GET"    | "/novels/{novelId}/authors"
+    "author"   | "update" | ["novelId", "id"] | "PUT"    | "/novels/{novelId}/authors/{id}"
+    "author"   | "create" | ["novelId"]       | "GET"    | "/novels/{novelId}/authors/create"
+    "author"   | "show"   | ["novelId", "id"] | "GET"    | "/novels/{novelId}/authors/{id}"
+    "author"   | "save"   | ["novelId"]       | "POST"   | "/novels/{novelId}/authors"
+    "author"   | "edit"   | ["novelId", "id"] | "GET"    | "/novels/{novelId}/authors/{id}/edit"
+    "author"   | "delete" | ["novelId", "id"] | "DELETE" | "/novels/{novelId}/authors/{id}"
     "artist"   | "index"  | []                | "GET"    | "/artists"
     "artist"   | "update" | ["id"]            | "PUT"    | "/artist/{id}"
     "artist"   | "delete" | ["id"]            | "DELETE" | "/artist/{id}"
