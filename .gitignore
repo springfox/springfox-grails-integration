@@ -4,3 +4,6 @@ build
 .env
 springfox-grails-contract-tests/out/
 springfox-grails/out/
+*.iml
+*.ipr
+*.iws

@@ -39,7 +39,7 @@ public class SpringfoxGrailsIntegrationConfiguration {
   }
 
   @Bean
-  DocumentationPluginsBootstrapper documentationPluginsBootstrapper(
+  public DocumentationPluginsBootstrapper documentationPluginsBootstrapper(
           DocumentationPluginsManager documentationPluginsManager,
           List<RequestHandlerProvider> handlerProviders,
           DocumentationCache scanned,

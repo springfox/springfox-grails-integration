@@ -14,7 +14,7 @@ import java.lang.reflect.Modifier;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static com.google.common.collect.Sets.*;
+import static com.google.common.collect.Sets.newHashSet;
 
 class Actions {
 
@@ -72,6 +72,7 @@ class Actions {
     return actionAnnotatedMethod;
   }
 
+  @SuppressWarnings("unchecked")
   public static Set<RequestMethod> methodOverrides(
       GrailsActionContext context,
       Set<RequestMethod> defaultMethods) {
@@ -98,6 +99,7 @@ class Actions {
     return methodOverrides(context, newHashSet());
   }
 
+  @SuppressWarnings("unchecked")
   public static Set<MediaType> mediaTypeOverrides(GrailsActionContext context) {
     Set<MediaType> produces = newHashSet(MediaType.APPLICATION_JSON);
     List<String> responseFormats;

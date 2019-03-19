@@ -7,27 +7,31 @@ import springfox.documentation.spring.web.plugins.DocumentationPluginsBootstrapp
 
 import java.util.Map;
 
-
 @Component
-public class SwaggerGrailsApplicationPostProcessor  implements GrailsApplicationLifeCycle {
+public class SwaggerGrailsApplicationPostProcessor implements GrailsApplicationLifeCycle {
 
     private DocumentationPluginsBootstrapper documentationPluginsBootstrapper;
 
-    public SwaggerGrailsApplicationPostProcessor(DocumentationPluginsBootstrapper documentationPluginsBootstrapper){
+    public SwaggerGrailsApplicationPostProcessor(DocumentationPluginsBootstrapper documentationPluginsBootstrapper) {
         this.documentationPluginsBootstrapper = documentationPluginsBootstrapper;
     }
 
     @Override
-    public Closure doWithSpring() { return null; }
+    public Closure doWithSpring() {
+        return null;
+    }
 
     @Override
-    public void doWithDynamicMethods() {}
+    public void doWithDynamicMethods() {
+    }
 
     @Override
-    public void doWithApplicationContext() {}
+    public void doWithApplicationContext() {
+    }
 
     @Override
-    public void onConfigChange(Map<String, Object> event) {}
+    public void onConfigChange(Map<String, Object> event) {
+    }
 
     @Override
     public void onStartup(Map<String, Object> event) {
@@ -35,5 +39,6 @@ public class SwaggerGrailsApplicationPostProcessor  implements GrailsApplication
     }
 
     @Override
-    public void onShutdown(Map<String, Object> event) {}
+    public void onShutdown(Map<String, Object> event) {
+    }
 }
