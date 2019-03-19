@@ -3,6 +3,9 @@ package springfox.documentation.grails
 import grails.core.GrailsControllerClass
 import grails.core.GrailsDomainClass
 import grails.core.GrailsDomainClassProperty
+import grails.util.GrailsNameUtils
+import org.grails.core.DefaultGrailsControllerClass
+import org.grails.core.DefaultGrailsDomainClass
 import org.grails.web.mapping.DefaultLinkGenerator
 import org.grails.web.mapping.DefaultUrlMappingsHolder
 import spock.lang.Specification
@@ -27,22 +30,27 @@ class ActionSpecificationFactorySpec extends Specification implements UrlMapping
   }
 
   GrailsControllerClass mockRegularController() {
-    def regularController = Mock(GrailsControllerClass)
-    regularController.clazz >> BookController
-    regularController.name >> "Book"
-    regularController.logicalPropertyName >> "Book"
-    regularController
+    return new DefaultGrailsControllerClass(BookController)
+//    name = GrailsNameUtils.getLogicalName(clazz, trailingName);
+//    logicalPropertyName = GrailsNameUtils.getPropertyNameRepresentation(name);
+    //def regularController = Mock(GrailsControllerClass)
+//    regularController.clazz >> BookController
+//    regularController.name >> "Book"
+//    regularController.logicalPropertyName >> "Book"
+//    regularController
   }
 
   def mockController() {
-    def controller = Mock(GrailsControllerClass)
-    controller.clazz >> AController
-    controller.name >> "AController"
-    controller.logicalPropertyName >> "A"
-    controller
+    return new DefaultGrailsControllerClass(AController)
+//    def controller = Mock(GrailsControllerClass)
+//    controller.clazz >> AController
+//    controller.name >> "AController"
+//    controller.logicalPropertyName >> "A"
+//    controller
   }
 
   def mockDomain() {
+    GrailsDomainClass domainClass = new DefaultGrailsDomainClass(ADomain)
     def domain = Mock(GrailsDomainClass)
     domain.clazz >> ADomain
     domain.hasProperty("id") >> true
