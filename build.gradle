@@ -32,7 +32,7 @@ allprojects {
     restAssured = '3.0.6'
     servlet = "4.0.1"
     slf4j = "1.7.22"
-    snakeyaml = '1.19'
+    snakeyaml = '1.26'
     spock = "1.1-groovy-2.4"
     spring = "4.2.13.RELEASE"
     springHateoas = "0.21.0.RELEASE"
