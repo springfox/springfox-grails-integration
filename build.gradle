@@ -33,7 +33,7 @@ allprojects {
     servlet = "4.0.1"
     slf4j = "1.7.22"
     snakeyaml = '1.19'
-    spock = "1.1-groovy-2.4"
+    spock = "1.3-groovy-2.5"
     spring = "4.2.13.RELEASE"
     springHateoas = "0.21.0.RELEASE"
     springPluginVersion = "1.2.0.RELEASE"
