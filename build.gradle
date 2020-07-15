@@ -39,6 +39,6 @@ allprojects {
     springPluginVersion = "1.2.0.RELEASE"
     swagger2Core = "1.5.20"
     springBoot = "1.5.15.RELEASE"
-    springfox = "2.9.2"
+    springfox = "3.0.0"
   }
 }
