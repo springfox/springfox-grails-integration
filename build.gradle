@@ -18,7 +18,7 @@ allprojects {
     byteBuddyVersion = "1.8.17"
     cglib = "3.2.4"
     classmate = "1.4.0"
-    groovy = "2.5.0"
+    groovy = "3.0.5"
     guava = "20.0"
     grails = "3.2.4"
     htmlUnit = "2.29"
