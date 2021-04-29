@@ -1,0 +1,32 @@
+version: 2
+updates:
+- package-ecosystem: gradle
+  directory: "/"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 10
+  ignore:
+  - dependency-name: net.sourceforge.htmlunit:htmlunit
+    versions:
+    - 2.46.0
+    - 2.47.1
+    - 2.48.0
+  - dependency-name: org.springframework.boot:spring-boot-autoconfigure
+    versions:
+    - 2.4.2
+    - 2.4.3
+    - 2.4.4
+  - dependency-name: org.hibernate:hibernate-core
+    versions:
+    - 5.4.27.Final
+    - 5.4.28.Final
+    - 5.4.29.Final
+  - dependency-name: com.jfrog.artifactory
+    versions:
+    - 4.20.0
+  - dependency-name: org.codehaus.groovy:groovy-all
+    versions:
+    - 3.0.7
+  - dependency-name: org.yaml:snakeyaml
+    versions:
+    - "1.27"
