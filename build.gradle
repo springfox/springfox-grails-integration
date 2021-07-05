@@ -21,7 +21,7 @@ allprojects {
     groovy = "2.5.0"
     guava = "20.0"
     grails = "3.2.4"
-    htmlUnit = "2.29"
+    htmlUnit = "2.51.0"
     jacocoVersion = '0.8.1'
     jackson = '2.7.7'
     joda = "2.9.4"
