@@ -53,7 +53,7 @@ dependencies {
     compile "org.grails:grails-logging"
     compile "org.grails.plugins:cache"
     compile "org.grails.plugins:hibernate5"
-    compile "org.hibernate:hibernate-core:5.1.10.Final"
+    compile "org.hibernate:hibernate-core:5.5.5.Final"
     compile "org.hibernate:hibernate-ehcache:5.1.10.Final"
     compile "org.grails.plugins:views-json"
     compile "org.grails.plugins:views-json-templates"
