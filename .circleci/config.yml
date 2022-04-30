@@ -51,11 +51,11 @@ jobs:
           path: ~/junit
       - store_artifacts:
           path: ~/reports
-      - deploy:
-          command: |
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              ./gradlew artifactoryPublish -x check
-            fi
+#      - deploy:
+#          command: |
+#            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+#              ./gradlew artifactoryPublish -x check
+#            fi
 notify:
   webhooks:
     - url: https://webhooks.gitter.im/e/b30a7db820817acfc6d8
