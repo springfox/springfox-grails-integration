@@ -18,15 +18,15 @@ buildscript {
     maven {
       url "https://plugins.gradle.org/m2/"
     }
-    jcenter()
+    // jcenter()
     mavenCentral()
   }
 
 }
 
 plugins {
-  id "com.jfrog.bintray" version "1.8.4"
-  id "com.jfrog.artifactory" version "4.7.5"
+  // id "com.jfrog.bintray" version "1.8.4"
+  // id "com.jfrog.artifactory" version "4.7.5"
 }
 
 apply plugin: 'groovy'
