@@ -15,23 +15,22 @@
  */
 buildscript {
   repositories {
-    maven {
-      url "https://plugins.gradle.org/m2/"
-    }
-    // jcenter()
-    mavenCentral()
+      maven { url "https://plugins.gradle.org/m2/" }
+      // jcenter()
+      maven { url "https://repo.grails.org/grails/core" }
+      mavenCentral()
   }
 
 }
 
 plugins {
-  // id "com.jfrog.bintray" version "1.8.4"
-  // id "com.jfrog.artifactory" version "4.7.5"
+    id "io.spring.dependency-management" version "1.0.11.RELEASE"
+    id 'jacoco'
 }
 
 apply plugin: 'groovy'
 apply plugin: 'idea'
-apply plugin: 'jacoco'
+// apply plugin: 'jacoco'
 apply from: 'gradle/publishing.gradle'
 
 description = 'Springfox Grails module that produces grails specific documentation'
@@ -41,35 +40,55 @@ configurations {
     compile.extendsFrom provided
 }
 
+dependencyManagement {
+    imports {
+        mavenBom "org.grails:grails-bom:$grailsVersion"
+    }
+    dependencies{
+        dependency('com.jayway.jsonpath:json-path:2.4.0')
+        dependency('org.slf4j:slf4j-simple:1.7.22')
+        dependency('org.yaml:snakeyaml:1.19')
+        dependency('org.spockframework:spock-spring:1.1-groovy-2.4')
+        dependency('io.swagger:swagger-annotations:1.5.20')
+        dependency('org.springframework.boot:spring-boot-autoconfigure:1.5.15.RELEASE')
+        dependency('javax.servlet:javax.servlet-api:4.0.1')
+        dependency('com.google.guava:guava:20.0')
+        dependency('com.fasterxml:classmate:1.4.0')
+        dependency("io.springfox:springfox-spi:$springfox")
+        dependency("io.springfox:springfox-core:$springfox")
+        dependency("io.springfox:springfox-swagger2:$springfox")
+    }
+    applyMavenExclusions false
+}
+
 dependencies {
-    testCompile "org.springframework:spring-test:${spring}"
-    testCompile "com.jayway.jsonpath:json-path:${jsonPath}"
-    testCompile "org.slf4j:slf4j-simple:${slf4j}"
-    testCompile "org.yaml:snakeyaml:${snakeyaml}"
-    testCompile "org.spockframework:spock-spring:${spock}"
-    testCompile "org.spockframework:spock-core:${spock}"
-    testCompile "org.codehaus.groovy:groovy-all:${groovy}"
-    testCompile "org.grails:grails-plugin-testing:${grails}"
-    testCompile "org.grails:grails-plugin-rest:${grails}"
+    testCompile "org.springframework:spring-test"
+    testCompile "com.jayway.jsonpath:json-path"
+    testCompile "org.slf4j:slf4j-simple"
+    testCompile "org.yaml:snakeyaml"
+    testCompile "org.spockframework:spock-spring"
+    testCompile "org.spockframework:spock-core"
+    testCompile "org.codehaus.groovy:groovy-all"
+    testCompile "org.grails:grails-plugin-testing"
+    testCompile "org.grails:grails-plugin-rest"
 
-    provided "io.swagger:swagger-annotations:${swagger2Core}"
-    provided "org.springframework:spring-core:$spring"
-    provided "org.springframework:spring-web:$spring"
-    provided "org.springframework:spring-webmvc:$spring"
-    provided "org.springframework:spring-context:$spring"
-    provided "org.springframework.boot:spring-boot-autoconfigure:$springBoot"
-    provided "org.grails:grails-core:$grails"
-    provided "org.grails:grails-web-url-mappings:$grails"
-    provided "org.grails:grails-web-url-mappings:$grails"
-    provided "javax.servlet:javax.servlet-api:$servlet"
+    provided "io.swagger:swagger-annotations"
+    provided "org.springframework:spring-core"
+    provided "org.springframework:spring-web"
+    provided "org.springframework:spring-webmvc"
+    provided "org.springframework:spring-context"
+    provided "org.springframework.boot:spring-boot-autoconfigure"
+    provided "org.grails:grails-core"
+    provided "org.grails:grails-web-url-mappings"
+    provided "javax.servlet:javax.servlet-api"
 
-    compile "com.google.guava:guava:${guava}"
-    compile "com.fasterxml:classmate:${classmate}"
-    compile "org.slf4j:slf4j-api:${slf4j}"
-    compile "io.springfox:springfox-spi:${springfox}"
-    compile "io.springfox:springfox-core:${springfox}"
-    compile "io.springfox:springfox-swagger2:${springfox}"
-    compile "net.bytebuddy:byte-buddy:${byteBuddyVersion}"
+    compile "com.google.guava:guava"
+    compile "com.fasterxml:classmate"
+    compile "org.slf4j:slf4j-api"
+    compile "io.springfox:springfox-spi"
+    compile "io.springfox:springfox-core"
+    compile "io.springfox:springfox-swagger2"
+    compile "net.bytebuddy:byte-buddy"
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
@@ -98,9 +117,6 @@ jar {
     }
 }
 
-jacoco {
-  toolVersion = "$jacocoVersion"
-}
 
 jacocoTestReport {
   reports {

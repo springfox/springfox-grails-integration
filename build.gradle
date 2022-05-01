@@ -12,33 +12,6 @@ allprojects {
     // jcenter()
 //    maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }
     mavenCentral()
-  }
-
-  ext {
-    byteBuddyVersion = "1.8.17"
-    cglib = "3.2.4"
-    classmate = "1.4.0"
-    groovy = "2.5.0"
-    guava = "20.0"
-    grails = "3.2.4"
-    htmlUnit = "2.29"
-    jacocoVersion = '0.8.1'
-    jackson = '2.7.7'
-    joda = "2.9.4"
-    jsonPath = "2.4.0"
-    jsonAssert = "1.5.0"
-    mockito = "1.10.19"
-    objenesis = "2.4"
-    restAssured = '3.0.6'
-    servlet = "4.0.1"
-    slf4j = "1.7.22"
-    snakeyaml = '1.19'
-    spock = "1.1-groovy-2.4"
-    spring = "4.2.13.RELEASE"
-    springHateoas = "0.21.0.RELEASE"
-    springPluginVersion = "1.2.0.RELEASE"
-    swagger2Core = "1.5.20"
-    springBoot = "1.5.15.RELEASE"
-    springfox = "2.9.2"
+    maven { url "https://plugins.gradle.org/m2/" }
   }
 }
