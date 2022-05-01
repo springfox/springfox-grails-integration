@@ -13,16 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-buildscript {
-  repositories {
-      maven { url "https://plugins.gradle.org/m2/" }
-      // jcenter()
-      maven { url "https://repo.grails.org/grails/core" }
-      mavenCentral()
-  }
-
-}
-
 plugins {
     id "io.spring.dependency-management" version "1.0.11.RELEASE"
     id 'jacoco'
@@ -35,6 +25,12 @@ apply from: 'gradle/publishing.gradle'
 
 description = 'Springfox Grails module that produces grails specific documentation'
 
+repositories {
+    maven { url "https://repo.grails.org/grails/core" }
+    maven { url "https://plugins.gradle.org/m2/" }
+    mavenCentral()
+}
+
 configurations {
     provided
     compile.extendsFrom provided
@@ -44,7 +40,7 @@ dependencyManagement {
     imports {
         mavenBom "org.grails:grails-bom:$grailsVersion"
     }
-    dependencies{
+    dependencies {
         dependency('com.jayway.jsonpath:json-path:2.4.0')
         dependency('org.slf4j:slf4j-simple:1.7.22')
         dependency('org.yaml:snakeyaml:1.19')
@@ -69,7 +65,6 @@ dependencies {
     testCompile "org.spockframework:spock-spring"
     testCompile "org.spockframework:spock-core"
     testCompile "org.codehaus.groovy:groovy-all"
-    testCompile "org.grails:grails-plugin-testing"
     testCompile "org.grails:grails-plugin-rest"
 
     provided "io.swagger:swagger-annotations"
@@ -92,41 +87,42 @@ dependencies {
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
-  classifier = 'sources'
-  from sourceSets.main.allSource
+    classifier = 'sources'
+    from sourceSets.main.allSource
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
-  classifier = 'javadoc'
-  from javadoc.destinationDir
+    classifier = 'javadoc'
+    from javadoc.destinationDir
 }
 
 jar {
     manifest {
-      attributes(
-          'Built-By': 'Dilip Krishnan',
-          'Created-By': System.properties['java.version'] + " (" + System.properties['java.vendor'] + " " + System.properties['java.vm.version'] + ")",
-          'Build-Date': project.buildDate,
-          'Build-Time': project.buildTime,
-          'Specification-Title': project.name,
-          'Specification-Version': project.version,
-          'Implementation-Title': project.name,
-          'Implementation-Version': project.version,
-          "SpringFox-Version": "$project.springfox",
-      )
+        attributes(
+            'Built-By': 'Dilip Krishnan',
+            'Created-By': System.properties['java.version'] + " (" + System.properties[
+                'java.vendor'] + " " + System.properties['java.vm.version'] + ")",
+            'Build-Date': project.buildDate,
+            'Build-Time': project.buildTime,
+            'Specification-Title': project.name,
+            'Specification-Version': project.version,
+            'Implementation-Title': project.name,
+            'Implementation-Version': project.version,
+            "SpringFox-Version": "$project.springfox",
+            )
     }
 }
 
 
 jacocoTestReport {
-  reports {
-    xml.enabled true
-    html.enabled true
-  }
+    reports {
+        xml.enabled true
+        html.enabled true
+    }
 }
 
 test {
-  jvmArgs "-Dorg.spockframework.mock.ignoreByteBuddy=true"
+    jvmArgs "-Dorg.spockframework.mock.ignoreByteBuddy=true"
 }
 
 

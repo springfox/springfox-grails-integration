@@ -1,17 +1,22 @@
 plugins {
-  id "net.ltgt.apt-idea" version "0.18"
-  id 'com.github.ben-manes.versions' version '0.20.0'
+    id "net.ltgt.apt-idea" version "0.18"
+    id 'com.github.ben-manes.versions' version '0.20.0'
 }
 
 allprojects {
+    buildscript {
+        repositories {
+            mavenLocal()
+            maven { url "https://repo.grails.org/grails/core" }
+        }
+    }
 
-  group = 'io.springfox.grails'
-  version = '1.0.1-SNAPSHOT'
+    group = 'io.springfox.grails'
+    version = '1.0.1-SNAPSHOT'
 
-  repositories {
-    // jcenter()
-//    maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }
-    mavenCentral()
-    maven { url "https://plugins.gradle.org/m2/" }
-  }
+    repositories {
+        mavenCentral()
+        maven { url "https://plugins.gradle.org/m2/" }
+        maven { url "https://repo.grails.org/grails/core" }
+    }
 }

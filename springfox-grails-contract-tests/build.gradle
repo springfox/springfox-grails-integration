@@ -1,34 +1,26 @@
 buildscript {
-    repositories {
-        mavenLocal()
-        maven { url "https://repo.grails.org/grails/core" }
-    }
     dependencies {
         classpath "org.grails:grails-gradle-plugin:$grailsVersion"
-        classpath "org.grails.plugins:hibernate5:6.0.2"
-        classpath "org.grails.plugins:views-gradle:1.1.1"
     }
 }
 
 version "0.1"
 group "grails.springfox.sample"
 
-apply plugin:"eclipse"
-apply plugin:"idea"
-apply plugin:"war"
-apply plugin:"org.grails.grails-web"
-apply plugin:"org.grails.plugins.views-json"
+apply plugin: "eclipse"
+apply plugin: "idea"
+apply plugin: "war"
+apply plugin: "org.grails.grails-web"
 
 repositories {
     mavenLocal()
-    maven { url "https://repo.grails.org/grails/core" }
 }
 
 dependencyManagement {
     imports {
         mavenBom "org.grails:grails-bom:$grailsVersion"
     }
-    dependencies{
+    dependencies {
         dependency("io.rest-assured:rest-assured:$restAssured")
         dependency("org.skyscreamer:jsonassert:$jsonAssert")
         dependency("io.rest-assured:json-path:$restAssured")
@@ -36,6 +28,7 @@ dependencyManagement {
         dependency("net.sourceforge.htmlunit:htmlunit:$htmlUnit")
         dependency("io.springfox:springfox-swagger2:${springfox}")
         dependency("io.springfox:springfox-swagger-ui:${springfox}")
+        // dependency('org.grails.plugins:converters:4.0.1')
     }
     applyMavenExclusions false
 }
@@ -56,7 +49,6 @@ dependencies {
     compile "org.grails:grails-plugin-services"
     compile "org.grails:grails-plugin-datasource"
     compile "org.grails:grails-plugin-databinding"
-    compile "org.grails:grails-plugin-async"
     compile "org.grails:grails-web-boot"
     compile "org.grails:grails-logging"
     compile "org.grails.plugins:cache"
@@ -70,12 +62,12 @@ dependencies {
     profile "org.grails.profiles:rest-api"
 
     provided "org.codehaus.groovy:groovy-ant"
-  
+
     runtime "com.h2database:h2"
-  
-    testCompile "org.grails:grails-plugin-testing"
+
+    // testCompile "org.grails:grails-plugin-testing"
     testCompile "org.grails.plugins:geb"
-    testCompile "org.grails:grails-datastore-rest-client"
+    // testCompile "org.grails:grails-datastore-rest-client"
 
     testCompile "io.rest-assured:rest-assured"
     testCompile "io.rest-assured:json-path"
@@ -86,5 +78,9 @@ dependencies {
     testCompile "org.skyscreamer:jsonassert"
 }
 springBoot {
-  mainClass = 'grails.springfox.sample.Application'
+    mainClassName = 'grails.springfox.sample.Application'
+}
+
+bootRun {
+    sourceResources sourceSets.main
 }
