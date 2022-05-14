@@ -12,7 +12,7 @@ allprojects {
     }
 
     group = 'io.springfox.grails'
-    version = '1.0.1-SNAPSHOT'
+    version = '4.0.1-SNAPSHOT'
 
     repositories {
         mavenCentral()

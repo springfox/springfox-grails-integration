@@ -4,7 +4,7 @@ buildscript {
     }
 }
 
-version "0.1"
+version "4.1"
 group "grails.springfox.sample"
 
 apply plugin: "eclipse"
