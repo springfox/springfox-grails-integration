@@ -1,14 +1,22 @@
 package springfox.documentation.grails.definitions;
 
+import io.micronaut.core.util.StringUtils;
 import org.grails.datastore.mapping.model.PersistentProperty;
+import org.grails.datastore.mapping.model.types.ToOne;
 import springfox.documentation.builders.AlternateTypePropertyBuilder;
 
 public class DefaultGrailsPropertyTransformer implements GrailsPropertyTransformer {
     @Override
     public AlternateTypePropertyBuilder apply(PersistentProperty property) {
         Class<?> type = property.getType();
-        if (type == null && property.getName().endsWith("Id")) {
-            type = relatedDomainIdentifierType(relatedDomainProperty(property));
+        if (property instanceof ToOne) {
+            ToOne<?> toOneRelation = (ToOne<?>) property;
+            return new AlternateTypePropertyBuilder()
+                .withName(property.getName()
+                    + StringUtils.capitalize(toOneRelation.getAssociatedEntity().getIdentity().getName()))
+                .withType(toOneRelation.getAssociatedEntity().getIdentity().getType())
+                .withCanRead(true)
+                .withCanWrite(true);
         }
 
         return new AlternateTypePropertyBuilder()

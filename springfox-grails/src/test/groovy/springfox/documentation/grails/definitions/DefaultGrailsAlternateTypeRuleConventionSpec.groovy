@@ -6,13 +6,8 @@ import org.grails.datastore.mapping.model.MappingContext
 import org.grails.datastore.mapping.model.PersistentEntity
 import org.grails.datastore.mapping.model.PersistentProperty
 import spock.lang.Specification
-import springfox.documentation.grails.definitions.DefaultGrailsAlternateTypeRuleConvention
-import springfox.documentation.grails.definitions.DefaultGrailsPropertySelector
-import springfox.documentation.grails.definitions.DefaultGrailsPropertyTransformer
-import springfox.documentation.grails.definitions.GrailsSerializationTypeGenerator
 import springfox.documentation.grails.doubles.Pet
 import springfox.documentation.grails.naming.DefaultGeneratedClassNamingStrategy
-
 
 class DefaultGrailsAlternateTypeRuleConventionSpec extends Specification {
     def "Alternate types for grails classes are created"() {

@@ -8,6 +8,7 @@ import springfox.documentation.builders.AlternateTypePropertyBuilder;
 
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Component
 public class GrailsSerializationTypeGenerator {
@@ -27,8 +28,8 @@ public class GrailsSerializationTypeGenerator {
 
     public Class<?> from(PersistentEntity domain) {
         List<AlternateTypePropertyBuilder> properties =
-            domain.getPersistentProperties()
-                .stream()
+            Stream.concat(domain.getPersistentProperties().stream(),
+                    Stream.of(domain.getIdentity()))
                 .filter(propertySelector)
                 .map(propertyTransformer)
                 .collect(Collectors.toList());
