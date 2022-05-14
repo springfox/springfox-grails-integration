@@ -78,8 +78,8 @@ class Actions {
     public static Set<MediaType> mediaTypeOverrides(GrailsActionContext context) {
         Set<MediaType> produces = newHashSet(MediaType.APPLICATION_JSON);
         List<String> responseFormats;
+        Class<?> clazz = context.getController().getClazz();
         try {
-            Class<?> clazz = context.getController().getClazz();
             Field responseFormatFields = clazz.getDeclaredField(PROPERTY_RESPONSE_FORMATS);
             responseFormatFields.setAccessible(true);
             responseFormats = (List<String>) responseFormatFields.get(clazz);
@@ -88,8 +88,10 @@ class Actions {
                     .map(format -> mediaTypes.getOrDefault(format, MediaType.ALL))
                     .collect(Collectors.toSet());
             }
-        } catch (NoSuchFieldException | IllegalAccessException ignored) {
-            log.warn("Ignore reflection error", ignored);
+        } catch (NoSuchFieldException ignored) {
+            log.debug("Class {} has no {} field", clazz, PROPERTY_RESPONSE_FORMATS);
+        } catch (IllegalAccessException ignored) {
+            log.debug("Cannot access {} field on {} class", PROPERTY_RESPONSE_FORMATS, clazz);
         }
         return produces;
     }

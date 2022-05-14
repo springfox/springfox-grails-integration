@@ -1,32 +1,31 @@
 package springfox.documentation.grails.doubles
 
-import grails.compiler.GrailsCompileStatic
 import grails.rest.RestfulController
 import grails.web.Action
 
 class AController extends RestfulController<ADomain> {
-  AController(Class<ADomain> resource) {
-    super(resource, false)
-  }
+    AController(Class<ADomain> resource) {
+        super(resource, false)
+    }
 
-  @Action
-  ADomain other(Integer first, ADomain domain) {
-    return new ADomain()
-  }
+    @Action
+    ADomain other(Integer first, ADomain domain) {
+        return new ADomain()
+    }
 
 
-  def nonAction() {
+    def nonAction() {
 
-  }
+    }
 
-  private privateMethod() {
-  }
+    private privateMethod() {
+    }
 
-  protected void protectedMethod() {
+    protected void protectedMethod() {
 
-  }
+    }
 
-  void packagePrivateMethod() {
+    void packagePrivateMethod() {
 
-  }
+    }
 }
