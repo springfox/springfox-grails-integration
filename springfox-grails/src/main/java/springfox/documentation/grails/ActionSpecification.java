@@ -11,7 +11,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-class ActionSpecification {
+public class ActionSpecification {
   private final Collection<RequestMethod> supportedMethods;
   private final Set<MediaType> produces;
   private final Set<MediaType> consumes;

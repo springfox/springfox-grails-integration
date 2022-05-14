@@ -6,6 +6,13 @@ grails:
     spring:
         transactionManagement:
             proxies: false
+    gorm:
+        failOnError: true # Default so we spend less time tracking down bugs
+        reactor:
+            # Whether to translate GORM events into Reactor events
+            # Disabled by default for performance reasons
+            events: false
+    serverURL: 'localhost'
 info:
     app:
         name: '@info.app.name@'
@@ -61,9 +68,9 @@ grails:
 hibernate:
     cache:
         queries: false
-        use_second_level_cache: true
-        use_query_cache: false
         region.factory_class: org.hibernate.cache.ehcache.SingletonEhCacheRegionFactory
+        use_second_level_cache: false
+        use_query_cache: false
 
 dataSource:
     pooled: true
@@ -104,3 +111,11 @@ environments:
                 jdbcInterceptors: ConnectionState
                 defaultTransactionIsolation: 2 # TRANSACTION_READ_COMMITTED
 
+springfox:
+    documentation:
+        auto-startup: false
+
+spring:
+    h2:
+        console:
+            enabled: true

@@ -4,9 +4,11 @@ import com.fasterxml.classmate.ResolvedType;
 import springfox.documentation.service.ResolvedMethodParameter;
 
 import static java.util.Collections.*;
-import static springfox.documentation.grails.SynthesizedAnnotations.*;
+import static springfox.documentation.grails.SynthesizedAnnotations.REQUEST_BODY_ANNOTATION;
+import static springfox.documentation.grails.SynthesizedAnnotations.pathVariable;
+import static springfox.documentation.grails.SynthesizedAnnotations.requestParam;
 
-class Parameters {
+public class Parameters {
   private Parameters() {
     throw new UnsupportedOperationException();
   }

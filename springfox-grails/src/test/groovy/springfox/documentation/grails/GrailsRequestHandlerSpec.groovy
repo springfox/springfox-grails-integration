@@ -3,10 +3,10 @@ package springfox.documentation.grails
 import com.fasterxml.classmate.TypeResolver
 import com.google.common.base.Objects
 import grails.core.GrailsControllerClass
-import grails.core.GrailsDomainClass
 import grails.web.mapping.LinkGenerator
 import grails.web.mapping.UrlMappings
 import io.swagger.annotations.Api
+import org.grails.datastore.mapping.model.PersistentEntity
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.method.HandlerMethod
@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.condition.PatternsRequestCondition
 import spock.lang.Specification
 import springfox.documentation.RequestHandler
 import springfox.documentation.RequestHandlerKey
+import springfox.documentation.grails.doubles.Pet
 import springfox.documentation.service.ResolvedMethodParameter
 
 class GrailsRequestHandlerSpec extends Specification implements UrlMappingSupport {
@@ -72,7 +73,7 @@ class GrailsRequestHandlerSpec extends Specification implements UrlMappingSuppor
     )
   }
 
-  ActionSpecification actionSpecification() {
+    ActionSpecification actionSpecification() {
     new ActionSpecification(
         "/test",
         [RequestMethod.GET] as Set,
@@ -103,10 +104,10 @@ class GrailsRequestHandlerSpec extends Specification implements UrlMappingSuppor
     links
   }
 
-  GrailsDomainClass domain() {
-    def domain = Mock(GrailsDomainClass)
+    PersistentEntity domain() {
+    def domain = Mock(PersistentEntity)
     domain.name >> "testDomain"
-    domain.logicalPropertyName >> "TestDomainLogicalPropertyName"
+    domain.decapitalizedName >> "TestDomainLogicalPropertyName"
     domain
   }
 

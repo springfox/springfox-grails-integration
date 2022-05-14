@@ -2,14 +2,14 @@ package springfox.documentation.grails
 
 import com.fasterxml.classmate.TypeResolver
 import grails.core.GrailsControllerClass
-import grails.core.GrailsDomainClass
 import grails.web.mapping.LinkGenerator
 import grails.web.mapping.UrlMapping
 import grails.web.mapping.UrlMappings
+import org.grails.datastore.mapping.model.PersistentEntity
 import org.springframework.web.bind.annotation.RequestMethod
 import spock.lang.Specification
 import spock.lang.Unroll
-
+import springfox.documentation.grails.doubles.AController
 
 class GrailsActionAttributesSpec extends Specification {
 
@@ -27,7 +27,7 @@ class GrailsActionAttributesSpec extends Specification {
       withOverrides()   | [RequestMethod.POST] as Set
   }
 
-  GrailsActionContext noOverrides() {
+    GrailsActionContext noOverrides() {
     context(noOverridesController(), "noOverride")
   }
 
@@ -38,7 +38,7 @@ class GrailsActionAttributesSpec extends Specification {
   GrailsActionContext context(controller, action) {
     new GrailsActionContext(
         controller,
-        Mock(GrailsDomainClass),
+        Mock(PersistentEntity),
         actionAttributes(linkGenerator(), urlMappings()),
         action,
         new TypeResolver())

@@ -2,14 +2,15 @@ package springfox.documentation.grails
 
 import com.fasterxml.classmate.TypeResolver
 import grails.core.GrailsControllerClass
-import grails.core.GrailsDomainClass
-import grails.core.GrailsDomainClassProperty
-import org.apache.commons.lang.StringUtils
+import org.apache.commons.lang3.StringUtils
+import org.grails.datastore.mapping.model.PersistentEntity
+import org.grails.datastore.mapping.model.PersistentProperty
 import org.grails.web.mapping.DefaultLinkGenerator
 import org.grails.web.mapping.DefaultUrlMappingsHolder
 import org.springframework.web.bind.annotation.RequestMethod
 import spock.lang.Specification
 import spock.lang.Unroll
+import springfox.documentation.grails.doubles.AController
 
 class GrailsActionContextSpec extends Specification implements UrlMappingSupport {
   @Unroll
@@ -26,7 +27,7 @@ class GrailsActionContextSpec extends Specification implements UrlMappingSupport
     expect:
     sut.path() == path
     sut.pathParameters().collect { it.defaultName().get() } == params
-    sut.requestMethods == (method == "" ? [] as Set : [RequestMethod.valueOf(method)] as Set)
+    sut.requestMethods == (method == "" ? ([] as Set) : [RequestMethod.valueOf(method)] as Set)
 
     where:
     controller | action   | params            | method   | path
@@ -82,20 +83,20 @@ class GrailsActionContextSpec extends Specification implements UrlMappingSupport
     links
   }
 
-  GrailsDomainClass domain() {
-    def mock = Mock(GrailsDomainClass)
+  PersistentEntity domain() {
+    def mock = Mock(PersistentEntity)
     mock.getPropertyByName(_) >> { args -> property(args[0]) }
     mock
   }
 
   def property(name) {
-    def mock = Mock(GrailsDomainClassProperty)
+    def mock = Mock(PersistentProperty)
     mock.getType() >> String
     mock.name >> name
     mock
   }
 
-  def controllerToTest(name, clazz) {
+  def controllerToTest(String name, clazz) {
     def mock = Mock(GrailsControllerClass)
     mock.name >> "${StringUtils.capitalize(name)}Controller"
     mock.logicalPropertyName >> name

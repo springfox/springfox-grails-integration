@@ -20,7 +20,6 @@ plugins {
 
 apply plugin: 'groovy'
 apply plugin: 'idea'
-// apply plugin: 'jacoco'
 apply from: 'gradle/publishing.gradle'
 
 description = 'Springfox Grails module that produces grails specific documentation'
@@ -44,12 +43,12 @@ dependencyManagement {
         dependency('com.jayway.jsonpath:json-path:2.4.0')
         dependency('org.slf4j:slf4j-simple:1.7.22')
         dependency('org.yaml:snakeyaml:1.19')
-        dependency('org.spockframework:spock-spring:1.1-groovy-2.4')
         dependency('io.swagger:swagger-annotations:1.5.20')
         dependency('org.springframework.boot:spring-boot-autoconfigure:1.5.15.RELEASE')
         dependency('javax.servlet:javax.servlet-api:4.0.1')
         dependency('com.google.guava:guava:20.0')
         dependency('com.fasterxml:classmate:1.4.0')
+        dependency('org.objenesis:objenesis:3.2')
         dependency("io.springfox:springfox-spi:$springfox")
         dependency("io.springfox:springfox-core:$springfox")
         dependency("io.springfox:springfox-swagger2:$springfox")
@@ -64,8 +63,8 @@ dependencies {
     testCompile "org.yaml:snakeyaml"
     testCompile "org.spockframework:spock-spring"
     testCompile "org.spockframework:spock-core"
-    testCompile "org.codehaus.groovy:groovy-all"
     testCompile "org.grails:grails-plugin-rest"
+    testCompile "org.objenesis:objenesis"
 
     provided "io.swagger:swagger-annotations"
     provided "org.springframework:spring-core"
@@ -87,12 +86,12 @@ dependencies {
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
-    classifier = 'sources'
+    getArchiveClassifier().set('sources')
     from sourceSets.main.allSource
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
+    getArchiveClassifier().set('javadoc')
     from javadoc.destinationDir
 }
 
@@ -119,10 +118,6 @@ jacocoTestReport {
         xml.enabled true
         html.enabled true
     }
-}
-
-test {
-    jvmArgs "-Dorg.spockframework.mock.ignoreByteBuddy=true"
 }
 
 

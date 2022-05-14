@@ -21,114 +21,113 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static org.springframework.util.StringUtils.*;
+import static org.springframework.util.StringUtils.capitalize;
 
 class GrailsRequestHandler implements RequestHandler {
-  private final GrailsActionContext actionContext;
-  private final ActionSpecification actionSpecification;
+    private final GrailsActionContext actionContext;
+    private final ActionSpecification actionSpecification;
 
-  GrailsRequestHandler(
-      GrailsActionContext actionContext,
-      ActionSpecification actionSpecification) {
-    this.actionContext = actionContext;
-    this.actionSpecification = actionSpecification;
-  }
+    GrailsRequestHandler(GrailsActionContext actionContext,
+                         ActionSpecification actionSpecification) {
+        this.actionContext = actionContext;
+        this.actionSpecification = actionSpecification;
+    }
 
-  @Override
-  public Class<?> declaringClass() {
-    return actionContext.getController().getClazz();
-  }
+    @Override
+    public Class<?> declaringClass() {
+        return actionContext.getController().getClazz();
+    }
 
-  @Override
-  public boolean isAnnotatedWith(Class<? extends Annotation> annotation) {
-    return findAnnotation(annotation).isPresent();
-  }
+    @Override
+    public boolean isAnnotatedWith(Class<? extends Annotation> annotation) {
+        return findAnnotation(annotation).isPresent();
+    }
 
-  @Override
-  public PatternsRequestCondition getPatternsCondition() {
-    return new PatternsRequestCondition(actionSpecification.getPath());
-  }
+    @Override
+    public PatternsRequestCondition getPatternsCondition() {
+        return new PatternsRequestCondition(actionSpecification.getPath());
+    }
 
-  @Override
-  public String groupName() {
-    return actionContext.getController().getLogicalPropertyName();
-  }
+    @Override
+    public String groupName() {
+        return actionContext.getController().getLogicalPropertyName();
+    }
 
-  @Override
-  public String getName() {
-    return java.util.Optional.ofNullable(actionContext.getDomainClass())
-        .map(domain -> String.format(
-            "%s%s",
-            actionContext.getAction(),
-            capitalize(domain.getLogicalPropertyName())))
-        .orElse(actionContext.getAction());
-  }
+    @Override
+    public String getName() {
+        return java.util.Optional.ofNullable(actionContext.getDomainClass())
+            .map(domain -> String.format(
+                "%s%s",
+                actionContext.getAction(),
+                capitalize(domain.getDecapitalizedName())))
+            .orElse(actionContext.getAction());
+    }
 
-  @Override
-  public Set<RequestMethod> supportedMethods() {
-    return ImmutableSet.copyOf(actionSpecification.getSupportedMethods());
-  }
+    @Override
+    public Set<RequestMethod> supportedMethods() {
+        return ImmutableSet.copyOf(actionSpecification.getSupportedMethods());
+    }
 
-  @Override
-  public Set<? extends MediaType> produces() {
-    return actionSpecification.getProduces();
-  }
+    @Override
+    public Set<? extends MediaType> produces() {
+        return actionSpecification.getProduces();
+    }
 
-  @Override
-  public Set<? extends MediaType> consumes() {
-    return actionSpecification.getConsumes();
-  }
+    @Override
+    public Set<? extends MediaType> consumes() {
+        return actionSpecification.getConsumes();
+    }
 
-  @Override
-  public Set<NameValueExpression<String>> headers() {
-    return new HashSet<>();
-  }
+    @Override
+    public Set<NameValueExpression<String>> headers() {
+        return new HashSet<>();
+    }
 
-  @Override
-  public Set<NameValueExpression<String>> params() {
-    return new HashSet<>();
-  }
+    @Override
+    public Set<NameValueExpression<String>> params() {
+        return new HashSet<>();
+    }
 
-  @Override
-  @SuppressWarnings("Guava")
-  public <T extends Annotation> Optional<T> findAnnotation(Class<T> annotation) {
-    return Optional.fromNullable(AnnotationUtils.findAnnotation(getHandlerMethod().getMethod(), annotation));
-  }
+    @Override
+    @SuppressWarnings("Guava")
+    public <T extends Annotation> Optional<T> findAnnotation(Class<T> annotation) {
+        return Optional.fromNullable(AnnotationUtils.findAnnotation(getHandlerMethod().getMethod(), annotation));
+    }
 
-  @Override
-  public RequestHandlerKey key() {
-    return new RequestHandlerKey(getPatternsCondition().getPatterns(), supportedMethods(), consumes(), produces());
-  }
+    @Override
+    public RequestHandlerKey key() {
+        return new RequestHandlerKey(getPatternsCondition().getPatterns(), supportedMethods(), consumes(), produces());
+    }
 
-  @Override
-  public List<ResolvedMethodParameter> getParameters() {
-    return new ArrayList<>(actionSpecification.getParameters());
-  }
+    @Override
+    public List<ResolvedMethodParameter> getParameters() {
+        return new ArrayList<>(actionSpecification.getParameters());
+    }
 
-  @Override
-  public ResolvedType getReturnType() {
-    return actionSpecification.getReturnType();
-  }
+    @Override
+    public ResolvedType getReturnType() {
+        return actionSpecification.getReturnType();
+    }
 
-  @SuppressWarnings("Guava")
-  @Override
-  public <T extends Annotation> Optional<T> findControllerAnnotation(Class<T> annotation) {
-    return Optional.fromNullable(AnnotationUtils.findAnnotation(getHandlerMethod().getBeanType(), annotation));
-  }
+    @SuppressWarnings("Guava")
+    @Override
+    public <T extends Annotation> Optional<T> findControllerAnnotation(Class<T> annotation) {
+        return Optional.fromNullable(AnnotationUtils.findAnnotation(getHandlerMethod().getBeanType(), annotation));
+    }
 
-  @Override
-  public HandlerMethod getHandlerMethod() {
-    return actionSpecification.getHandlerMethod();
-  }
+    @Override
+    public HandlerMethod getHandlerMethod() {
+        return actionSpecification.getHandlerMethod();
+    }
 
-  @Override
-  public RequestMappingInfo getRequestMapping() {
-    throw new UnsupportedOperationException();
-  }
+    @Override
+    public RequestMappingInfo getRequestMapping() {
+        throw new UnsupportedOperationException();
+    }
 
-  @Override
-  public RequestHandler combine(RequestHandler other) {
-    return new CombinedRequestHandler(this, other);
-  }
+    @Override
+    public RequestHandler combine(RequestHandler other) {
+        return new CombinedRequestHandler(this, other);
+    }
 
 }
