@@ -1,10 +1,10 @@
 = SpringFox Grails Integration
 
-image:https://api.bintray.com/packages/springfox/maven-repo/springfox-grails-integration/images/download.svg["Download", link="https://bintray.com/springfox/maven-repo/springfox-grails-integration/_latestVersion"]
-image:https://circleci.com/gh/springfox/springfox-grails-integration.svg?style=svg["CircleCI", link="https://circleci.com/gh/springfox/springfox-grails-integration"]
-image:https://codecov.io/gh/springfox/springfox-grails-integration/branch/master/graph/badge.svg["codecov",link="https://codecov.io/gh/springfox/springfox-grails-integration"]
-image:https://api.codacy.com/project/badge/Grade/77fbd793eb06447d9f1bf47eb8cdad8b["Codacy code quality", link="https://www.codacy.com/app/dilip-krishnan-github/springfox-grails-integration?utm_source=github.com&utm_medium=referral&utm_content=springfox/springfox-grails-integration&utm_campaign=Badge_Grade"]
-image:https://app.fossa.io/api/projects/git%2Bgithub.com%2Fspringfox%2Fspringfox-grails-integration.svg?type=shield["FOSSA Status", link="https://app.fossa.io/projects/git%2Bgithub.com%2Fspringfox%2Fspringfox-grails-integration?ref=badge_shield"]
+//image:https://api.bintray.com/packages/springfox/maven-repo/springfox-grails-integration/images/download.svg["Download", link="https://bintray.com/springfox/maven-repo/springfox-grails-integration/_latestVersion"]
+image:https://circleci.com/gh/dcebotarenco/springfox-grails-integration.svg?style=svg["CircleCI", link="https://circleci.com/gh/dcebotarenco/springfox-grails-integration.svg"]
+image:https://codecov.io/gh/dcebotarenco/springfox-grails-integration/branch/master/graph/badge.svg["codecov",link="https://codecov.io/gh/dcebotarenco/springfox-grails-integration"]
+image:https://app.codacy.com/project/badge/Grade/ad2bbf8f26ec44da8ac714f8f812dc07["Codacy code quality", link="https://www.codacy.com/gh/dcebotarenco/springfox-grails-integration/dashboard?utm_source=github.com&utm_medium=referral&utm_content=dcebotarenco/springfox-grails-integration&utm_campaign=Badge_Grade"]
+//image:https://app.fossa.io/api/projects/git%2Bgithub.com%2Fspringfox%2Fspringfox-grails-integration.svg?type=shield["FOSSA Status", link="https://app.fossa.io/projects/git%2Bgithub.com%2Fspringfox%2Fspringfox-grails-integration?ref=badge_shield"]
 
 SpringFox Grails integration library that produces grails specific documentation.
 
@@ -38,26 +38,25 @@ SpringFox Grails integration library that produces grails specific documentation
 
 == Getting Started
 
-:releaseVersion: 1.0.0
-:snapshotVersion: 1.0.1-SNAPSHOT
-:springfoxVersion: 2.7.0
-:springfoxRfc6570Version: 1.0.0
+:releaseVersion: 4.0.0
+:snapshotVersion: 4.0.1-SNAPSHOT
+:springfoxVersion: 2.9.2
 
 The SpringFox Grails integration library depends on http://springfox.github.io/springfox/docs/current/[Springfox]
 
-image:https://api.bintray.com/packages/springfox/maven-repo/springfox/images/download.svg["Download", link="https://bintray.com/springfox/maven-repo/springfox/_latestVersion"]
+//image:https://api.bintray.com/packages/springfox/maven-repo/springfox/images/download.svg["Download", link="https://bintray.com/springfox/maven-repo/springfox/_latestVersion"]
 
-
-== Dependencies
-The Springfox libraries are hosted on https://bintray.com/springfox/maven-repo/springfox/view[bintray] and jcenter.
-The artifacts can be viewed accessed at the following locations:
-
-* Release:
-   ** https://jcenter.bintray.com/io/springfox/
-   ** http://jcenter.bintray.com/io/springfox/
-* Snapshot
- ** http://oss.jfrog.org/simple/oss-snapshot-local/io/springfox/
- ** http://oss.jfrog.org/oss-snapshot-local/io/springfox/
+//
+//== Dependencies
+//The Springfox libraries are hosted on https://bintray.com/springfox/maven-repo/springfox/view[bintray] and jcenter.
+//The artifacts can be viewed accessed at the following locations:
+//
+//* Release:
+//   ** https://jcenter.bintray.com/io/springfox/
+//   ** http://jcenter.bintray.com/io/springfox/
+//* Snapshot
+// ** http://oss.jfrog.org/simple/oss-snapshot-local/io/springfox/
+// ** http://oss.jfrog.org/oss-snapshot-local/io/springfox/
 
 SpringFox has multiple modules and the dependencies will vary depending on the desired API specification standard.
 Below outlines how to include the springfox-swagger2 module which produces Swagger 2.0 API documentation.
@@ -66,33 +65,33 @@ TIP: Refer the main documentation on how to http://springfox.github.io/springfox
 
 NOTE: Please refer the main documentation on how to http://springfox.github.io/springfox/docs/current/#dependencies[include the springfox-swagger2 dependencies]
 which are required for this integration library to work.
-
-=== Release
-[source,groovy]
-[subs="verbatim,attributes"]
-----
-repositories {
-  jcenter()
-}
-
-dependencies {
-    compile "io.springfox.grails:springfox-grails:{releaseVersion}" //<1>
-}
-----
-
-=== Snapshot
-
-[source,groovy]
-[subs="verbatim,attributes"]
-----
-repositories {
-   maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }
-}
-
-dependencies {
-    compile "io.springfox.grails:springfox-grails:{snapshotVersion}" //<1>
-}
-----
+//
+//=== Release
+//[source,groovy]
+//[subs="verbatim,attributes"]
+//----
+//repositories {
+//  jcenter()
+//}
+//
+//dependencies {
+//    compile "io.springfox.grails:springfox-grails:{releaseVersion}" //<1>
+//}
+//----
+//
+//=== Snapshot
+//
+//[source,groovy]
+//[subs="verbatim,attributes"]
+//----
+//repositories {
+//   maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }
+//}
+//
+//dependencies {
+//    compile "io.springfox.grails:springfox-grails:{snapshotVersion}" //<1>
+//}
+//----
 
 == Configuration
 
@@ -125,8 +124,8 @@ class Application extends GrailsAutoConfiguration {
    // 4. **Optionally** in the absense of asset pipeline configure the swagger-ui webjar to serve the scaffolded
    swagger UI
    @Bean
-   static WebMvcConfigurerAdapter webConfigurer() {
-     new WebMvcConfigurerAdapter() {
+   static WebMvcConfigurer webConfigurer() {
+     new WebMvcConfigurer() {
        @Override
        void addResourceHandlers(ResourceHandlerRegistry registry) {
          if (!registry.hasMappingForPattern("/webjars/**")) {
@@ -141,6 +140,30 @@ class Application extends GrailsAutoConfiguration {
          }
        }
       }
+    }
+}
+----
+Disable auto start-up of the springfox documentation. It is bounded to `SmartLifecycle` which triggers it before the GORM mapping context is initialized by  `DomainClassGrailsPlugin`
+[source,yml]
+----
+springfox:
+    documentation:
+        auto-startup: false
+----
+Then, when the servlet is ready, call it manually
+[source,groovy]
+----
+
+class BootStrap {
+
+    @Autowired
+    DocumentationPluginsBootstrapper bootstrapper
+
+    def init = { servletContext ->
+        bootstrapper.start() //manual start
+    }
+
+    def destroy = {
     }
 }
 ----
@@ -176,10 +199,10 @@ registered as a bean to augment default behavior.
 - GeneratedClassNamingStrategy - for naming the generated class mixins
 
 
-== Demo application
-
-The demo application is available in https://github.com/springfox/springfox-grails-demo[this repository]. You can
-see a live demo running or https://immense-escarpment-17128.herokuapp.com/swagger-ui.html[heroku here].
+//== Demo application
+//
+//The demo application is available in https://github.com/springfox/springfox-grails-demo[this repository]. You can
+//see a live demo running or https://immense-escarpment-17128.herokuapp.com/swagger-ui.html[heroku here].
 
 == Troubleshooting
 
@@ -193,5 +216,5 @@ to your `application.yml` for the plugin to render absolute links.
 
 
 
-## License
-image:https://app.fossa.io/api/projects/git%2Bgithub.com%2Fspringfox%2Fspringfox-grails-integration.svg?type=large["FOSSA Status", link="https://app.fossa.io/projects/git%2Bgithub.com%2Fspringfox%2Fspringfox-grails-integration?ref=badge_large"]
+//## License
+//image:https://app.fossa.io/api/projects/git%2Bgithub.com%2Fspringfox%2Fspringfox-grails-integration.svg?type=large["FOSSA Status", link="https://app.fossa.io/projects/git%2Bgithub.com%2Fspringfox%2Fspringfox-grails-integration?ref=badge_large"]
