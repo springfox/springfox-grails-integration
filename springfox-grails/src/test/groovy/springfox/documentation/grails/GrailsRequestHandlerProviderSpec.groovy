@@ -28,8 +28,7 @@ class GrailsRequestHandlerProviderSpec extends Specification implements UrlMappi
                                                    new ActionSpecificationFactoryComposite(
                                                        new RestfulActionSpecificationFactory(resolver),
                                                        new MethodBackedActionSpecificationFactory(resolver)
-                                                   )
-        )
+                                                   ))
         expect:
         sut.requestHandlers().size() == 1
     }

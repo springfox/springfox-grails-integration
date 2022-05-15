@@ -48,8 +48,8 @@ class ActionsSpec extends ActionSpecificationFactorySpec implements GrailsContro
       methods == expected
     where:
       controller          | action          | expected
-      OverridenController | "withOverrides" | [RequestMethod.POST] as Set
-      OverridenController | "noOverrides"   | [] as Set
+      OverriddenController | "withOverrides" | [RequestMethod.POST] as Set
+      OverriddenController | "noOverrides"   | [] as Set
   }
 
   @Unroll
@@ -63,8 +63,8 @@ class ActionsSpec extends ActionSpecificationFactorySpec implements GrailsContro
       methods == expected
     where:
       controller          | action          | expected
-      OverridenController | "withOverrides" | [RequestMethod.POST] as Set
-      OverridenController | "noOverrides"   | [RequestMethod.GET] as Set
+      OverriddenController | "withOverrides" | [RequestMethod.POST] as Set
+      OverriddenController | "noOverrides"   | [RequestMethod.GET] as Set
   }
 
   @Unroll
@@ -79,7 +79,7 @@ class ActionsSpec extends ActionSpecificationFactorySpec implements GrailsContro
     where:
       controller          | expected
     AController | [MediaType.APPLICATION_JSON] as Set
-      OverridenController | [MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML] as Set
+      OverriddenController | [MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML] as Set
   }
 
   def grailsController(Class controller) {
@@ -97,7 +97,7 @@ class ActionsSpec extends ActionSpecificationFactorySpec implements GrailsContro
         new TypeResolver())
   }
 
-  class OverridenController {
+  class OverriddenController {
     static allowedMethods = [withOverrides: "POST", update: "PUT", delete: "DELETE"]
     static responseFormats = ['json', 'xml']
     

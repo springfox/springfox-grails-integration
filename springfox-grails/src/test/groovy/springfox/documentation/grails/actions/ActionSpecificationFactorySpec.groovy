@@ -29,29 +29,29 @@ class ActionSpecificationFactorySpec extends Specification implements UrlMapping
     links.urlMappingsHolder = urlMappings
     actionAttributes = new GrailsActionAttributes(links, urlMappings)
 
-    domain = mockDomain()
-    controller = mockController()
-    regularController = mockRegularController()
+    domain = stubDomain()
+    controller = stubController()
+    regularController = stubRegularController()
   }
 
-  GrailsControllerClass mockRegularController() {
-    def regularController = Mock(GrailsControllerClass)
+  GrailsControllerClass stubRegularController() {
+    def regularController = Stub(GrailsControllerClass)
     regularController.clazz >> BookController
     regularController.name >> "Book"
     regularController.logicalPropertyName >> "Book"
     regularController
   }
 
-  def mockController() {
-    def controller = Mock(GrailsControllerClass)
+  def stubController() {
+    def controller = Stub(GrailsControllerClass)
     controller.clazz >> AController
     controller.name >> "AController"
     controller.logicalPropertyName >> "A"
     controller
   }
 
-  def mockDomain() {
-    def domain = Mock(PersistentEntity)
+  def stubDomain() {
+    def domain = Stub(PersistentEntity)
     domain.javaClass >> ADomain
     domain.hasProperty("id", Long) >> true
     def id = idProperty()

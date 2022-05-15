@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 
 import static com.google.common.collect.Sets.newHashSet;
 
-class Actions {
+public class Actions {
 
     private static final Logger log = LoggerFactory.getLogger(Actions.class);
     private static final String PROPERTY_RESPONSE_FORMATS = "responseFormats";

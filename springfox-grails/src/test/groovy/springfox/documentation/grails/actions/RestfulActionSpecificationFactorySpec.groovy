@@ -34,10 +34,10 @@ class RestfulActionSpecificationFactorySpec extends Specification implements Url
   }
 
   def property(name) {
-    def mock = Stub(Simple)
-    mock.name >> name
-    mock.type >> (ADomain.declaredFields.find { it.name == name }?.type ?: String)
-    mock
+    def stub = Stub(Simple)
+    stub.name >> name
+    stub.type >> (ADomain.declaredFields.find { it.name == name }?.type ?: String)
+    stub
   }
 
   def "Resolves all restful actions"() {

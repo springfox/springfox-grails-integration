@@ -17,12 +17,11 @@ class GrailsActionContextSpec extends Specification implements UrlMappingSupport
     def "Generates the paths correctly for #controller #action"() {
         given:
         def actionAttributes = actionAttributes()
-        def sut = new GrailsActionContext(
-            controllerToTest(controller, AController),
-            domain(),
-            actionAttributes,
-            action,
-            new TypeResolver())
+        def sut = new GrailsActionContext(controllerToTest(controller, AController),
+                                          domain(),
+                                          actionAttributes,
+                                          action,
+                                          new TypeResolver())
 
         expect:
         sut.path() == path

@@ -4,9 +4,9 @@ import com.fasterxml.classmate.TypeResolver
 import grails.web.mapping.UrlMapping
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.RequestMethod
+import springfox.documentation.grails.GrailsActionContext
 import springfox.documentation.grails.doubles.Book
 import springfox.documentation.grails.doubles.BookController
-import springfox.documentation.grails.GrailsActionContext
 
 class MethodBackedActionSpecificationFactorySpec extends ActionSpecificationFactorySpec {
 
@@ -15,7 +15,7 @@ class MethodBackedActionSpecificationFactorySpec extends ActionSpecificationFact
       def resolver = new TypeResolver()
       def sut = new MethodBackedActionSpecificationFactory(resolver)
     and:
-      urlMappings.urlMappings >> [otherMapping(Mock(UrlMapping))]
+      urlMappings.urlMappings >> [otherMapping(Stub(UrlMapping))]
     when:
       def spec = sut.create(new GrailsActionContext(regularController, domain, actionAttributes, "save", resolver))
     then: "All http attributes match"
