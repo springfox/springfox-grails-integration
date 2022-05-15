@@ -4,7 +4,7 @@ import com.fasterxml.classmate.TypeResolver
 import grails.core.GrailsControllerClass
 import org.apache.commons.lang3.StringUtils
 import org.grails.datastore.mapping.model.PersistentEntity
-import org.grails.datastore.mapping.model.PersistentProperty
+import org.grails.datastore.mapping.model.types.Simple
 import org.grails.web.mapping.DefaultLinkGenerator
 import org.grails.web.mapping.DefaultUrlMappingsHolder
 import org.springframework.web.bind.annotation.RequestMethod
@@ -90,7 +90,7 @@ class GrailsActionContextSpec extends Specification implements UrlMappingSupport
   }
 
   def property(name) {
-    def mock = Mock(PersistentProperty)
+    def mock = Mock(Simple)
     mock.getType() >> String
     mock.name >> name
     mock

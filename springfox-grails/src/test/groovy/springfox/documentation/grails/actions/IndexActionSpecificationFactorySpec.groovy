@@ -4,8 +4,8 @@ import com.fasterxml.classmate.TypeResolver
 import grails.rest.RestfulController
 import org.springframework.http.MediaType
 import org.springframework.web.bind.annotation.RequestMethod
-import springfox.documentation.grails.doubles.ADomain
 import springfox.documentation.grails.GrailsActionContext
+import springfox.documentation.grails.doubles.ADomain
 
 class IndexActionSpecificationFactorySpec extends ActionSpecificationFactorySpec {
     def "Index action produces action specification"() {
@@ -19,7 +19,7 @@ class IndexActionSpecificationFactorySpec extends ActionSpecificationFactorySpec
         spec.consumes == [MediaType.APPLICATION_JSON] as Set
         spec.produces == [MediaType.APPLICATION_JSON] as Set
         spec.supportedMethods == [RequestMethod.GET] as Set
-        spec.handlerMethod.method == RestfulController.declaredMethods.find { it.name == "index" }
+        RestfulController.declaredMethods.contains(spec.handlerMethod.method)
         spec.path == "/a"
 
         and: "Parameters match"

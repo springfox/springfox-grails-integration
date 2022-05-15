@@ -2,11 +2,8 @@ package springfox.documentation.grails.definitions
 
 import grails.core.GrailsApplication
 import org.grails.datastore.mapping.model.PersistentEntity
-import org.grails.datastore.mapping.model.PersistentProperty
+import org.grails.datastore.mapping.model.types.Simple
 import spock.lang.Specification
-import springfox.documentation.grails.definitions.DefaultGrailsPropertySelector
-import springfox.documentation.grails.definitions.DefaultGrailsPropertyTransformer
-import springfox.documentation.grails.definitions.GrailsSerializationTypeGenerator
 import springfox.documentation.grails.doubles.Pet
 import springfox.documentation.grails.naming.DefaultGeneratedClassNamingStrategy
 
@@ -40,7 +37,7 @@ class GrailsSerializationTypeGeneratorSpec extends Specification {
   }
 
   def property(name, type) {
-    def property = Mock(PersistentProperty)
+    def property = Mock(Simple)
     property.name >> name
     property.type >> type
     property

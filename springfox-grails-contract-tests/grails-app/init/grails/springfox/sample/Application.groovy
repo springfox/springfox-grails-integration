@@ -6,14 +6,13 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Import
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import springfox.documentation.grails.config.SpringfoxGrailsIntegrationConfiguration
 import springfox.documentation.spi.DocumentationType
 import springfox.documentation.spring.web.plugins.Docket
 import springfox.documentation.swagger2.annotations.EnableSwagger2
 
-import static com.google.common.base.Predicates.*
-import static springfox.documentation.builders.PathSelectors.*
+import static com.google.common.base.Predicates.not
+import static springfox.documentation.builders.PathSelectors.ant
 
 @EnableSwagger2
 @Import([SpringfoxGrailsIntegrationConfiguration])
@@ -28,6 +27,7 @@ class Application extends GrailsAutoConfiguration {
         .ignoredParameterTypes(MetaClass)
         .select()
         .paths(not(ant("/error")))
+        .paths(not(ant("/actuator")))
         .build()
   }
 

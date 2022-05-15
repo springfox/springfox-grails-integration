@@ -1,24 +1,27 @@
 package springfox.documentation.grails.actions
 
 import grails.core.GrailsControllerClass
+import grails.web.mapping.LinkGenerator
+import grails.web.mapping.UrlMappings
 import org.grails.datastore.mapping.model.PersistentEntity
 import org.grails.datastore.mapping.model.PersistentProperty
+import org.grails.datastore.mapping.model.types.Simple
 import org.grails.web.mapping.DefaultLinkGenerator
 import org.grails.web.mapping.DefaultUrlMappingsHolder
 import spock.lang.Specification
+import springfox.documentation.grails.GrailsActionAttributes
+import springfox.documentation.grails.UrlMappingSupport
 import springfox.documentation.grails.doubles.AController
 import springfox.documentation.grails.doubles.ADomain
 import springfox.documentation.grails.doubles.BookController
-import springfox.documentation.grails.GrailsActionAttributes
-import springfox.documentation.grails.UrlMappingSupport
 
 class ActionSpecificationFactorySpec extends Specification implements UrlMappingSupport {
-  def controller
-  def domain
-  def links
-  def urlMappings
-  def actionAttributes
-  def regularController
+  GrailsControllerClass controller
+  PersistentEntity domain
+  LinkGenerator links
+  UrlMappings urlMappings
+  GrailsActionAttributes actionAttributes
+  GrailsControllerClass regularController
 
   def setup() {
     urlMappings = new DefaultUrlMappingsHolder(urlMappings())
@@ -60,14 +63,14 @@ class ActionSpecificationFactorySpec extends Specification implements UrlMapping
   }
 
   PersistentProperty property(name) {
-    def property = Mock(PersistentProperty)
+    def property = Mock(Simple)
     property.type >> String
     property.name >> name
     property
   }
 
   PersistentProperty idProperty() {
-    def property = Mock(PersistentProperty)
+    def property = Mock(Simple)
     property.type >> Long
     property
   }

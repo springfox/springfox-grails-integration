@@ -1,11 +1,9 @@
 package springfox.documentation.grails.definitions
 
 import org.grails.datastore.mapping.model.PersistentEntity
-import org.grails.datastore.mapping.model.PersistentProperty
+import org.grails.datastore.mapping.model.types.Simple
 import spock.lang.Specification
 import spock.lang.Unroll
-import springfox.documentation.grails.definitions.DefaultGrailsPropertyTransformer
-
 
 class DefaultGrailsPropertyTransformerSpec extends Specification {
   @Unroll
@@ -30,14 +28,14 @@ class DefaultGrailsPropertyTransformerSpec extends Specification {
   }
 
   def scalarProperty(propertyName, propertyType) {
-    def property = Mock(PersistentProperty)
+    def property = Mock(Simple)
     property.type >> propertyType
     property.name >> propertyName
     property
   }
 
   def relatedEntityProperty() {
-    def property = Mock(PersistentProperty)
+    def property = Mock(Simple)
     property.type >> RelatedEntity
     property.name >> "relatedEntity"
     property.getOwner() >> relatedEntityDomain()
@@ -45,7 +43,7 @@ class DefaultGrailsPropertyTransformerSpec extends Specification {
   }
 
   def relatedEntityIdProperty() {
-    def property = Mock(PersistentProperty)
+    def property = Mock(Simple)
     property.type >> Long
     property.name >> "relatedEntityId"
     property.getOwner() >> domainClass()

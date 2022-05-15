@@ -62,7 +62,8 @@
             "in": "query",
             "description": "max",
             "required": false,
-            "type": "string"
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "responses": {
@@ -365,7 +366,8 @@
             "in": "query",
             "description": "max",
             "required": false,
-            "type": "string"
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "responses": {
@@ -791,7 +793,8 @@
             "in": "formData",
             "description": "Id of the book",
             "required": true,
-            "type": "string"
+            "type": "integer",
+            "format": "int64"
           }
         ],
         "responses": {
@@ -831,7 +834,8 @@
             "in": "query",
             "description": "max",
             "required": false,
-            "type": "string"
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "responses": {
@@ -1104,7 +1108,8 @@
             "in": "query",
             "description": "max",
             "required": false,
-            "type": "string"
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "responses": {
@@ -1377,7 +1382,8 @@
             "in": "query",
             "description": "max",
             "required": false,
-            "type": "string"
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "responses": {

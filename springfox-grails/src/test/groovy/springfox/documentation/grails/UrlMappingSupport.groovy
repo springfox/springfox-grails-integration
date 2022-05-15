@@ -1,5 +1,6 @@
 package springfox.documentation.grails
 
+import grails.web.mapping.UrlMapping
 import org.grails.web.mapping.DefaultUrlMappingEvaluator
 
 trait UrlMappingSupport {
@@ -35,7 +36,7 @@ trait UrlMappingSupport {
   "  }\n" +
   "}"
 
-  def urlMappings(String mappings = allMappings) {
+  List<UrlMapping> urlMappings(String mappings = allMappings) {
     GroovyShell shell = new GroovyShell()
     Binding binding = new Binding()
     Script script = shell.parse(mappings)

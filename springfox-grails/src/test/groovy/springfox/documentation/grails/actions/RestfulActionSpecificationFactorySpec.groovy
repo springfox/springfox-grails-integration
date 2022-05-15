@@ -5,18 +5,18 @@ import grails.core.GrailsControllerClass
 import grails.web.mapping.LinkGenerator
 import grails.web.mapping.UrlMappings
 import org.grails.datastore.mapping.model.PersistentEntity
-import org.grails.datastore.mapping.model.PersistentProperty
+import org.grails.datastore.mapping.model.types.Simple
 import spock.lang.Specification
-import springfox.documentation.grails.doubles.AController
-import springfox.documentation.grails.doubles.ADomain
 import springfox.documentation.grails.GrailsActionAttributes
 import springfox.documentation.grails.GrailsActionContext
 import springfox.documentation.grails.UrlMappingSupport
+import springfox.documentation.grails.doubles.AController
+import springfox.documentation.grails.doubles.ADomain
 
 class RestfulActionSpecificationFactorySpec extends Specification implements UrlMappingSupport {
   def controller = Mock(GrailsControllerClass)
   def domain = Mock(PersistentEntity)
-  def identifierProperty = Mock(PersistentProperty)
+  def identifierProperty = Mock(Simple)
   def urlMappings = Mock(UrlMappings)
   def links = Mock(LinkGenerator)
   def actionAttributes = new GrailsActionAttributes(links, urlMappings)
@@ -34,7 +34,7 @@ class RestfulActionSpecificationFactorySpec extends Specification implements Url
   }
 
   def property(name) {
-    def mock = Mock(PersistentProperty)
+    def mock = Mock(Simple)
     mock.name >> name
     mock.type >> (ADomain.declaredFields.find { it.name == name }?.type ?: String)
     mock
