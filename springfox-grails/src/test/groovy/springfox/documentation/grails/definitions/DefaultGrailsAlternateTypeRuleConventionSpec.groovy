@@ -36,15 +36,15 @@ class DefaultGrailsAlternateTypeRuleConventionSpec extends Specification {
     }
 
     def grailsApplication() {
-        def app = Mock(GrailsApplication)
-        MappingContext mappingContext = Mock(MappingContext)
+        def app = Stub(GrailsApplication)
+        MappingContext mappingContext = Stub(MappingContext)
         app.getMappingContext() >> mappingContext
         mappingContext.getPersistentEntities() >> [petDomain()]
         app
     }
 
     def petDomain() {
-        def domain = Mock(PersistentEntity)
+        def domain = Stub(PersistentEntity)
         domain.name >> "Pet"
         domain.javaClass >> Pet
         domain.persistentProperties >> [property("name", String)]
@@ -52,7 +52,7 @@ class DefaultGrailsAlternateTypeRuleConventionSpec extends Specification {
     }
 
     def property(name, type) {
-        def property = Mock(Simple)
+        def property = Stub(Simple)
         property.name >> name
         property.type >> type
         property

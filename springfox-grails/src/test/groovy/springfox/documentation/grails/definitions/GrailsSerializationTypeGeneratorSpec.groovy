@@ -23,13 +23,13 @@ class GrailsSerializationTypeGeneratorSpec extends Specification {
   }
 
   def grailsApplication() {
-    def app = Mock(GrailsApplication)
+    def app = Stub(GrailsApplication)
     app.getArtefacts("Domain") >> [petDomain()]
     app
   }
 
   def petDomain() {
-    def domain = Mock(PersistentEntity)
+    def domain = Stub(PersistentEntity)
     domain.name >> "Pet"
     domain.javaClass >> Pet
     domain.persistentProperties >> [property("name", String)]
@@ -37,7 +37,7 @@ class GrailsSerializationTypeGeneratorSpec extends Specification {
   }
 
   def property(name, type) {
-    def property = Mock(Simple)
+    def property = Stub(Simple)
     property.name >> name
     property.type >> type
     property

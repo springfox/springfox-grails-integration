@@ -83,7 +83,7 @@ class ActionsSpec extends ActionSpecificationFactorySpec implements GrailsContro
   }
 
   def grailsController(Class controller) {
-    def grails = Mock(GrailsControllerClass)
+    def grails = Stub(GrailsControllerClass)
     grails.clazz >> controller
     grails
   }
@@ -91,7 +91,7 @@ class ActionsSpec extends ActionSpecificationFactorySpec implements GrailsContro
     GrailsActionContext context(controller, action) {
     new GrailsActionContext(
         controller,
-        Mock(PersistentEntity),
+        Stub(PersistentEntity),
         actionAttributes,
         action,
         new TypeResolver())

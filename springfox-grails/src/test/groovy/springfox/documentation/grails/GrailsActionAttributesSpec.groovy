@@ -38,7 +38,7 @@ class GrailsActionAttributesSpec extends Specification {
   GrailsActionContext context(controller, action) {
     new GrailsActionContext(
         controller,
-        Mock(PersistentEntity),
+        Stub(PersistentEntity),
         actionAttributes(linkGenerator(), urlMappings()),
         action,
         new TypeResolver())
@@ -53,7 +53,7 @@ class GrailsActionAttributesSpec extends Specification {
   }
 
   def controller(controllerClazz, name) {
-    def controller = Mock(GrailsControllerClass)
+    def controller = Stub(GrailsControllerClass)
     controller.clazz >> controllerClazz
     controller.name >> name
     controller
@@ -66,13 +66,13 @@ class GrailsActionAttributesSpec extends Specification {
   }
 
   UrlMappings urlMappings() {
-    def mappings = Mock(UrlMappings)
+    def mappings = Stub(UrlMappings)
     mappings.urlMappings >> [noOverrideMapping(), withOverrideMapping()]
     mappings
   }
 
   def noOverrideMapping() {
-    def noOverride = Mock(UrlMapping)
+    def noOverride = Stub(UrlMapping)
     noOverride.actionName >> "noOverride"
     noOverride.httpMethod >> "GET"
     noOverride.controllerName >> "A"
@@ -81,7 +81,7 @@ class GrailsActionAttributesSpec extends Specification {
 
 
   def withOverrideMapping() {
-    def noOverride = Mock(UrlMapping)
+    def noOverride = Stub(UrlMapping)
     noOverride.actionName >> "withOverride"
     noOverride.httpMethod >> "POST"
     noOverride.controllerName >> "Override"
@@ -89,7 +89,7 @@ class GrailsActionAttributesSpec extends Specification {
   }
 
   LinkGenerator linkGenerator() {
-    def links = Mock(LinkGenerator)
+    def links = Stub(LinkGenerator)
     links.link(_) >> "/test"
     links.serverBaseURL >> "http://localhost:8080"
     links

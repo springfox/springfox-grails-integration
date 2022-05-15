@@ -28,14 +28,14 @@ class DefaultGrailsPropertyTransformerSpec extends Specification {
   }
 
   def scalarProperty(propertyName, propertyType) {
-    def property = Mock(Simple)
+    def property = Stub(Simple)
     property.type >> propertyType
     property.name >> propertyName
     property
   }
 
   def relatedEntityProperty() {
-    def property = Mock(Simple)
+    def property = Stub(Simple)
     property.type >> RelatedEntity
     property.name >> "relatedEntity"
     property.getOwner() >> relatedEntityDomain()
@@ -43,7 +43,7 @@ class DefaultGrailsPropertyTransformerSpec extends Specification {
   }
 
   def relatedEntityIdProperty() {
-    def property = Mock(Simple)
+    def property = Stub(Simple)
     property.type >> Long
     property.name >> "relatedEntityId"
     property.getOwner() >> domainClass()
@@ -51,14 +51,14 @@ class DefaultGrailsPropertyTransformerSpec extends Specification {
   }
 
   PersistentEntity domainClass() {
-    def domain = Mock(PersistentEntity)
+    def domain = Stub(PersistentEntity)
     domain.getPropertyByName("relatedEntity") >> relatedEntityProperty()
     domain.getPersistentPropertyNames().contains(_) >> {args -> "format" != args[0]}
     domain
   }
 
   PersistentEntity relatedEntityDomain() {
-    def domain = Mock(PersistentEntity)
+    def domain = Stub(PersistentEntity)
     domain.getIdentity() >> id()
     domain
   }

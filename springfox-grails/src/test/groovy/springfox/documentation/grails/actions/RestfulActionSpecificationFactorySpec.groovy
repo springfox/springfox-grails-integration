@@ -14,11 +14,11 @@ import springfox.documentation.grails.doubles.AController
 import springfox.documentation.grails.doubles.ADomain
 
 class RestfulActionSpecificationFactorySpec extends Specification implements UrlMappingSupport {
-  def controller = Mock(GrailsControllerClass)
-  def domain = Mock(PersistentEntity)
-  def identifierProperty = Mock(Simple)
-  def urlMappings = Mock(UrlMappings)
-  def links = Mock(LinkGenerator)
+  def controller = Stub(GrailsControllerClass)
+  def domain = Stub(PersistentEntity)
+  def identifierProperty = Stub(Simple)
+  def urlMappings = Stub(UrlMappings)
+  def links = Stub(LinkGenerator)
   def actionAttributes = new GrailsActionAttributes(links, urlMappings)
 
   def setup() {
@@ -34,7 +34,7 @@ class RestfulActionSpecificationFactorySpec extends Specification implements Url
   }
 
   def property(name) {
-    def mock = Mock(Simple)
+    def mock = Stub(Simple)
     mock.name >> name
     mock.type >> (ADomain.declaredFields.find { it.name == name }?.type ?: String)
     mock

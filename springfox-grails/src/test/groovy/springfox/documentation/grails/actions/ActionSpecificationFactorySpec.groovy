@@ -63,14 +63,14 @@ class ActionSpecificationFactorySpec extends Specification implements UrlMapping
   }
 
   PersistentProperty property(name) {
-    def property = Mock(Simple)
+    def property = Stub(Simple)
     property.type >> String
     property.name >> name
     property
   }
 
   PersistentProperty idProperty() {
-    def property = Mock(Simple)
+    def property = Stub(Simple)
     property.type >> Long
     property
   }

@@ -35,13 +35,13 @@ class GrailsRequestHandlerProviderSpec extends Specification implements UrlMappi
     }
 
     UrlMappings urlMappingsHolder() {
-        def mappings = Mock(UrlMappings)
+        def mappings = Stub(UrlMappings)
         mappings.urlMappings >> urlMappings()
         mappings
     }
 
     def mapping() {
-        def mapping = Mock(UrlMapping)
+        def mapping = Stub(UrlMapping)
         mapping.actionName >> "save"
         mapping.httpMethod >> "POST"
         mapping.controllerName >> "BookController"
@@ -49,7 +49,7 @@ class GrailsRequestHandlerProviderSpec extends Specification implements UrlMappi
     }
 
     LinkGenerator linkGenerator() {
-        def links = Mock(LinkGenerator)
+        def links = Stub(LinkGenerator)
         links.link(_) >> "/test"
         links.serverBaseURL >> "http://localhost:8080"
         links
@@ -62,16 +62,16 @@ class GrailsRequestHandlerProviderSpec extends Specification implements UrlMappi
     }
 
     GrailsApplication application() {
-        def application = Mock(GrailsApplication)
+        def application = Stub(GrailsApplication)
         application.getArtefacts("Controller") >> [bookController()]
-        MappingContext mappingContext = Mock(MappingContext)
+        MappingContext mappingContext = Stub(MappingContext)
         application.getMappingContext() >> mappingContext
         mappingContext.getPersistentEntities() >> [bookDomain()]
         application
     }
 
     def bookDomain() {
-        def domain = Mock(PersistentEntity)
+        def domain = Stub(PersistentEntity)
         domain.name >> "Book"
         domain.decapitalizedName >> "book"
         domain.javaClass >> Book
@@ -79,7 +79,7 @@ class GrailsRequestHandlerProviderSpec extends Specification implements UrlMappi
     }
 
     def bookController() {
-        def controller = Mock(GrailsControllerClass)
+        def controller = Stub(GrailsControllerClass)
         controller.name >> "BookController"
         controller.logicalPropertyName >> "Book"
         controller.clazz >> BookController

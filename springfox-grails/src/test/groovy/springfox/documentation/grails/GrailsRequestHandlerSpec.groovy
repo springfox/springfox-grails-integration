@@ -48,7 +48,7 @@ class GrailsRequestHandlerSpec extends Specification implements UrlMappingSuppor
       sut.groupName() == "AnotherLogicalPropertyName"
       sut.headers() == [] as Set
       sut.params() == [] as Set
-      sut.combine(Mock(RequestHandler)) != sut
+      sut.combine(Stub(RequestHandler)) != sut
   }
 
   def areEqual(ResolvedMethodParameter a, ResolvedMethodParameter b) {
@@ -92,27 +92,27 @@ class GrailsRequestHandlerSpec extends Specification implements UrlMappingSuppor
   }
 
   UrlMappings urlMappingsHolder() {
-    def mock = Mock(UrlMappings)
+    def mock = Stub(UrlMappings)
     mock.urlMappings >> urlMappings()
     mock
   }
 
   LinkGenerator linkGenerator() {
-    def links = Mock(LinkGenerator)
+    def links = Stub(LinkGenerator)
     links.link(_) >> "/test"
     links.serverBaseURL >> "http://localhost:8080"
     links
   }
 
     PersistentEntity domain() {
-    def domain = Mock(PersistentEntity)
+    def domain = Stub(PersistentEntity)
     domain.name >> "testDomain"
     domain.decapitalizedName >> "TestDomainLogicalPropertyName"
     domain
   }
 
   GrailsControllerClass controller() {
-    def controller = Mock(GrailsControllerClass)
+    def controller = Stub(GrailsControllerClass)
     controller.getClazz() >> AnotherController
     controller.name >> "AnotherName"
     controller.logicalPropertyName >> "AnotherLogicalPropertyName"

@@ -16,7 +16,7 @@ class ActionSpecificationFactoryCompositeSpec extends ActionSpecificationFactory
             new MethodBackedActionSpecificationFactory(resolver)
         )
         and:
-        urlMappings.urlMappings >> [otherMapping(Mock(UrlMapping))]
+        urlMappings.urlMappings >> [otherMapping(Stub(UrlMapping))]
         when:
         def spec = sut.resolve(new GrailsActionContext(controller, domain, actionAttributes, action, resolver))
         then:
@@ -34,7 +34,7 @@ class ActionSpecificationFactoryCompositeSpec extends ActionSpecificationFactory
             new MethodBackedActionSpecificationFactory(resolver)
         )
         and:
-        urlMappings.urlMappings >> [otherMapping(Mock(UrlMapping))]
+        urlMappings.urlMappings >> [otherMapping(Stub(UrlMapping))]
         when:
         def spec = sut.resolve(new GrailsActionContext(regularController, null, actionAttributes, action, resolver))
         then:
