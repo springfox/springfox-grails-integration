@@ -49,6 +49,6 @@ jobs:
           path: ~/reports
       - run:
           name: Publish to artifactory
-          command: ./gradlew artifactoryPublish --no-daemon
+          command: ./gradlew artifactoryPublish --no-daemon -Dartifactory_repo_key=dcebotarenco-libs-snapshot
           no_output_timeout: 900s
 
