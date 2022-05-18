@@ -5,10 +5,10 @@ workflows:
   version: 2
   workflow:
     jobs:
-      - build-snapshot-and-publish
+      - build-and-publish
 
 jobs:
-  build-snapshot-and-publish:
+  build-and-publish:
     working_directory: ~/project
     docker:
       - image: cimg/openjdk:8.0.322-browsers
