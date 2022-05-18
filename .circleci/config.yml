@@ -30,17 +30,23 @@ jobs:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "build.gradle" }}
       - run:
           name: Run Tests
-          command: ./gradlew clean build jacocoTestReport  --no-daemon
+          command: ./gradlew clean build jacocoTestReport
           no_output_timeout: 900s
           environment:
             _JAVA_OPTIONS: -Xmx1024M -XX:ReservedCodeCacheSize=512M
       - codecov/upload
-      - store_test_results:
+      - store_artifacts:
           path: springfox-grails/build/reports/tests
+          destination: reports
       - store_test_results:
           path: springfox-grails/build/test-results/test
+      - store_artifacts:
+          path: springfox-grails-contract-tests/build/reports/tests
+          destination: reports
+      - store_test_results:
+          path: springfox-grails-contract-tests/build/test-results/test
       - run:
           name: Publish to artifactory
-          command: ./gradlew artifactoryPublish -Dartifactory_repo_key=dcebotarenco-libs-snapshot --no-daemon 
+          command: ./gradlew artifactoryPublish -Dartifactory_repo_key=dcebotarenco-libs-snapshot 
           no_output_timeout: 900s
 
