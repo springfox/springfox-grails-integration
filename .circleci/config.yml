@@ -35,20 +35,12 @@ jobs:
           environment:
             _JAVA_OPTIONS: -Xmx1024M -XX:ReservedCodeCacheSize=512M
       - codecov/upload
-      - run:
-          name: Save test results
-          command: |
-            mkdir -p ~/junit/
-            mkdir -p ~/reports/
-            find . -type f -regex ".*/build/test-results/.*xml" -exec cp {} ~/junit/ \;
-            cp -R springfox-grails-contract-tests/build/reports/tests ~/reports
-          when: always
       - store_test_results:
-          path: build/reports/tests
+          path: springfox-grails/build/reports/tests
       - store_test_results:
-          path: build/test-results/test
+          path: springfox-grails/build/test-results/test
       - run:
           name: Publish to artifactory
-          command: ./gradlew artifactoryPublish --no-daemon -Dartifactory_repo_key=dcebotarenco-libs-snapshot
+          command: ./gradlew artifactoryPublish -Dartifactory_repo_key=dcebotarenco-libs-snapshot --no-daemon 
           no_output_timeout: 900s
 
