@@ -3,13 +3,12 @@ orbs:
   codecov: codecov/codecov@3.0.0
 workflows:
   version: 2
-  test_and_publish:
+  workflow:
     jobs:
-      - test
-      - publishing
+      - build-snapshot-and-publish
 
 jobs:
-  test:
+  build-snapshot-and-publish:
     working_directory: ~/project
     docker:
       - image: cimg/openjdk:8.0.322-browsers
@@ -48,14 +47,8 @@ jobs:
           path: ~/junit
       - store_test_results:
           path: ~/reports
-  publishing:
-    docker:
-      - image: cimg/openjdk:8.0.322-browsers
-    environment:
-      JVM_OPTIONS: -Xmx1024M -XX:MaxPermSize=512M -XX:ReservedCodeCacheSize=512M
-      GRADLE_OPTS: '-Dorg.gradle.daemon=false -Dorg.gradle.jvmargs="-Xmx3840m -XX:+HeapDumpOnOutOfMemoryError"'
-    steps:
-      - checkout
-      - restore_cache:
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "build.gradle" }}
+      - run:
+          name: Publish to artifactory
+          command: ./gradlew artifactoryPublish --no-daemon
+          no_output_timeout: 900s
 
