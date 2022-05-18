@@ -55,6 +55,7 @@ jobs:
       JVM_OPTIONS: -Xmx1024M -XX:MaxPermSize=512M -XX:ReservedCodeCacheSize=512M
       GRADLE_OPTS: '-Dorg.gradle.daemon=false -Dorg.gradle.jvmargs="-Xmx3840m -XX:+HeapDumpOnOutOfMemoryError"'
     steps:
+      - checkout
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "build.gradle" }}
 
