@@ -1,110 +1,67 @@
-// apply plugin: 'maven-publish'
-// apply plugin: 'com.jfrog.bintray'
+apply plugin: "com.jfrog.artifactory"
+apply plugin: 'java'
+apply plugin: 'maven-publish'
 
-import java.text.SimpleDateFormat
 
-Date buildTimeAndDate = new Date()
-
-ext {
-  buildDate = new SimpleDateFormat('yyyy-MM-dd').format(buildTimeAndDate)
-  buildTime = new SimpleDateFormat('HH:mm:ss.SSSZ').format(buildTimeAndDate)
-  bintrayUsername = project.hasProperty('bintrayUsername') ? project.bintrayUsername : System.getenv('BINTRAY_USER')
-  bintrayApiKey = project.hasProperty('bintrayApiKey') ? project.bintrayApiKey : System.getenv('BINTRAY_API_KEY')
-  ossUser = project.hasProperty('ossUser') ? project.ossUser : System.getenv('OSS_USER')
-  ossPassword = project.hasProperty('ossPassword') ? project.ossPassword : System.getenv('OSS_PASSWORD')
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier "sources"
+    from sourceSets.main.allJava
 }
-//
-// bintray {
-//   user = project.bintrayUsername
-//   key = project.bintrayApiKey
-//   dryRun = false //Whether to run this as dry-run, without deploying
-//   publish = true //If version should be auto published after an upload
-//   publications = ['mavenJava']
-//   pkg {
-//     repo = 'maven-repo'
-//     userOrg = 'springfox' //An optional organization name when the repo belongs to one of the user's orgs
-//     name = 'springfox-grails-integration'
-//     websiteUrl = 'https://github.com/springfox/springfox-grails-integration'
-//     issueTrackerUrl = 'https://github.com/springfox/springfox-grails-integration/issues'
-//     vcsUrl = 'https://github.com/springfox/springfox-grails-integration/springfox-grails.git'
-//     desc = 'SpringFox Grails Integration module'
-//     licenses = ['Apache-2.0']
-//     labels = ['spring', 'swagger', 'apis', 'grails']
-//     publicDownloadNumbers = true
-//
-//     version {
-//       vcsTag = project.version
-//       mavenCentralSync {
-//         sync = true //Optional (true by default). Determines whether to sync the version to Maven Central.
-//         user = ossUser //OSS user token
-//         password = ossPassword //OSS user password
-//       }
-//     }
-//   }
-// }
-//
-// publishing {
-//   publications {
-//     mavenJava(MavenPublication) {
-//       from components.java
-//       pom.withXml {
-//         def devs = ['dilipkrish': 'Dilip Krishnan']
-//         def root = asNode()
-//
-//         root.dependencies.'*'.findAll() {
-//           it.scope.text() == 'runtime' && project.configurations.compile.allDependencies.find { dep ->
-//             dep.name == it.artifactId.text()
-//           }
-//         }.each() {
-//           it.scope*.value = 'compile'
-//         }
-//
-//         root.appendNode('name', 'springfox-grails-integration')
-//         root.appendNode('packaging', 'jar')
-//         root.appendNode('url', 'https://github.com/springfox/springfox-grails-integration')
-//         root.appendNode('description', 'Springfox Grails Integration Module')
-//
-//         def license = root.appendNode('licenses').appendNode('license')
-//         license.appendNode('name', 'Apache-2.0')
-//         license.appendNode('url', 'https://github.com/springfox/springfox-grails-integration/blob/master/LICENSE.txt')
-//         license.appendNode('distribution', 'repo')
-//
-//         root.appendNode('scm').appendNode('url', 'https://github.com/springfox/springfox-grails-integration.git')
-//
-//         def developers = root.appendNode('developers')
-//         devs.each {
-//           def d = developers.appendNode('developer')
-//           d.appendNode('id', it.key)
-//           d.appendNode('name', it.value)
-//         }
-//       }
-//       artifact sourcesJar
-//       artifact javadocJar
-//     }
-//   }
-// }
-//
-// artifactory {
-//   contextUrl = 'https://oss.jfrog.org'
-//   resolve {
-//     repository {
-//       repoKey = 'libs-release'
-//     }
-//   }
-//   publish {
-//     repository {
-//       repoKey = 'oss-snapshot-local' //The Artifactory repository key to publish to
-//       //when using oss.jfrog.org the credentials are from Bintray. For local build we expect them to be found in
-//       //~/.gradle/gradle.properties, otherwise to be set in the build server
-//       username = bintrayUsername
-//       password = bintrayApiKey
-//     }
-//     defaults {
-//       publications('mavenJava')
-//     }
-//   }
-// }
-//
-// tasks.artifactoryPublish {
-//   dependsOn 'check'
-// }
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier "javadoc"
+    from javadoc.destinationDir
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            artifact sourcesJar
+            artifact javadocJar
+            pom {
+                name = "springfox-grails-integration"
+                packaging = 'jar'
+                url = 'https://github.com/dcebotarenco/springfox-grails-integration'
+                description = 'Springfox Grails Integration Module'
+
+                developers {
+                    developer {
+                        id = 'dilipkrish'
+                        name = 'Dilip Krishnan'
+                    }
+                    developer {
+                        id = 'dcebotarenco'
+                        name = 'Dan Cebotarenco'
+                    }
+                }
+                licenses {
+                    license {
+                        name = 'Apache-2.0'
+                        url = 'https://github.com/dcebotarenco/springfox-grails-integration/blob/master/LICENSE.txt'
+                        distribution = 'repo'
+                    }
+                }
+                scm {
+                    url = 'https://github.com/dcebotarenco/springfox-grails-integration.git'
+                }
+            }
+        }
+    }
+}
+
+artifactory {
+    contextUrl = 'https://dcebotarenco.jfrog.io/artifactory'
+    publish {
+        repository {
+            repoKey = "${artifactory_repo_key}"
+            username = "${artifactory_user}"
+            password = "${artifactory_password}"
+        }
+        defaults {
+            publications('mavenJava')
+            publishArtifacts = true
+            publishPom = true
+        }
+    }
+}

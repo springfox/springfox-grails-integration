@@ -13,13 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:4.28.3"
+    }
+}
+
 plugins {
     id "io.spring.dependency-management" version "1.0.11.RELEASE"
     id 'jacoco'
+    id 'groovy'
+    id 'idea'
 }
 
-apply plugin: 'groovy'
-apply plugin: 'idea'
 apply from: 'gradle/publishing.gradle'
 
 description = 'Springfox Grails module that produces grails specific documentation'
@@ -85,20 +96,10 @@ dependencies {
     compile "net.bytebuddy:byte-buddy"
 }
 
-task sourcesJar(type: Jar, dependsOn: classes) {
-    getArchiveClassifier().set('sources')
-    from sourceSets.main.allSource
-}
-
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    getArchiveClassifier().set('javadoc')
-    from javadoc.destinationDir
-}
-
 jar {
     manifest {
         attributes(
-            'Built-By': 'Dilip Krishnan',
+            'Built-By': 'Dilip Krishnan, Dan Cebotarenco',
             'Created-By': System.properties['java.version'] + " (" + System.properties[
                 'java.vendor'] + " " + System.properties['java.vm.version'] + ")",
             'Build-Date': project.buildDate,

@@ -1,6 +1,18 @@
+import java.text.SimpleDateFormat
+
 plugins {
     id "net.ltgt.apt-idea" version "0.18"
     id 'com.github.ben-manes.versions' version '0.20.0'
+}
+
+Date buildTimeAndDate = new Date()
+
+ext {
+    buildDate = new SimpleDateFormat('yyyy-MM-dd').format(buildTimeAndDate)
+    buildTime = new SimpleDateFormat('HH:mm:ss.SSSZ').format(buildTimeAndDate)
+    artifactory_user = project.hasProperty('artifactory_user') ? project.artifactory_user : System.getenv('ARTIFACTORY_USER')
+    artifactory_repo_key = project.hasProperty('artifactory_repo_key') ? project.artifactory_repo_key : System.getenv('ARTIFACTORY_REPO_KEY')
+    artifactory_password = project.hasProperty('artifactory_password') ? project.artifactory_password : System.getenv('ARTIFACTORY_PASSWORD')
 }
 
 allprojects {
@@ -15,6 +27,14 @@ allprojects {
     version = '4.0.1-SNAPSHOT'
 
     repositories {
+        maven {
+            name 'release-repository'
+            url "https://dcebotarenco.jfrog.io/artifactory/dcebotarenco-libs-snapshot"
+        }
+        maven {
+            name 'snapshot-repository'
+            url "https://dcebotarenco.jfrog.io/artifactory/dcebotarenco-libs-release"
+        }
         mavenCentral()
         maven { url "https://plugins.gradle.org/m2/" }
         maven { url "https://repo.grails.org/grails/core" }
