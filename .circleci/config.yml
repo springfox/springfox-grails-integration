@@ -44,9 +44,9 @@ jobs:
             cp -R springfox-grails-contract-tests/build/reports/tests ~/reports
           when: always
       - store_test_results:
-          path: ~/junit
+          path: build/reports/tests
       - store_test_results:
-          path: ~/reports
+          path: build/test-results/test
       - run:
           name: Publish to artifactory
           command: ./gradlew artifactoryPublish --no-daemon -Dartifactory_repo_key=dcebotarenco-libs-snapshot
